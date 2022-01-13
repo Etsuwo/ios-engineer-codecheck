@@ -1,5 +1,7 @@
 # 株式会社ゆめみ iOS エンジニアコードチェック課題
 
+<details><summary>課題概要(Duplicate前に書いてあった内容)</summary>
+
 ## 概要
 
 本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に iOS エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の概要を詳しく読んだ上で課題を取り組んでください。
@@ -43,3 +45,58 @@ Issues を確認した上、本プロジェクトを [**Duplicate** してくだ
 ## 参考記事
 
 提出された課題の評価ポイントに関しては、[こちらの記事](https://qiita.com/lovee/items/d76c68341ec3e7beb611)に詳しく書かれてありますので、ぜひご覧ください。
+
+</details>
+
+# 環境
+## 開発環境  
+Xcode: 13.0  
+CocoaPods: 1.10.2  
+iOS: 15.0
+
+## インストール方法
+1. リポジトリをクローンする. 
+
+`git clone git@github.com:Etsuwo/Yumemi-iOS.git`
+
+2. ルートディレクトリにて以下を実行. 
+
+`pod install`
+
+3. プロジェクトファイルを開き実行する. 
+
+# ブランチ戦略
+`main`ブランチ
+
+- 成果物提出用のブランチ
+- `develop`からマージされる
+
+`develop`ブランチ
+
+- 課題issueに対応するブランチ
+- `main`から切る
+- 子のissueが必要ならfeatureブランチを作る
+- 子のissueがないならここで作業
+- ブランチ名は`develop/issue-xx`（xxにはissue番号が入る）とする
+
+`feature`ブランチ
+
+- 作業用ブランチ
+- `main`または`develop`から切る
+- ブランチ名は`feature/issue-xx`（xxにはissue番号が入る）とする
+
+# ライブラリ管理
+
+- SwiftPackageManagerとCocoaPodsを併用する
+- 基本的にはSwiftPackageManagerを使用し、対応していないまたは問題があった場合はCocoaPodsを使用する。
+
+# コミットルール
+以下の[コミット種別] + 修正内容
+
+- `[add]` 機能やファイル追加
+- `[remove]` 機能やファイル削除
+- `[fix]` バグ修正
+- `[update]` バグでない機能修正
+- `[clean]` リファクタ
+
+参考：[Gitのコミットメッセージの書き方](https://qiita.com/itosho/items/9565c6ad2ffc24c09364)
