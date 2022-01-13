@@ -168,7 +168,6 @@
 				B0F18E59DAFD81FA53738B78 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */,
 				C6547CF69A4B94CEBAF16C11 /* Pods-iOSEngineerCodeCheckTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -183,6 +182,7 @@
 				BFD945D7244DC5E80012785A /* Sources */,
 				BFD945D8244DC5E80012785A /* Frameworks */,
 				BFD945D9244DC5E80012785A /* Resources */,
+				5A165A102790AB730039B84A /* SwiftFormat */,
 			);
 			buildRules = (
 			);
@@ -302,6 +302,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5A165A102790AB730039B84A /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd BuildTools\nSDKROOT=(xcurn --sdk macosx --show-sdk-path)\nswift run -c release swiftformat \"$SRCROOT\" --disable strongOutlets, trailingCommas\n\n";
+		};
 		B24F0292F4E9B601859ABDF8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
