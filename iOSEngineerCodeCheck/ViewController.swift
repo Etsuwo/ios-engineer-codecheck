@@ -63,7 +63,7 @@ class ViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return repo.count
+        repo.count
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
