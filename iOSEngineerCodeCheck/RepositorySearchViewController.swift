@@ -9,20 +9,20 @@
 import UIKit
 
 class RepositorySearchViewController: UITableViewController, UISearchBarDelegate {
-    @IBOutlet weak var SchBr: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar!
 
-    var repo: [[String: Any]] = []
+    var repositories: [[String: Any]] = []
 
     var task: URLSessionTask?
-    var word: String!
+    var searchWord: String!
     var url: String!
-    var idx: Int!
+    var selectedIndex: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        SchBr.text = "GitHubのリポジトリを検索できるよー"
-        SchBr.delegate = self
+        searchBar.text = "GitHubのリポジトリを検索できるよー"
+        searchBar.delegate = self
     }
 
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
@@ -36,14 +36,14 @@ class RepositorySearchViewController: UITableViewController, UISearchBarDelegate
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        word = searchBar.text!
+        searchWord = searchBar.text!
 
-        if word.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
+        if searchWord.count != 0 {
+            url = "https://api.github.com/search/repositories?q=\(searchWord!)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
-                if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = obj["items"] as? [[String: Any]] {
-                        self.repo = items
+                if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
+                    if let items = object["items"] as? [[String: Any]] {
+                        self.repositories = items
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
@@ -57,27 +57,27 @@ class RepositorySearchViewController: UITableViewController, UISearchBarDelegate
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == "Detail" {
-            let dtl = segue.destination as! RepositoryDetailViewController
-            dtl.vc1 = self
+            let detailVC = segue.destination as! RepositoryDetailViewController
+            detailVC.vc1 = self
         }
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        repo.count
+        repositories.count
     }
 
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let rp = repo[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
+        let repository = repositories[indexPath.row]
+        cell.textLabel?.text = repository["full_name"] as? String ?? ""
+        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
         cell.tag = indexPath.row
         return cell
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 画面遷移時に呼ばれる
-        idx = indexPath.row
+        selectedIndex = indexPath.row
         performSegue(withIdentifier: "Detail", sender: self)
     }
 }
