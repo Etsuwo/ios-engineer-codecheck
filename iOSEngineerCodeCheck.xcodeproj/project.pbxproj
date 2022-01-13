@@ -179,10 +179,10 @@
 			buildConfigurationList = BFD94605244DC5EC0012785A /* Build configuration list for PBXNativeTarget "iOSEngineerCodeCheck" */;
 			buildPhases = (
 				D8A5D78CFA19E4447A3CC158 /* [CP] Check Pods Manifest.lock */,
+				5A165A102790AB730039B84A /* SwiftFormat */,
 				BFD945D7244DC5E80012785A /* Sources */,
 				BFD945D8244DC5E80012785A /* Frameworks */,
 				BFD945D9244DC5E80012785A /* Resources */,
-				5A165A102790AB730039B84A /* SwiftFormat */,
 			);
 			buildRules = (
 			);
