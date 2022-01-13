@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UISearchBarDelegate {
+class RepositorySearchViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var SchBr: UISearchBar!
 
     var repo: [[String: Any]] = []
