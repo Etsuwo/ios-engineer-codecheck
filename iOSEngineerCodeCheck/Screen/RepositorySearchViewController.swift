@@ -29,7 +29,7 @@ final class RepositorySearchViewController: UITableViewController {
     // MARK: Private Methods
 
     private func setupUI() {
-        searchBar.text = "GitHubのリポジトリを検索できるよー"
+        searchBar.text = L10n.RepositorySearch.SearchBar.text
         searchBar.delegate = self
     }
 
@@ -51,8 +51,8 @@ final class RepositorySearchViewController: UITableViewController {
     override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         let repository = repositories[indexPath.row]
-        cell.textLabel?.text = repository["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
+        cell.textLabel?.text = repository["full_name"] as? String ?? L10n.Common.blank
+        cell.detailTextLabel?.text = repository["language"] as? String ?? L10n.Common.blank
         cell.tag = indexPath.row
         return cell
     }
@@ -67,7 +67,7 @@ final class RepositorySearchViewController: UITableViewController {
 
 extension RepositorySearchViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.text = ""
+        searchBar.text = L10n.Common.blank
         return true
     }
 

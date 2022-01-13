@@ -1,0 +1,14 @@
+input_dir: iOSEngineerCodeCheck
+output_dir: iOSEngineerCodeCheck
+strings:
+  inputs: Resources/Localizable.strings
+  outputs:
+    - templateName: structured-swift5
+      output: Generated/Strings.swift
+ib:
+  inputs:
+    - Storyboards
+  outputs:
+    - templateName: scenes-swift5
+      output: Generated/Scenes.swift
+
