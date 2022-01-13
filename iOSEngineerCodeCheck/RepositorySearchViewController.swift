@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RepositorySearchViewController: UITableViewController, UISearchBarDelegate {
+class RepositorySearchViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
     var repositories: [[String: Any]] = []
@@ -29,6 +29,34 @@ class RepositorySearchViewController: UITableViewController, UISearchBarDelegate
         searchBar.delegate = self
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        if segue.identifier == "Detail" {
+            let detailVC = segue.destination as! RepositoryDetailViewController
+            detailVC.searchVC = self
+        }
+    }
+
+    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        repositories.count
+    }
+
+    override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        let repository = repositories[indexPath.row]
+        cell.textLabel?.text = repository["full_name"] as? String ?? ""
+        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
+        cell.tag = indexPath.row
+        return cell
+    }
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 画面遷移時に呼ばれる
+        selectedIndex = indexPath.row
+        performSegue(withIdentifier: "Detail", sender: self)
+    }
+}
+
+extension RepositorySearchViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         // ↓こうすれば初期のテキストを消せる
         searchBar.text = ""
@@ -57,31 +85,5 @@ class RepositorySearchViewController: UITableViewController, UISearchBarDelegate
             // これ呼ばなきゃリストが更新されません
             task?.resume()
         }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        if segue.identifier == "Detail" {
-            let detailVC = segue.destination as! RepositoryDetailViewController
-            detailVC.searchVC = self
-        }
-    }
-
-    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        repositories.count
-    }
-
-    override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        let repository = repositories[indexPath.row]
-        cell.textLabel?.text = repository["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
-        cell.tag = indexPath.row
-        return cell
-    }
-
-    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時に呼ばれる
-        selectedIndex = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
     }
 }
