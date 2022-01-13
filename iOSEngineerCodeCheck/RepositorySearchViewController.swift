@@ -12,7 +12,6 @@ class RepositorySearchViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
 
     var repositories: [[String: Any]] = []
-
     var task: URLSessionTask?
     var searchWord: String!
     var url: String!
@@ -20,7 +19,6 @@ class RepositorySearchViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         setupUI()
     }
 
@@ -50,7 +48,6 @@ class RepositorySearchViewController: UITableViewController {
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時に呼ばれる
         selectedIndex = indexPath.row
         performSegue(withIdentifier: "Detail", sender: self)
     }
@@ -58,7 +55,6 @@ class RepositorySearchViewController: UITableViewController {
 
 extension RepositorySearchViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        // ↓こうすれば初期のテキストを消せる
         searchBar.text = ""
         return true
     }
@@ -73,16 +69,15 @@ extension RepositorySearchViewController: UISearchBarDelegate {
         if searchWord.count != 0 {
             url = "https://api.github.com/search/repositories?q=\(searchWord!)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
-                if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = object["items"] as? [[String: Any]] {
-                        self.repositories = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+                if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
+                   let items = object["items"] as? [[String: Any]]
+                {
+                    self.repositories = items
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 }
             }
-            // これ呼ばなきゃリストが更新されません
             task?.resume()
         }
     }

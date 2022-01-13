@@ -10,11 +10,8 @@ import UIKit
 
 class RepositoryDetailViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
-
     @IBOutlet weak var fullNameLabel: UILabel!
-
     @IBOutlet weak var languageLabel: UILabel!
-
     @IBOutlet weak var starsCountLabel: UILabel!
     @IBOutlet weak var watchersCountLabel: UILabel!
     @IBOutlet weak var forksCountLabel: UILabel!
@@ -40,15 +37,15 @@ class RepositoryDetailViewController: UIViewController {
 
     func fetchAvatarImage() {
         let repository = searchVC.repositories[searchVC.selectedIndex]
-        if let owner = repository["owner"] as? [String: Any] {
-            if let imageUrl = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imageUrl)!) { data, _, _ in
-                    let image = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.avatarImageView.image = image
-                    }
-                }.resume()
-            }
+        if let owner = repository["owner"] as? [String: Any],
+           let imageUrl = owner["avatar_url"] as? String
+        {
+            URLSession.shared.dataTask(with: URL(string: imageUrl)!) { data, _, _ in
+                let image = UIImage(data: data!)!
+                DispatchQueue.main.async {
+                    self.avatarImageView.image = image
+                }
+            }.resume()
         }
     }
 }
