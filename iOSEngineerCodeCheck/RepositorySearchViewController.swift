@@ -13,8 +13,6 @@ class RepositorySearchViewController: UITableViewController {
 
     var repositories: [[String: Any]] = []
     var task: URLSessionTask?
-    var searchWord: String!
-    var url: String!
     var selectedIndex: Int!
 
     override func viewDidLoad() {
@@ -64,10 +62,10 @@ extension RepositorySearchViewController: UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchWord = searchBar.text!
+        let searchWord = searchBar.text!
 
         if searchWord.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(searchWord!)"
+            let url = "https://api.github.com/search/repositories?q=\(searchWord)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
                 if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
                    let items = object["items"] as? [[String: Any]]
