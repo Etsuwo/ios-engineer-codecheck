@@ -10,6 +10,51 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+
+  internal enum Common {
+    /// 
+    internal static let blank = L10n.tr("Localizable", "Common.Blank")
+  }
+
+  internal enum RepositoryDetail {
+    internal enum ForksCountLabel {
+      /// %@ forks
+      internal static func text(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "RepositoryDetail.ForksCountLabel.Text", String(describing: p1))
+      }
+    }
+    internal enum IssueCountLabel {
+      /// %@ open issues
+      internal static func text(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "RepositoryDetail.IssueCountLabel.Text", String(describing: p1))
+      }
+    }
+    internal enum LanguageLabel {
+      /// Written in %@
+      internal static func text(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "RepositoryDetail.LanguageLabel.Text", String(describing: p1))
+      }
+    }
+    internal enum StarsCountLabel {
+      /// %@ stars
+      internal static func text(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "RepositoryDetail.StarsCountLabel.Text", String(describing: p1))
+      }
+    }
+    internal enum WatchersCountLabel {
+      /// %@ watchers
+      internal static func text(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "RepositoryDetail.WatchersCountLabel.Text", String(describing: p1))
+      }
+    }
+  }
+
+  internal enum RepositorySearch {
+    internal enum SearchBar {
+      /// GitHubのリポジトリを検索できるよー
+      internal static let text = L10n.tr("Localizable", "RepositorySearch.SearchBar.Text")
+    }
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

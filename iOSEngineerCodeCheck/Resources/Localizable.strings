@@ -5,3 +5,16 @@
   Created by Etsushi Otani on 2022/01/14.
   Copyright © 2022 YUMEMI Inc. All rights reserved.
 */
+
+// MARK: Common
+"Common.Blank" = "";
+
+// MARK: RepositorySearchViewController
+"RepositorySearch.SearchBar.Text" = "GitHubのリポジトリを検索できるよー";
+
+// MARK: RepositoryDetailViewController
+"RepositoryDetail.LanguageLabel.Text" = "Written in %@";
+"RepositoryDetail.StarsCountLabel.Text" = "%@ stars";
+"RepositoryDetail.WatchersCountLabel.Text" = "%@ watchers";
+"RepositoryDetail.ForksCountLabel.Text" = "%@ forks";
+"RepositoryDetail.IssueCountLabel.Text" = "%@ open issues";
