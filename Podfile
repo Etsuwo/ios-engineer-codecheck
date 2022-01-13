@@ -7,6 +7,8 @@ target 'iOSEngineerCodeCheck' do
 
   # Pods for iOSEngineerCodeCheck
 
+  pod 'SwiftLint'
+
   target 'iOSEngineerCodeCheckTests' do
     inherit! :search_paths
     # Pods for testing
