@@ -9,21 +9,31 @@
 import UIKit
 
 final class RepositorySearchViewController: UITableViewController {
+    // MARK: IBOutlet
+
     @IBOutlet private weak var searchBar: UISearchBar!
+
+    // MARK: Propaties
 
     private var repositories: [[String: Any]] = []
     private var task: URLSessionTask?
     private var selectedIndex: Int!
+
+    // MARK: LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
 
+    // MARK: Private Methods
+
     private func setupUI() {
         searchBar.text = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
     }
+
+    // MARK: Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == "Detail" {
@@ -31,6 +41,8 @@ final class RepositorySearchViewController: UITableViewController {
             detailVC.repository = repositories[selectedIndex]
         }
     }
+
+    // MARK: TableView Methods
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         repositories.count
@@ -50,6 +62,8 @@ final class RepositorySearchViewController: UITableViewController {
         performSegue(withIdentifier: "Detail", sender: self)
     }
 }
+
+// MARK: UISearchBarDelegate
 
 extension RepositorySearchViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {

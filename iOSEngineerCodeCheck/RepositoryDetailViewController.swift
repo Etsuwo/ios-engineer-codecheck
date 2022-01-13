@@ -9,6 +9,8 @@
 import UIKit
 
 final class RepositoryDetailViewController: UIViewController {
+    // MARK: IBOutlet
+
     @IBOutlet private weak var avatarImageView: UIImageView!
     @IBOutlet private weak var fullNameLabel: UILabel!
     @IBOutlet private weak var languageLabel: UILabel!
@@ -17,13 +19,19 @@ final class RepositoryDetailViewController: UIViewController {
     @IBOutlet private weak var forksCountLabel: UILabel!
     @IBOutlet private weak var issuesCountLabel: UILabel!
 
+    // MARK: Propaties
+
     var repository: [String: Any]!
+
+    // MARK: LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         fetchAvatarImage()
     }
+
+    // MARK: Private Methods
 
     private func setupUI() {
         fullNameLabel.text = repository["full_name"] as? String
