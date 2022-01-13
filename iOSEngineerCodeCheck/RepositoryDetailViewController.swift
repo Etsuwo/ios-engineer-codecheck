@@ -24,22 +24,22 @@ class RepositoryDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        fetchAvatarImage()
+    }
 
+    private func setupUI() {
         let repository = searchVC.repositories[searchVC.selectedIndex]
-
+        fullNameLabel.text = repository["full_name"] as? String
         languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
         starsCountLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
         watchersCountLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
         forksCountLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issuesCountLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
-        fetchAvatarImage()
     }
 
     func fetchAvatarImage() {
         let repository = searchVC.repositories[searchVC.selectedIndex]
-
-        fullNameLabel.text = repository["full_name"] as? String
-
         if let owner = repository["owner"] as? [String: Any] {
             if let imageUrl = owner["avatar_url"] as? String {
                 URLSession.shared.dataTask(with: URL(string: imageUrl)!) { data, _, _ in
