@@ -56,7 +56,7 @@ final class RepositoryDetailViewController: UIViewController {
         else {
             return
         }
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -69,7 +69,7 @@ final class RepositoryDetailViewController: UIViewController {
 
             let image = UIImage(data: data)
             DispatchQueue.main.async {
-                self.avatarImageView.image = image
+                self?.avatarImageView.image = image
             }
         }.resume()
     }
