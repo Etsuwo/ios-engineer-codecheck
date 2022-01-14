@@ -21,7 +21,7 @@ final class RepositoryDetailViewController: UIViewController {
 
     // MARK: Propaties
 
-    var repository: [String: Any]!
+    private var repository: [String: Any]!
 
     // MARK: LifeCycle
 
@@ -29,6 +29,12 @@ final class RepositoryDetailViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchAvatarImage()
+    }
+
+    // MARK: Public Methods
+
+    func configure(with repository: [String: Any]) {
+        self.repository = repository
     }
 
     // MARK: Private Methods
@@ -54,12 +60,12 @@ final class RepositoryDetailViewController: UIViewController {
                 print(error.localizedDescription)
                 return
             }
-            
+
             guard let data = data else {
                 print(" ### There is No Data ### ")
                 return
             }
-            
+
             let image = UIImage(data: data)
             DispatchQueue.main.async {
                 self.avatarImageView.image = image

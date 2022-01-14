@@ -41,12 +41,12 @@ final class RepositorySearchViewController: UITableViewController {
                 print(error.localizedDescription)
                 return
             }
-            
+
             guard let data = data else {
                 print(" ### There is No Data ### ")
                 return
             }
-            
+
             do {
                 if let object = try JSONSerialization.jsonObject(with: data) as? [String: Any],
                    let items = object["items"] as? [[String: Any]]
@@ -69,7 +69,7 @@ final class RepositorySearchViewController: UITableViewController {
         if segue.identifier == "Detail" {
             let detailVC = segue.destination as! RepositoryDetailViewController
             guard let selectedIndex = selectedIndex else { return }
-            detailVC.repository = repositories[selectedIndex]
+            detailVC.configure(with: repositories[selectedIndex])
         }
     }
 
