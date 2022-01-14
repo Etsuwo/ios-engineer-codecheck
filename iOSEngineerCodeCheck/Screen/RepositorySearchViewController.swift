@@ -17,7 +17,7 @@ final class RepositorySearchViewController: UITableViewController {
 
     private var repositories: [[String: Any]] = []
     private var task: URLSessionTask?
-    private var selectedIndex: Int!
+    private var selectedIndex: Int?
 
     // MARK: LifeCycle
 
@@ -53,6 +53,7 @@ final class RepositorySearchViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == "Detail" {
             let detailVC = segue.destination as! RepositoryDetailViewController
+            guard let selectedIndex = selectedIndex else { return }
             detailVC.repository = repositories[selectedIndex]
         }
     }
