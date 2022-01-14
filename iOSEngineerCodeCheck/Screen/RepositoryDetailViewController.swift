@@ -34,7 +34,7 @@ final class RepositoryDetailViewController: UIViewController {
     // MARK: Private Methods
 
     private func setupUI() {
-        fullNameLabel.text = repository["full_name"] as? String
+        fullNameLabel.text = repository["full_name"] as? String ?? L10n.Common.blank
         languageLabel.text = L10n.RepositoryDetail.LanguageLabel.text(repository["language"] as? String ?? L10n.Common.blank)
         starsCountLabel.text = L10n.RepositoryDetail.StarsCountLabel.text(repository["stargazers_count"] as? Int ?? 0)
         watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(repository["wachers_count"] as? Int ?? 0)
