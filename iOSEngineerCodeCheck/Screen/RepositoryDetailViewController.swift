@@ -49,8 +49,17 @@ final class RepositoryDetailViewController: UIViewController {
         else {
             return
         }
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            guard let data = data else { return }
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else {
+                print(" ### There is No Data ### ")
+                return
+            }
+            
             let image = UIImage(data: data)
             DispatchQueue.main.async {
                 self.avatarImageView.image = image

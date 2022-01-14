@@ -36,14 +36,28 @@ final class RepositorySearchViewController: UITableViewController {
     private func searchRepository(with word: String) {
         let stringUrl = "https://api.github.com/search/repositories?q=\(word)"
         guard let url = URL(string: stringUrl) else { return }
-        task = URLSession.shared.dataTask(with: url) { data, _, _ in
-            if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
-               let items = object["items"] as? [[String: Any]]
-            {
-                self.repositories = items
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+        task = URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            
+            guard let data = data else {
+                print(" ### There is No Data ### ")
+                return
+            }
+            
+            do {
+                if let object = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let items = object["items"] as? [[String: Any]]
+                {
+                    self.repositories = items
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
+            } catch {
+                print(" ### Invalid Data ### ")
             }
         }
         task?.resume()
