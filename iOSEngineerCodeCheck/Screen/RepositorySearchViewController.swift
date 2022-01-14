@@ -66,9 +66,9 @@ final class RepositorySearchViewController: UITableViewController {
     // MARK: Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        guard let selectedIndex = selectedIndex else { return }
         if segue.identifier == "Detail" {
             let detailVC = segue.destination as! RepositoryDetailViewController
-            guard let selectedIndex = selectedIndex else { return }
             detailVC.configure(with: repositories[selectedIndex])
         }
     }
