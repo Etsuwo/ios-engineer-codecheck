@@ -78,7 +78,7 @@ extension RepositorySearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchWord = searchBar.text!
 
-        if searchWord.count != 0 {
+        if searchWord.isNotEmpty {
             let url = "https://api.github.com/search/repositories?q=\(searchWord)"
             task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
                 if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
