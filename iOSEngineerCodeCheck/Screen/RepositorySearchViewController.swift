@@ -17,7 +17,7 @@ final class RepositorySearchViewController: UITableViewController {
 
     private var repositories: [[String: Any]] = []
     private var task: URLSessionTask?
-    private var selectedIndex: Int!
+    private var selectedIndex: Int?
 
     // MARK: LifeCycle
 
@@ -34,15 +34,30 @@ final class RepositorySearchViewController: UITableViewController {
     }
 
     private func searchRepository(with word: String) {
-        let url = "https://api.github.com/search/repositories?q=\(word)"
-        task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
-            if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
-               let items = object["items"] as? [[String: Any]]
-            {
-                self.repositories = items
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+        let stringUrl = "https://api.github.com/search/repositories?q=\(word)"
+        guard let url = URL(string: stringUrl) else { return }
+        task = URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+
+            guard let data = data else {
+                print(" ### There is No Data ### ")
+                return
+            }
+
+            do {
+                if let object = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let items = object["items"] as? [[String: Any]]
+                {
+                    self.repositories = items
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
+            } catch {
+                print(" ### Invalid Data ### ")
             }
         }
         task?.resume()
@@ -51,9 +66,10 @@ final class RepositorySearchViewController: UITableViewController {
     // MARK: Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        guard let selectedIndex = selectedIndex else { return }
         if segue.identifier == "Detail" {
             let detailVC = segue.destination as! RepositoryDetailViewController
-            detailVC.repository = repositories[selectedIndex]
+            detailVC.configure(with: repositories[selectedIndex])
         }
     }
 
@@ -91,7 +107,7 @@ extension RepositorySearchViewController: UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchWord = searchBar.text!
+        guard let searchWord = searchBar.text else { return }
         if searchWord.isNotEmpty {
             searchRepository(with: searchWord)
         }

@@ -21,7 +21,7 @@ final class RepositoryDetailViewController: UIViewController {
 
     // MARK: Propaties
 
-    var repository: [String: Any]!
+    private var repository: [String: Any]!
 
     // MARK: LifeCycle
 
@@ -31,10 +31,17 @@ final class RepositoryDetailViewController: UIViewController {
         fetchAvatarImage()
     }
 
+    // MARK: Public Methods
+
+    /// このViewControllerに遷移する前に呼んで表示するリポジトリを渡してあげる
+    func configure(with repository: [String: Any]) {
+        self.repository = repository
+    }
+
     // MARK: Private Methods
 
     private func setupUI() {
-        fullNameLabel.text = repository["full_name"] as? String
+        fullNameLabel.text = repository["full_name"] as? String ?? L10n.Common.blank
         languageLabel.text = L10n.RepositoryDetail.LanguageLabel.text(repository["language"] as? String ?? L10n.Common.blank)
         starsCountLabel.text = L10n.RepositoryDetail.StarsCountLabel.text(repository["stargazers_count"] as? Int ?? 0)
         watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(repository["wachers_count"] as? Int ?? 0)
@@ -43,15 +50,27 @@ final class RepositoryDetailViewController: UIViewController {
     }
 
     private func fetchAvatarImage() {
-        if let owner = repository["owner"] as? [String: Any],
-           let imageUrl = owner["avatar_url"] as? String
-        {
-            URLSession.shared.dataTask(with: URL(string: imageUrl)!) { data, _, _ in
-                let image = UIImage(data: data!)!
-                DispatchQueue.main.async {
-                    self.avatarImageView.image = image
-                }
-            }.resume()
+        guard let owner = repository["owner"] as? [String: Any],
+              let stringUrl = owner["avatar_url"] as? String,
+              let url = URL(string: stringUrl)
+        else {
+            return
         }
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+
+            guard let data = data else {
+                print(" ### There is No Data ### ")
+                return
+            }
+
+            let image = UIImage(data: data)
+            DispatchQueue.main.async {
+                self.avatarImageView.image = image
+            }
+        }.resume()
     }
 }
