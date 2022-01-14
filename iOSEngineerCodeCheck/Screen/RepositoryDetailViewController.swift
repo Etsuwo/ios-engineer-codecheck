@@ -43,15 +43,18 @@ final class RepositoryDetailViewController: UIViewController {
     }
 
     private func fetchAvatarImage() {
-        if let owner = repository["owner"] as? [String: Any],
-           let imageUrl = owner["avatar_url"] as? String
-        {
-            URLSession.shared.dataTask(with: URL(string: imageUrl)!) { data, _, _ in
-                let image = UIImage(data: data!)!
-                DispatchQueue.main.async {
-                    self.avatarImageView.image = image
-                }
-            }.resume()
+        guard let owner = repository["owner"] as? [String: Any],
+              let stringUrl = owner["avatar_url"] as? String,
+              let url = URL(string: stringUrl)
+        else {
+            return
         }
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+            guard let data = data else { return }
+            let image = UIImage(data: data)
+            DispatchQueue.main.async {
+                self.avatarImageView.image = image
+            }
+        }.resume()
     }
 }

@@ -34,8 +34,9 @@ final class RepositorySearchViewController: UITableViewController {
     }
 
     private func searchRepository(with word: String) {
-        let url = "https://api.github.com/search/repositories?q=\(word)"
-        task = URLSession.shared.dataTask(with: URL(string: url)!) { data, _, _ in
+        let stringUrl = "https://api.github.com/search/repositories?q=\(word)"
+        guard let url = URL(string: stringUrl) else { return }
+        task = URLSession.shared.dataTask(with: url) { data, _, _ in
             if let object = try! JSONSerialization.jsonObject(with: data!) as? [String: Any],
                let items = object["items"] as? [[String: Any]]
             {
@@ -92,7 +93,7 @@ extension RepositorySearchViewController: UISearchBarDelegate {
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchWord = searchBar.text!
+        guard let searchWord = searchBar.text else { return }
         if searchWord.isNotEmpty {
             searchRepository(with: searchWord)
         }
