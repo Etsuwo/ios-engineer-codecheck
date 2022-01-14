@@ -33,6 +33,7 @@ final class RepositoryDetailViewController: UIViewController {
 
     // MARK: Public Methods
 
+    /// このViewControllerに遷移する前に呼んで表示するリポジトリを渡してあげる
     func configure(with repository: [String: Any]) {
         self.repository = repository
     }
