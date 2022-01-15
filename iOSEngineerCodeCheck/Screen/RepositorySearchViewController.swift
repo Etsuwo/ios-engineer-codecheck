@@ -6,6 +6,7 @@
 //  Copyright © 2020 YUMEMI Inc. All rights reserved.
 //
 
+import Combine
 import UIKit
 
 final class RepositorySearchViewController: UITableViewController {
@@ -15,8 +16,8 @@ final class RepositorySearchViewController: UITableViewController {
 
     // MARK: Propaties
 
-    private var repositories: [[String: Any]] = []
-    private var task: URLSessionTask?
+    private let repository = GithubRepositoryRepository()
+    private var cancellable: AnyCancellable?
     private var selectedIndex: Int?
 
     // MARK: Constants
@@ -40,58 +41,45 @@ final class RepositorySearchViewController: UITableViewController {
         searchBar.delegate = self
     }
 
-    private func searchRepository(with word: String) {
-        let stringUrl = "https://api.github.com/search/repositories?q=\(word)"
-        guard let url = URL(string: stringUrl) else { return }
-        task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-
-            guard let data = data else {
-                print(" ### There is No Data ### ")
-                return
-            }
-
-            do {
-                if let object = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let items = object["items"] as? [[String: Any]]
-                {
-                    self?.repositories = items
-                    DispatchQueue.main.async {
-                        self?.tableView.reloadData()
-                    }
+    private func searchRepository(by word: String) {
+        cancellable?.cancel()
+        cancellable = repository.searchRepositories(by: word)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case let .failure(error):
+                    print(error.localizedDescription)
+                default: break
                 }
-            } catch {
-                print(" ### Invalid Data ### ")
-            }
-        }
-        task?.resume()
+            }, receiveValue: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
     }
 
     // MARK: Segue
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        guard let selectedIndex = selectedIndex else { return }
+        guard let selectedIndex = selectedIndex,
+              let repository = repository.response?.items[selectedIndex] else { return }
         if segue.identifier == Constants.segueIdentifier {
             let detailVC = segue.destination as! RepositoryDetailViewController
-            detailVC.configure(with: repositories[selectedIndex])
+            detailVC.configure(with: repository)
         }
     }
 
     // MARK: TableView Methods
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        repositories.count
+        repository.response?.items.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
-        let repository = repositories[indexPath.row]
-        cell.textLabel?.text = repository["full_name"] as? String ?? L10n.Common.blank
-        cell.detailTextLabel?.text = repository["language"] as? String ?? L10n.Common.blank
-        cell.tag = indexPath.row
+        if let repository = repository.response?.items[indexPath.row] {
+            cell.textLabel?.text = repository.fullName
+            cell.detailTextLabel?.text = repository.language ?? ""
+            cell.tag = indexPath.row
+        }
         return cell
     }
 
@@ -109,14 +97,10 @@ extension RepositorySearchViewController: UISearchBarDelegate {
         return true
     }
 
-    func searchBar(_: UISearchBar, textDidChange _: String) {
-        task?.cancel()
-    }
-
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text else { return }
         if searchWord.isNotEmpty {
-            searchRepository(with: searchWord)
+            searchRepository(by: searchWord)
         }
     }
 }
