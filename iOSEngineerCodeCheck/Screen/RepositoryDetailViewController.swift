@@ -44,7 +44,7 @@ final class RepositoryDetailViewController: UIViewController {
         fullNameLabel.text = repository["full_name"] as? String ?? L10n.Common.blank
         languageLabel.text = L10n.RepositoryDetail.LanguageLabel.text(repository["language"] as? String ?? L10n.Common.blank)
         starsCountLabel.text = L10n.RepositoryDetail.StarsCountLabel.text(repository["stargazers_count"] as? Int ?? 0)
-        watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(repository["wachers_count"] as? Int ?? 0)
+        watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(repository["watchers_count"] as? Int ?? 0)
         forksCountLabel.text = L10n.RepositoryDetail.ForksCountLabel.text(repository["forks_count"] as? Int ?? 0)
         issuesCountLabel.text = L10n.RepositoryDetail.IssueCountLabel.text(repository["open_issues_count"] as? Int ?? 0)
     }
@@ -56,7 +56,7 @@ final class RepositoryDetailViewController: UIViewController {
         else {
             return
         }
-        URLSession.shared.dataTask(with: url) { data, _, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -69,7 +69,7 @@ final class RepositoryDetailViewController: UIViewController {
 
             let image = UIImage(data: data)
             DispatchQueue.main.async {
-                self.avatarImageView.image = image
+                self?.avatarImageView.image = image
             }
         }.resume()
     }
