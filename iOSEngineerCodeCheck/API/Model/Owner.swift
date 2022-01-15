@@ -10,7 +10,7 @@ import Foundation
 
 struct Owner: Codable {
     var avatarUrl: String
-    
+
     enum CodingKeys: String, CodingKey {
         case avatarUrl = "avatar_url"
     }
