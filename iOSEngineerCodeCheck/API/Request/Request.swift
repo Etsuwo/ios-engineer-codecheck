@@ -42,7 +42,7 @@ extension Request where Response: Codable {
                         return
                     }
                     guard let data = response.data else {
-                        // TODO: エラー処理
+                        promise(.failure(APIError.unknownError))
                         return
                     }
                     do {
