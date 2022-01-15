@@ -18,10 +18,10 @@ final class RepositorySearchViewController: UITableViewController {
     private var repositories: [[String: Any]] = []
     private var task: URLSessionTask?
     private var selectedIndex: Int?
-    
+
     // MARK: Constants
-    
-    private struct Constants {
+
+    private enum Constants {
         static let cellIdentifier = "RepositoryCell"
         static let segueIdentifier = "Detail"
     }
