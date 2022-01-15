@@ -6,6 +6,7 @@
 //  Copyright © 2020 YUMEMI Inc. All rights reserved.
 //
 
+import Kingfisher
 import UIKit
 
 final class RepositoryDetailViewController: UIViewController {
@@ -28,7 +29,6 @@ final class RepositoryDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        fetchAvatarImage()
     }
 
     // MARK: Public Methods
@@ -47,27 +47,6 @@ final class RepositoryDetailViewController: UIViewController {
         watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(repository.watchersCount)
         forksCountLabel.text = L10n.RepositoryDetail.ForksCountLabel.text(repository.forksCount)
         issuesCountLabel.text = L10n.RepositoryDetail.IssueCountLabel.text(repository.openIssuesCount)
-    }
-
-    private func fetchAvatarImage() {
-        guard let url = URL(string: repository.owner.avatarUrl) else {
-            return
-        }
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-
-            guard let data = data else {
-                print(" ### There is No Data ### ")
-                return
-            }
-
-            let image = UIImage(data: data)
-            DispatchQueue.main.async {
-                self?.avatarImageView.image = image
-            }
-        }.resume()
+        avatarImageView.kf.setImage(with: URL(string: repository.owner.avatarUrl))
     }
 }
