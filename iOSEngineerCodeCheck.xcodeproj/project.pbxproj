@@ -18,6 +18,7 @@
 		5A663CD52792FDE4006680EB /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CD42792FDE4006680EB /* Request.swift */; };
 		5A663CD8279301DE006680EB /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CD7279301DE006680EB /* Owner.swift */; };
 		5A663CDA27930E4B006680EB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CD927930E4B006680EB /* Item.swift */; };
+		5A663CDC279310D1006680EB /* SearchRepositoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CDB279310D1006680EB /* SearchRepositoriesResponse.swift */; };
 		6705427595D7AAB509C377B6 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
@@ -57,6 +58,7 @@
 		5A663CD42792FDE4006680EB /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		5A663CD7279301DE006680EB /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		5A663CD927930E4B006680EB /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		5A663CDB279310D1006680EB /* SearchRepositoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoriesResponse.swift; sourceTree = "<group>"; };
 		99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACEA46D304CF28B4C8D76499 /* Pods_iOSEngineerCodeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F18E59DAFD81FA53738B78 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheckTests/Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			children = (
 				5A663CD7279301DE006680EB /* Owner.swift */,
 				5A663CD927930E4B006680EB /* Item.swift */,
+				5A663CDB279310D1006680EB /* SearchRepositoriesResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A663CDC279310D1006680EB /* SearchRepositoriesResponse.swift in Sources */,
 				BFD945E3244DC5E80012785A /* RepositorySearchViewController.swift in Sources */,
 				5A663CD8279301DE006680EB /* Owner.swift in Sources */,
 				5A663CCB27915078006680EB /* String+Extension.swift in Sources */,
