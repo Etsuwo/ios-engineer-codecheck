@@ -16,6 +16,7 @@
 		5A663CCF2792FC30006680EB /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CCE2792FC30006680EB /* APIEndpoint.swift */; };
 		5A663CD22792FD74006680EB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5A663CD12792FD74006680EB /* Alamofire */; };
 		5A663CD52792FDE4006680EB /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CD42792FDE4006680EB /* Request.swift */; };
+		5A663CD8279301DE006680EB /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CD7279301DE006680EB /* Owner.swift */; };
 		6705427595D7AAB509C377B6 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		5A663CCA27915078006680EB /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5A663CCE2792FC30006680EB /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		5A663CD42792FDE4006680EB /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		5A663CD7279301DE006680EB /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACEA46D304CF28B4C8D76499 /* Pods_iOSEngineerCodeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F18E59DAFD81FA53738B78 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheckTests/Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 		5A663CCC2792FBE5006680EB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				5A663CD627930176006680EB /* Model */,
 				5A663CD32792FDCB006680EB /* Request */,
 				5A663CCE2792FC30006680EB /* APIEndpoint.swift */,
 			);
@@ -185,6 +188,14 @@
 				5A663CD42792FDE4006680EB /* Request.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		5A663CD627930176006680EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5A663CD7279301DE006680EB /* Owner.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		BFD945D2244DC5E80012785A = {
@@ -523,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945E3244DC5E80012785A /* RepositorySearchViewController.swift in Sources */,
+				5A663CD8279301DE006680EB /* Owner.swift in Sources */,
 				5A663CCB27915078006680EB /* String+Extension.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */,
 				5A165A1D2790BB190039B84A /* Scenes.swift in Sources */,
