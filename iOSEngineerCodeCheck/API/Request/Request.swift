@@ -27,6 +27,7 @@ extension Request where Response: Codable {
     var parameter: [String: Any]? { nil }
     var encording: ParameterEncoding { URLEncoding.default }
 
+    /// API通信を実行する
     func exec() -> AnyPublisher<Response, Error> {
         Future<Response, Error> { promise in
             debugPrint("path: " + baseURL + path)

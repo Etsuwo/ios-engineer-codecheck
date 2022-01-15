@@ -15,7 +15,8 @@ protocol GithubRepositoryRepositoryProtocol {
 
 final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
     private(set) var response: SearchRepositoriesResponse?
-
+    
+    /// Githubのリポジトリを検索する
     func searchRepositories(by word: String) -> AnyPublisher<SearchRepositoriesResponse, Error> {
         SearchRepositoriesRequest(searchWord: word).exec()
             .tryMap { [weak self] response -> SearchRepositoriesResponse in
