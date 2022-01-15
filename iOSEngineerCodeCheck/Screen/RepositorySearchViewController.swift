@@ -19,6 +19,13 @@ final class RepositorySearchViewController: UITableViewController {
     private var task: URLSessionTask?
     private var selectedIndex: Int?
 
+    // MARK: Constants
+
+    private enum Constants {
+        static let cellIdentifier = "RepositoryCell"
+        static let segueIdentifier = "Detail"
+    }
+
     // MARK: LifeCycle
 
     override func viewDidLoad() {
@@ -67,7 +74,7 @@ final class RepositorySearchViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         guard let selectedIndex = selectedIndex else { return }
-        if segue.identifier == "Detail" {
+        if segue.identifier == Constants.segueIdentifier {
             let detailVC = segue.destination as! RepositoryDetailViewController
             detailVC.configure(with: repositories[selectedIndex])
         }
@@ -79,8 +86,8 @@ final class RepositorySearchViewController: UITableViewController {
         repositories.count
     }
 
-    override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
         let repository = repositories[indexPath.row]
         cell.textLabel?.text = repository["full_name"] as? String ?? L10n.Common.blank
         cell.detailTextLabel?.text = repository["language"] as? String ?? L10n.Common.blank
@@ -90,7 +97,7 @@ final class RepositorySearchViewController: UITableViewController {
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        performSegue(withIdentifier: "Detail", sender: self)
+        performSegue(withIdentifier: Constants.segueIdentifier, sender: self)
     }
 }
 
