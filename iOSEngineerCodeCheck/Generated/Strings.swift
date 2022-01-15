@@ -16,6 +16,13 @@ internal enum L10n {
     internal static let blank = L10n.tr("Localizable", "Common.Blank")
   }
 
+  internal enum Error {
+    internal enum Unknown {
+      /// 不明なエラーが発生しました
+      internal static let description = L10n.tr("Localizable", "Error.Unknown.Description")
+    }
+  }
+
   internal enum RepositoryDetail {
     internal enum ForksCountLabel {
       /// %@ forks
