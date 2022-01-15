@@ -12,7 +12,6 @@ import Foundation
 
 protocol Request {
     associatedtype Response
-    associatedtype CustomResponse
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
@@ -23,7 +22,6 @@ protocol Request {
 }
 
 extension Request where Response: Codable {
-    typealias CustomResponse = Response
     var baseURL: String { APIEndpoint.baseURL }
     var headers: HTTPHeaders { ["Content-Type": "application/vnd.github.v3+json"] }
     var parameter: [String: Any]? { nil }
@@ -35,7 +33,7 @@ extension Request where Response: Codable {
             debugPrint("method: \(method)")
             debugPrint("parameter: \(String(describing: parameter))")
             debugPrint("headers: \(headers)")
-            
+
             AF.request(baseURL + path, method: method, parameters: parameter, encoding: encording, headers: headers)
                 .response { response in
                     if let error = response.error {
@@ -48,7 +46,7 @@ extension Request where Response: Codable {
                         return
                     }
                     do {
-                        let result = try JSONDecoder().decode(CustomResponse.self, from: data)
+                        let result = try JSONDecoder().decode(Response.self, from: data)
                         print(result)
                         promise(.success(result))
                     } catch {
