@@ -11,7 +11,7 @@ import Foundation
 struct Item: Codable {
     var fullName: String
     var owner: Owner
-    var language: String
+    var language: String?
     var stargazersCount: Int
     var watchersCount: Int
     var forksCount: Int
@@ -33,7 +33,7 @@ extension Item {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         fullName = try container.decode(String.self, forKey: .fullName)
         owner = try container.decode(Owner.self, forKey: .owner)
-        language = try container.decode(String.self, forKey: .language)
+        language = try container.decode(String?.self, forKey: .language)
         stargazersCount = try container.decode(Int.self, forKey: .stargazersCount)
         watchersCount = try container.decode(Int.self, forKey: .watchersCount)
         forksCount = try container.decode(Int.self, forKey: .forksCount)
