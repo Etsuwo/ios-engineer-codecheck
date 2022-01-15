@@ -79,8 +79,8 @@ final class RepositorySearchViewController: UITableViewController {
         repositories.count
     }
 
-    override func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RepositoryCell", for: indexPath)
         let repository = repositories[indexPath.row]
         cell.textLabel?.text = repository["full_name"] as? String ?? L10n.Common.blank
         cell.detailTextLabel?.text = repository["language"] as? String ?? L10n.Common.blank
