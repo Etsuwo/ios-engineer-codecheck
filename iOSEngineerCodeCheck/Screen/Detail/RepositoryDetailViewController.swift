@@ -22,7 +22,7 @@ final class RepositoryDetailViewController: UIViewController {
 
     // MARK: Propaties
 
-    private var repository: Item!
+    private var viewModel: RepositoryDetailViewModelType!
 
     // MARK: LifeCycle
 
@@ -34,19 +34,20 @@ final class RepositoryDetailViewController: UIViewController {
     // MARK: Public Methods
 
     /// このViewControllerに遷移する前に呼んで表示するリポジトリを渡してあげる
-    func configure(with repository: Item) {
-        self.repository = repository
+    /// - Parameter item: 表示するリポジトリ
+    func configure(with item: Item) {
+        viewModel = RepositoryDetailViewModel(item: item)
     }
 
     // MARK: Private Methods
 
     private func setupUI() {
-        fullNameLabel.text = repository.fullName
-        languageLabel.text = L10n.RepositoryDetail.LanguageLabel.text(repository.language ?? "")
-        starsCountLabel.text = L10n.RepositoryDetail.StarsCountLabel.text(repository.stargazersCount)
-        watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(repository.watchersCount)
-        forksCountLabel.text = L10n.RepositoryDetail.ForksCountLabel.text(repository.forksCount)
-        issuesCountLabel.text = L10n.RepositoryDetail.IssueCountLabel.text(repository.openIssuesCount)
-        avatarImageView.kf.setImage(with: URL(string: repository.owner.avatarUrl))
+        fullNameLabel.text = viewModel.outputs.fullName
+        languageLabel.text = L10n.RepositoryDetail.LanguageLabel.text(viewModel.outputs.language)
+        starsCountLabel.text = L10n.RepositoryDetail.StarsCountLabel.text(viewModel.outputs.stargazersCount)
+        watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(viewModel.outputs.watchersCount)
+        forksCountLabel.text = L10n.RepositoryDetail.ForksCountLabel.text(viewModel.outputs.forksCount)
+        issuesCountLabel.text = L10n.RepositoryDetail.IssueCountLabel.text(viewModel.outputs.openIssuesCount)
+        avatarImageView.kf.setImage(with: viewModel.outputs.avatarUrl)
     }
 }
