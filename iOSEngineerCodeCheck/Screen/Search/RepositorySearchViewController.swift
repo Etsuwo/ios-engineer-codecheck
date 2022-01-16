@@ -16,8 +16,8 @@ final class RepositorySearchViewController: UITableViewController {
 
     // MARK: Propaties
 
-    private let repository = GithubRepositoryRepository()
-    private var cancellable: AnyCancellable?
+    private let viewModel: RepositorySearchViewModelType = RepositorySearchViewModel()
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: Constants
 
@@ -30,6 +30,7 @@ final class RepositorySearchViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        bind()
     }
 
     // MARK: Private Methods
@@ -39,46 +40,39 @@ final class RepositorySearchViewController: UITableViewController {
         searchBar.delegate = self
     }
 
-    private func searchRepository(by word: String) {
-        cancellable?.cancel()
-        cancellable = repository.searchRepositories(by: word)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case let .failure(error):
-                    print(error.localizedDescription)
-                default: break
-                }
-            }, receiveValue: { [weak self] _ in
+    private func bind() {
+        viewModel.outputs.fetchSuccess
+            .sink(receiveValue: { [weak self] in
                 self?.tableView.reloadData()
             })
-    }
-
-    private func transitionToDetail(with repository: Item) {
-        let detailVC = StoryboardScene.Main.repositoryDetailViewController.instantiate()
-        detailVC.configure(with: repository)
-        navigationController?.pushViewController(detailVC, animated: true)
+            .store(in: &cancellables)
+        viewModel.outputs.onTransitionDetail
+            .sink(receiveValue: { [weak self] item in
+                let detailVC = StoryboardScene.Main.repositoryDetailViewController.instantiate()
+                detailVC.configure(with: item)
+                self?.navigationController?.pushViewController(detailVC, animated: true)
+            })
+            .store(in: &cancellables)
     }
 
     // MARK: TableView Methods
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        repository.response?.items.count ?? 0
+        viewModel.outputs.items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
-        if let repository = repository.response?.items[indexPath.row] {
-            cell.textLabel?.text = repository.fullName
-            cell.detailTextLabel?.text = repository.language ?? ""
-            cell.tag = indexPath.row
-        }
+        let repository = viewModel.outputs.items[indexPath.row]
+        cell.textLabel?.text = repository.fullName
+        cell.detailTextLabel?.text = repository.language ?? L10n.Common.blank
+        cell.tag = indexPath.row
+
         return cell
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let repository = repository.response?.items[indexPath.row] else { return }
-        transitionToDetail(with: repository)
+        viewModel.inputs.onTapTableViewCell(index: indexPath.row)
     }
 }
 
@@ -93,7 +87,7 @@ extension RepositorySearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text else { return }
         if searchWord.isNotEmpty {
-            searchRepository(by: searchWord)
+            viewModel.inputs.searchRepository(by: searchWord)
         }
     }
 }
