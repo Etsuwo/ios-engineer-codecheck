@@ -52,11 +52,13 @@ final class RepositorySearchViewController: UITableViewController {
 
     private func bindViewModel() {
         viewModel.outputs.fetchSuccess
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 self?.tableView.reloadData()
             })
             .store(in: &cancellables)
         viewModel.outputs.onTransitionDetail
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] item in
                 let detailVC = StoryboardScene.Main.repositoryDetailViewController.instantiate()
                 detailVC.configure(with: item)
