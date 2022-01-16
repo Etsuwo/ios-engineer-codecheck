@@ -143,8 +143,8 @@
 		5A165A132790B8190039B84A /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */,
-				BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */,
+				5A23B001279463D700CC35A0 /* Detail */,
+				5A23B000279463C300CC35A0 /* Search */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -174,6 +174,22 @@
 				5A165A1E2790BB220039B84A /* Strings.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		5A23B000279463C300CC35A0 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		5A23B001279463D700CC35A0 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		5A663CC92791504A006680EB /* Extension */ = {
