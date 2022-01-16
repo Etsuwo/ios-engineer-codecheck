@@ -10,7 +10,7 @@ import Combine
 import Foundation
 
 protocol RepositorySearchViewModelInputs {
-    func searchRepository(by word: String)
+    func onTapSearchButton(with word: String)
     func onTapTableViewCell(index: Int)
 }
 
@@ -37,7 +37,16 @@ final class RepositorySearchViewModel: RepositorySearchViewModelType {
 }
 
 extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
-    func searchRepository(by word: String) {
+    func onTapSearchButton(with word: String) {
+        searchRepository(by: word)
+    }
+
+    func onTapTableViewCell(index: Int) {
+        guard let item = repository.response?.items[index] else { return }
+        onTransitionDetailSubject.send(item)
+    }
+
+    private func searchRepository(by word: String) {
         searchCancellable?.cancel()
         searchCancellable = repository.searchRepositories(by: word)
             .receive(on: DispatchQueue.main)
@@ -50,11 +59,6 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
             }, receiveValue: { [weak self] _ in
                 self?.fetchSuccessSubject.send()
             })
-    }
-
-    func onTapTableViewCell(index: Int) {
-        guard let item = repository.response?.items[index] else { return }
-        onTransitionDetailSubject.send(item)
     }
 }
 

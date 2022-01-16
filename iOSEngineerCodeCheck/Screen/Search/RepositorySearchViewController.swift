@@ -45,7 +45,7 @@ final class RepositorySearchViewController: UITableViewController {
         searchBar.searchButtonClickedPublisher
             .sink(receiveValue: { [weak self] in
                 guard let searchWord = self?.searchBar.text, searchWord.isNotEmpty else { return }
-                self?.viewModel.inputs.searchRepository(by: searchWord)
+                self?.viewModel.inputs.onTapSearchButton(with: searchWord)
             })
             .store(in: &cancellables)
     }
