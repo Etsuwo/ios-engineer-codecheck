@@ -37,10 +37,14 @@ final class RepositorySearchViewModel: RepositorySearchViewModelType {
 }
 
 extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
+    /// SearchButtonがタップされた時に呼ぶ
+    /// - Parameter word: SearchBarに入力された文字列
     func onTapSearchButton(with word: String) {
         searchRepository(by: word)
     }
 
+    /// TableViewCellがタップされた時に呼ぶ
+    /// - Parameter index: タップされたCellのIndexPath.row
     func onTapTableViewCell(index: Int) {
         guard let item = repository.response?.items[index] else { return }
         onTransitionDetailSubject.send(item)

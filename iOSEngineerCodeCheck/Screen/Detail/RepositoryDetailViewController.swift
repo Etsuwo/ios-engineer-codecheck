@@ -34,6 +34,7 @@ final class RepositoryDetailViewController: UIViewController {
     // MARK: Public Methods
 
     /// このViewControllerに遷移する前に呼んで表示するリポジトリを渡してあげる
+    /// - Parameter item: 表示するリポジトリ
     func configure(with item: Item) {
         viewModel = RepositoryDetailViewModel(item: item)
     }
