@@ -7,6 +7,7 @@
 //
 
 import Combine
+import CombineCocoa
 import UIKit
 
 final class RepositorySearchViewController: UITableViewController {
@@ -30,7 +31,8 @@ final class RepositorySearchViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        bind()
+        bindUIAction()
+        bindViewModel()
     }
 
     // MARK: Private Methods
@@ -40,7 +42,15 @@ final class RepositorySearchViewController: UITableViewController {
         searchBar.delegate = self
     }
 
-    private func bind() {
+    private func bindUIAction() {
+        tableView.didSelectRowPublisher
+            .sink(receiveValue: { [weak self] indexPath in
+                self?.viewModel.inputs.onTapTableViewCell(index: indexPath.row)
+            })
+            .store(in: &cancellables)
+    }
+
+    private func bindViewModel() {
         viewModel.outputs.fetchSuccess
             .sink(receiveValue: { [weak self] in
                 self?.tableView.reloadData()
@@ -69,10 +79,6 @@ final class RepositorySearchViewController: UITableViewController {
         cell.tag = indexPath.row
 
         return cell
-    }
-
-    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.inputs.onTapTableViewCell(index: indexPath.row)
     }
 }
 
