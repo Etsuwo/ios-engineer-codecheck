@@ -30,22 +30,22 @@ final class RepositorySearchViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         bindUIAction()
         bindViewModel()
     }
 
     // MARK: Private Methods
 
-    private func setupUI() {
-        searchBar.text = L10n.RepositorySearch.SearchBar.text
-        searchBar.delegate = self
-    }
-
     private func bindUIAction() {
         tableView.didSelectRowPublisher
             .sink(receiveValue: { [weak self] indexPath in
                 self?.viewModel.inputs.onTapTableViewCell(index: indexPath.row)
+            })
+            .store(in: &cancellables)
+        searchBar.searchButtonClickedPublisher
+            .sink(receiveValue: { [weak self] in
+                guard let searchWord = self?.searchBar.text, searchWord.isNotEmpty else { return }
+                self?.viewModel.inputs.searchRepository(by: searchWord)
             })
             .store(in: &cancellables)
     }
@@ -79,21 +79,5 @@ final class RepositorySearchViewController: UITableViewController {
         cell.tag = indexPath.row
 
         return cell
-    }
-}
-
-// MARK: UISearchBarDelegate
-
-extension RepositorySearchViewController: UISearchBarDelegate {
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        searchBar.text = L10n.Common.blank
-        return true
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchWord = searchBar.text else { return }
-        if searchWord.isNotEmpty {
-            viewModel.inputs.searchRepository(by: searchWord)
-        }
     }
 }
