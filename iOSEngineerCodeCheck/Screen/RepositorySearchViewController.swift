@@ -18,13 +18,11 @@ final class RepositorySearchViewController: UITableViewController {
 
     private let repository = GithubRepositoryRepository()
     private var cancellable: AnyCancellable?
-    private var selectedIndex: Int?
 
     // MARK: Constants
 
     private enum Constants {
         static let cellIdentifier = "RepositoryCell"
-        static let segueIdentifier = "Detail"
     }
 
     // MARK: LifeCycle
@@ -56,15 +54,10 @@ final class RepositorySearchViewController: UITableViewController {
             })
     }
 
-    // MARK: Segue
-
-    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        guard let selectedIndex = selectedIndex,
-              let repository = repository.response?.items[selectedIndex] else { return }
-        if segue.identifier == Constants.segueIdentifier {
-            let detailVC = segue.destination as! RepositoryDetailViewController
-            detailVC.configure(with: repository)
-        }
+    private func transitionToDetail(with repository: Item) {
+        let detailVC = StoryboardScene.Main.repositoryDetailViewController.instantiate()
+        detailVC.configure(with: repository)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 
     // MARK: TableView Methods
@@ -84,8 +77,8 @@ final class RepositorySearchViewController: UITableViewController {
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        performSegue(withIdentifier: Constants.segueIdentifier, sender: self)
+        guard let repository = repository.response?.items[indexPath.row] else { return }
+        transitionToDetail(with: repository)
     }
 }
 
