@@ -16,8 +16,8 @@ protocol GithubRepositoryRepositoryProtocol {
 final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
     private let provider: GithubAPIProviderProtocol
 
-    init() {
-        provider = GithubAPIProvider()
+    init(provider: GithubAPIProviderProtocol = GithubAPIProvider()) {
+        self.provider = provider
     }
 
     /// Githubのリポジトリ検索をProviderに依頼
