@@ -14,7 +14,6 @@ protocol GithubRepositoryRepositoryProtocol {
 }
 
 final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
-    private(set) var response: SearchRepositoriesResponse?
     private let provider: GithubAPIProviderProtocol
 
     init() {
@@ -25,10 +24,6 @@ final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
     func searchRepositories(by word: String) -> AnyPublisher<SearchRepositoriesResponse, Error> {
         let request = SearchRepositoriesRequest(searchWord: word)
         return provider.exec(with: request)
-            .tryMap { [weak self] response -> SearchRepositoriesResponse in
-                self?.response = response
-                return response
-            }
             .eraseToAnyPublisher()
     }
 }

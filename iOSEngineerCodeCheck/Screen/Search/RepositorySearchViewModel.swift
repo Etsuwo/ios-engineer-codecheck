@@ -29,11 +29,21 @@ protocol RepositorySearchViewModelType {
 final class RepositorySearchViewModel: RepositorySearchViewModelType {
     var inputs: RepositorySearchViewModelInputs { self }
     var outputs: RepositorySearchViewModelOutputs { self }
+
+    struct DataStore {
+        var items: [Item] = []
+    }
+
     private var searchCancellable: AnyCancellable?
-    private let repository = GithubRepositoryRepository()
+    private let repository: GithubRepositoryRepositoryProtocol
+    private var dataStore = DataStore()
     private let fetchSuccessSubject = PassthroughSubject<Void, Never>()
     private let errorMessageSubject = PassthroughSubject<String, Never>()
     private let onTransitionDetailSubject = PassthroughSubject<Item, Never>()
+
+    init(repository: GithubRepositoryRepositoryProtocol = GithubRepositoryRepository()) {
+        self.repository = repository
+    }
 }
 
 extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
@@ -46,8 +56,7 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
     /// TableViewCellがタップされた時に呼ぶ
     /// - Parameter index: タップされたCellのIndexPath.row
     func onTapTableViewCell(index: Int) {
-        guard let item = repository.response?.items[index] else { return }
-        onTransitionDetailSubject.send(item)
+        onTransitionDetailSubject.send(dataStore.items[index])
     }
 
     private func searchRepository(by word: String) {
@@ -60,7 +69,8 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
                     self?.errorMessageSubject.send(error.localizedDescription)
                 default: break
                 }
-            }, receiveValue: { [weak self] _ in
+            }, receiveValue: { [weak self] response in
+                self?.dataStore.items = response.items
                 self?.fetchSuccessSubject.send()
             })
     }
@@ -80,6 +90,6 @@ extension RepositorySearchViewModel: RepositorySearchViewModelOutputs {
     }
 
     var items: [Item] {
-        repository.response?.items ?? []
+        dataStore.items
     }
 }
