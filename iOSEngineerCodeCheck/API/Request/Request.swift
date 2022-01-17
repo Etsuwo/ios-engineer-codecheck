@@ -17,6 +17,7 @@ protocol Request {
     var headers: HTTPHeaders { get }
     var parameter: [String: Any]? { get }
     var encording: ParameterEncoding { get }
+    var sampleData: Data { get } // テスト用
 }
 
 extension Request {
