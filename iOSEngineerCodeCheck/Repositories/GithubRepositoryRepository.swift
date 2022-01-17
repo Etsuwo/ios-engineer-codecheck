@@ -15,10 +15,16 @@ protocol GithubRepositoryRepositoryProtocol {
 
 final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
     private(set) var response: SearchRepositoriesResponse?
-    
+    private let provider: GithubAPIProviderProtocol
+
+    init() {
+        provider = GithubAPIProvider()
+    }
+
     /// Githubのリポジトリを検索する
     func searchRepositories(by word: String) -> AnyPublisher<SearchRepositoriesResponse, Error> {
-        SearchRepositoriesRequest(searchWord: word).exec()
+        let request = SearchRepositoriesRequest(searchWord: word)
+        return provider.exec(with: request)
             .tryMap { [weak self] response -> SearchRepositoriesResponse in
                 self?.response = response
                 return response
