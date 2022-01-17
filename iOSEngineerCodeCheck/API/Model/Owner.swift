@@ -10,9 +10,11 @@ import Foundation
 
 struct Owner: Codable {
     var avatarUrl: String
+    var login: String
 
     enum CodingKeys: String, CodingKey {
         case avatarUrl = "avatar_url"
+        case login
     }
 }
 
@@ -20,5 +22,6 @@ extension Owner {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         avatarUrl = try container.decode(String.self, forKey: .avatarUrl)
+        login = try container.decode(String.self, forKey: .login)
     }
 }
