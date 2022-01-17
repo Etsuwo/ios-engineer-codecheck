@@ -57,9 +57,17 @@ internal enum L10n {
   }
 
   internal enum RepositorySearch {
-    internal enum SearchBar {
-      /// GitHubのリポジトリを検索できるよー
-      internal static let text = L10n.tr("Localizable", "RepositorySearch.SearchBar.Text")
+    internal enum DetailLabel {
+      /// %@ / ☆ %@
+      internal static func text(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "RepositorySearch.DetailLabel.Text", String(describing: p1), String(describing: p2))
+      }
+    }
+    internal enum OwnerNameLabel {
+      /// %@ /
+      internal static func text(_ p1: Any) -> String {
+        return L10n.tr("Localizable", "RepositorySearch.OwnerNameLabel.Text", String(describing: p1))
+      }
     }
   }
 }

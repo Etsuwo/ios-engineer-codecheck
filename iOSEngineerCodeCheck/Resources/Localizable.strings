@@ -13,7 +13,8 @@
 "Error.Unknown.Description" = "不明なエラーが発生しました";
 
 // MARK: RepositorySearchViewController
-"RepositorySearch.SearchBar.Text" = "GitHubのリポジトリを検索できるよー";
+"RepositorySearch.OwnerNameLabel.Text" = "%@ /";
+"RepositorySearch.DetailLabel.Text" = "%@ / ☆ %@";
 
 // MARK: RepositoryDetailViewController
 "RepositoryDetail.LanguageLabel.Text" = "Written in %@";
