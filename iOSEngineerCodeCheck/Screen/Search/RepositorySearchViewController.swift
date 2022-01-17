@@ -30,6 +30,11 @@ final class RepositorySearchViewController: UIViewController {
         bindViewModel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.removeHighlight()
+    }
+
     // MARK: Private Methods
 
     private func setupUI() {
