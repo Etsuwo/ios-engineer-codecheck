@@ -20,3 +20,10 @@ struct SearchRepositoriesRequest: Request {
 
     var searchWord: String
 }
+
+extension SearchRepositoriesRequest {
+    var sampleData: Data {
+        let path = Bundle.main.path(forResource: "SearchRepositoriesRequestSample", ofType: "json")!
+        return try! String(contentsOfFile: path).data(using: .utf8)!
+    }
+}
