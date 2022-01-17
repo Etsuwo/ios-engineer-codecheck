@@ -8,9 +8,10 @@ strings:
 xcassets:
   inputs:
     - Resources/Images.xcassets
+    - Resources/Colors.xcassets
   outputs:
     - templateName: swift5
-      output: Generated/Images.swift
+      output: Generated/Assets.swift
 ib:
   inputs:
     - Storyboards
