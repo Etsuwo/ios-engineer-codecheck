@@ -65,30 +65,35 @@ iOS: 15.0
 
 3. プロジェクトファイルを開き実行する. 
 
-# ブランチ戦略
-`main`ブランチ
+# 設計・アーキテクチャ
 
-- 成果物提出用のブランチ
-- `develop`からマージされる
+本アプリケーションではアーキテクチャとしてMVVMを採用している。理由は以下の通りである
 
-`develop`ブランチ
+- 一部画面をSwiftUIで作成することを見越して相性の良いアーキテクチャを選択したため
+- 小規模なアプリケーションであり、FluxやRedexはデメリットの方が目立ってしまうため
 
-- 課題issueに対応するブランチ
-- `main`から切る
-- 子のissueが必要ならfeatureブランチを作る
-- 子のissueがないならここで作業
-- ブランチ名は`develop/issue-xx`（xxにはissue番号が入る）とする
+また、それぞれの役割は以下の通りである
 
-`feature`ブランチ
+- View: ViewModelの状態を監視してUIを更新する。また、ユーザからのアクションをViewModelに伝える
+- ViewModel: Modelからデータを受け取り自身の状態を更新する。また、ユーザからの入力をModelに伝える
+- Model: UIに依存しないロジックやデータの保持を担当する。
+  - Repository: 関連するデータをProviderなどから取得する
+  - Provider: 関連する通信処理を担う
 
-- 作業用ブランチ
-- `main`または`develop`から切る
-- ブランチ名は`feature/issue-xx`（xxにはissue番号が入る）とする
-
-# ライブラリ管理
+# ライブラリについて
+## 管理方法
 
 - SwiftPackageManagerとCocoaPodsを併用する
 - 基本的にはSwiftPackageManagerを使用し、対応していないまたは問題があった場合はCocoaPodsを使用する。
+
+## 利用ライブラリ一覧
+
+- [Alamofire](https://github.com/Alamofire/Alamofire)
+- [CombineCocoa](https://github.com/CombineCommunity/CombineCocoa)
+- [KingFisher](https://github.com/onevcat/Kingfisher)
+- [SwiftLint](https://github.com/realm/SwiftLint)
+- [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
+- [SwiftGen](https://github.com/SwiftGen/SwiftGen)
 
 # コミットルール
 以下の[コミット種別] + 修正内容
@@ -100,3 +105,6 @@ iOS: 15.0
 - `[clean]` リファクタ
 
 参考：[Gitのコミットメッセージの書き方](https://qiita.com/itosho/items/9565c6ad2ffc24c09364)
+
+# 課題
+課題issueと関連のあるPRは各issueに記載しております。issueをご確認下さい。
