@@ -10,31 +10,31 @@ import Combine
 import CombineCocoa
 import UIKit
 
-final class RepositorySearchViewController: UITableViewController {
+final class RepositorySearchViewController: UIViewController {
     // MARK: IBOutlet
 
     @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
 
     // MARK: Propaties
 
     private let viewModel: RepositorySearchViewModelType = RepositorySearchViewModel()
     private var cancellables = Set<AnyCancellable>()
 
-    // MARK: Constants
-
-    private enum Constants {
-        static let cellIdentifier = "RepositoryCell"
-    }
-
     // MARK: LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         bindUIAction()
         bindViewModel()
     }
 
     // MARK: Private Methods
+
+    private func setupUI() {
+        tableView.dataSource = self
+    }
 
     private func bindUIAction() {
         tableView.didSelectRowPublisher
@@ -66,18 +66,22 @@ final class RepositorySearchViewController: UITableViewController {
             })
             .store(in: &cancellables)
     }
+}
 
-    // MARK: TableView Methods
+// MARK: TableView DataSource
 
-    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+extension RepositorySearchViewController: UITableViewDataSource {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         viewModel.outputs.items.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath)
-        let repository = viewModel.outputs.items[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.language ?? L10n.Common.blank
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RepositorySearchCell.identifier, for: indexPath)
+        guard let repositoryCell = cell as? RepositorySearchCell else {
+            return cell
+        }
+        let item = viewModel.outputs.items[indexPath.row]
+        repositoryCell.configure(with: item)
         cell.tag = indexPath.row
 
         return cell

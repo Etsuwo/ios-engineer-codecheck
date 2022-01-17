@@ -122,7 +122,7 @@
                                 <rect key="frame" x="0.0" y="132" width="428" height="760"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="QJQ-y5-m9l">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RepositorySearchCell" id="QJQ-y5-m9l" customClass="RepositorySearchCell" customModule="iOSEngineerCodeCheck" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QJQ-y5-m9l" id="eME-Us-V04">
@@ -203,6 +203,13 @@
                                                 <constraint firstItem="6PN-Mn-ayD" firstAttribute="leading" secondItem="eME-Us-V04" secondAttribute="leadingMargin" id="sqL-lN-pNF"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImageView" destination="j3T-wQ-6go" id="Nma-K6-d14"/>
+                                            <outlet property="descriptionLabel" destination="zxX-oZ-Efn" id="Agq-1E-kfI"/>
+                                            <outlet property="detailLabel" destination="bvN-hN-Sio" id="Tf8-On-wLO"/>
+                                            <outlet property="ownerNameLabel" destination="wOW-MH-Jys" id="dFq-I2-58O"/>
+                                            <outlet property="repositoryNameLabel" destination="mOS-iG-894" id="vDs-hc-MeM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -220,6 +227,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BAx-vl-Igo"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Eoe-n9-bS6" id="Naq-he-6E2"/>
+                        <outlet property="tableView" destination="mwL-lI-W2i" id="jDz-7K-jaL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XbX-gD-7Cm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
