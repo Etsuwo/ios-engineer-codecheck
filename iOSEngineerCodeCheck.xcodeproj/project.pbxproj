@@ -26,6 +26,7 @@
 		5A663CE8279322B0006680EB /* GithubRepositoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CE7279322B0006680EB /* GithubRepositoryRepository.swift */; };
 		5A663CEB279333B0006680EB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5A663CEA279333B0006680EB /* Kingfisher */; };
 		5A663CED279335F7006680EB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A663CEC279335F7006680EB /* APIError.swift */; };
+		5AA3D67A2795AD9F00EECA17 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D6792795AD9F00EECA17 /* Images.swift */; };
 		5AB58A782795453400E3669E /* GithubAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB58A772795453400E3669E /* GithubAPIProvider.swift */; };
 		5AB58A7C27956FA000E3669E /* SearchRepositoriesRequestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AB58A7B27956FA000E3669E /* SearchRepositoriesRequestSample.json */; };
 		5AB58A7F279573B200E3669E /* GithubRepositoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB58A7E279573B200E3669E /* GithubRepositoryRepositoryTests.swift */; };
@@ -35,7 +36,7 @@
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
 		BFD945E3244DC5E80012785A /* RepositorySearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */; };
 		BFD945E6244DC5E80012785A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD945E4244DC5E80012785A /* Main.storyboard */; };
-		BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD945E7244DC5EB0012785A /* Assets.xcassets */; };
+		BFD945E8244DC5EB0012785A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD945E7244DC5EB0012785A /* Images.xcassets */; };
 		BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */; };
 		BFD945F6244DC5EB0012785A /* APIRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945F5244DC5EB0012785A /* APIRequestTests.swift */; };
 		BFD94601244DC5EC0012785A /* iOSEngineerCodeCheckUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD94600244DC5EC0012785A /* iOSEngineerCodeCheckUITests.swift */; };
@@ -74,6 +75,7 @@
 		5A663CDD27931206006680EB /* SearchRepositoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryRequest.swift; sourceTree = "<group>"; };
 		5A663CE7279322B0006680EB /* GithubRepositoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryRepository.swift; sourceTree = "<group>"; };
 		5A663CEC279335F7006680EB /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		5AA3D6792795AD9F00EECA17 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		5AB58A772795453400E3669E /* GithubAPIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIProvider.swift; sourceTree = "<group>"; };
 		5AB58A7B27956FA000E3669E /* SearchRepositoriesRequestSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SearchRepositoriesRequestSample.json; path = iOSEngineerCodeCheck/Resources/APISample/SearchRepositoriesRequestSample.json; sourceTree = SOURCE_ROOT; };
 		5AB58A7E279573B200E3669E /* GithubRepositoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryRepositoryTests.swift; sourceTree = "<group>"; };
@@ -87,7 +89,7 @@
 		BFD945E0244DC5E80012785A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchViewController.swift; sourceTree = "<group>"; };
 		BFD945E5244DC5E80012785A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BFD945E7244DC5EB0012785A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BFD945E7244DC5EB0012785A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BFD945EA244DC5EB0012785A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFD945EC244DC5EB0012785A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFD945F1244DC5EB0012785A /* iOSEngineerCodeCheckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSEngineerCodeCheckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,7 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				5AB58A7D279572C100E3669E /* APISample */,
-				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
+				BFD945E7244DC5EB0012785A /* Images.xcassets */,
 				5A165A192790BA4A0039B84A /* Localizable.strings */,
 			);
 			path = Resources;
@@ -184,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				5A165A1C2790BB190039B84A /* Scenes.swift */,
+				5AA3D6792795AD9F00EECA17 /* Images.swift */,
 				5A165A1E2790BB220039B84A /* Strings.swift */,
 			);
 			path = Generated;
@@ -463,7 +466,7 @@
 				BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */,
 				5AB58A7C27956FA000E3669E /* SearchRepositoriesRequestSample.json in Resources */,
 				5A165A1A2790BA4A0039B84A /* Localizable.strings in Resources */,
-				BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */,
+				BFD945E8244DC5EB0012785A /* Images.xcassets in Resources */,
 				BFD945E6244DC5E80012785A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +626,7 @@
 				5AB58A782795453400E3669E /* GithubAPIProvider.swift in Sources */,
 				5A663CDE27931206006680EB /* SearchRepositoryRequest.swift in Sources */,
 				5A663CED279335F7006680EB /* APIError.swift in Sources */,
+				5AA3D67A2795AD9F00EECA17 /* Images.swift in Sources */,
 				5A663CDA27930E4B006680EB /* Item.swift in Sources */,
 				5A165A1F2790BB220039B84A /* Strings.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,

@@ -5,6 +5,12 @@ strings:
   outputs:
     - templateName: structured-swift5
       output: Generated/Strings.swift
+xcassets:
+  inputs:
+    - Resources/Images.xcassets
+  outputs:
+    - templateName: swift5
+      output: Generated/Images.swift
 ib:
   inputs:
     - Storyboards
