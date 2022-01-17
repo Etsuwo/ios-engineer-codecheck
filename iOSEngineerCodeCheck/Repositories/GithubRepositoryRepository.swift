@@ -14,15 +14,18 @@ protocol GithubRepositoryRepositoryProtocol {
 }
 
 final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
-    private(set) var response: SearchRepositoriesResponse?
-    
-    /// Githubのリポジトリを検索する
+    private let provider: GithubAPIProviderProtocol
+
+    init(provider: GithubAPIProviderProtocol = GithubAPIProvider()) {
+        self.provider = provider
+    }
+
+    /// Githubのリポジトリ検索をProviderに依頼
+    /// - Parameter word: 検索ワード
+    /// - Returns: SearchRepositoriesResponseを流すPublisher
     func searchRepositories(by word: String) -> AnyPublisher<SearchRepositoriesResponse, Error> {
-        SearchRepositoriesRequest(searchWord: word).exec()
-            .tryMap { [weak self] response -> SearchRepositoriesResponse in
-                self?.response = response
-                return response
-            }
+        let request = SearchRepositoriesRequest(searchWord: word)
+        return provider.exec(with: request)
             .eraseToAnyPublisher()
     }
 }
