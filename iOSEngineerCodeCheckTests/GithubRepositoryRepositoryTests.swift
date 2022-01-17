@@ -11,20 +11,22 @@ import Combine
 import XCTest
 
 class GithubRepositoryRepositoryTests: XCTestCase {
+    private var repositoryWithStub: GithubRepositoryRepository!
     private var repository: GithubRepositoryRepository!
-    private var cancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
         let stub = GithubAPIProviderStub()
-        repository = GithubRepositoryRepository(provider: stub)
-        cancellable?.cancel()
+        repositoryWithStub = GithubRepositoryRepository(provider: stub)
+        let provider = GithubAPIProvider()
+        repository = GithubRepositoryRepository(provider: provider)
     }
 
-    /// searchRepositories(by:)のテスト
-    func testSearchRepositories() {
-        let expectation = expectation(description: "testSearchRepository")
+    /// searchRepositories()の単体テスト
+    func testSearchRepositoriesWithStub() {
+        let expectation = expectation(description: "testSearchRepositoryWithStub")
 
-        cancellable = repository.searchRepositories(by: "Alamofire")
+        repositoryWithStub.searchRepositories(by: "Alamofire")
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case let .failure(error): XCTFail(error.localizedDescription)
@@ -33,6 +35,25 @@ class GithubRepositoryRepositoryTests: XCTestCase {
             }, receiveValue: { response in
                 XCTAssertNotNil(response)
             })
+            .store(in: &cancellables)
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+
+    /// searchRepositories()の結合テスト
+    func testSearchRepositories() {
+        let expectation = expectation(description: "testSearchRepository")
+
+        repository.searchRepositories(by: "Alamofire")
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case let .failure(error): XCTFail(error.localizedDescription)
+                case .finished: expectation.fulfill()
+                }
+            }, receiveValue: { response in
+                XCTAssertNotNil(response)
+            })
+            .store(in: &cancellables)
 
         waitForExpectations(timeout: 5, handler: nil)
     }
