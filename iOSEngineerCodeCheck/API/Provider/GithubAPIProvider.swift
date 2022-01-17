@@ -15,6 +15,8 @@ protocol GithubAPIProviderProtocol {
 }
 
 final class GithubAPIProvider: GithubAPIProviderProtocol {
+    /// API通信を実行する
+    /// - Returns: Requestに対応するResponseを流すPublisher
     func exec<T: Request>(with request: T) -> AnyPublisher<T.Response, Error> where T.Response: Codable {
         Future<T.Response, Error> { [weak self] promise in
             self?.printForDebug(request: request)

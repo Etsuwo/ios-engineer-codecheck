@@ -20,7 +20,9 @@ final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
         provider = GithubAPIProvider()
     }
 
-    /// Githubのリポジトリを検索する
+    /// Githubのリポジトリ検索をProviderに依頼
+    /// - Parameter word: 検索ワード
+    /// - Returns: SearchRepositoriesResponseを流すPublisher
     func searchRepositories(by word: String) -> AnyPublisher<SearchRepositoriesResponse, Error> {
         let request = SearchRepositoriesRequest(searchWord: word)
         return provider.exec(with: request)
