@@ -30,6 +30,7 @@
 		5A701BC327969B38006C667E /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 5A701BC227969B38006C667E /* MarkdownView */; };
 		5A701BC62796A29C006C667E /* GetReadmeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A701BC52796A29C006C667E /* GetReadmeResponse.swift */; };
 		5A701BC82796A2F2006C667E /* GetReadmeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A701BC72796A2F2006C667E /* GetReadmeRequest.swift */; };
+		5A701BCC2796DC88006C667E /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A701BCB2796DC88006C667E /* UIViewController+Extension.swift */; };
 		5AA3D67C2795C2FB00EECA17 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA3D67B2795C2FB00EECA17 /* Colors.xcassets */; };
 		5AA3D6802795C40C00EECA17 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D67F2795C40C00EECA17 /* Assets.swift */; };
 		5AA3D6822795C76700EECA17 /* RepositorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */; };
@@ -85,6 +86,7 @@
 		5A663CEC279335F7006680EB /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		5A701BC52796A29C006C667E /* GetReadmeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReadmeResponse.swift; sourceTree = "<group>"; };
 		5A701BC72796A2F2006C667E /* GetReadmeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReadmeRequest.swift; sourceTree = "<group>"; };
+		5A701BCB2796DC88006C667E /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		5AA3D67B2795C2FB00EECA17 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5AA3D67F2795C40C00EECA17 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchCell.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				5A663CCA27915078006680EB /* String+Extension.swift */,
 				5AA3D6832795D05500EECA17 /* TableView+Extension.swift */,
+				5A701BCB2796DC88006C667E /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				5AA3D6842795D05500EECA17 /* TableView+Extension.swift in Sources */,
 				5A5CE73B2795D80D00F62BA5 /* AppDelegate+Global.swift in Sources */,
 				5A663CDE27931206006680EB /* SearchRepositoryRequest.swift in Sources */,
+				5A701BCC2796DC88006C667E /* UIViewController+Extension.swift in Sources */,
 				5A663CED279335F7006680EB /* APIError.swift in Sources */,
 				5A663CDA27930E4B006680EB /* Item.swift in Sources */,
 				5A165A1F2790BB220039B84A /* Strings.swift in Sources */,

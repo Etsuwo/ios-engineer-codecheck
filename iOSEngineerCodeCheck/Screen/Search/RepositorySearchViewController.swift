@@ -29,6 +29,7 @@ final class RepositorySearchViewController: UIViewController {
         setupUI()
         bindUIAction()
         bindViewModel()
+        setupDismissKeyboardGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
