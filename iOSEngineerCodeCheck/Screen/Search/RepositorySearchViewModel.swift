@@ -13,6 +13,7 @@ protocol RepositorySearchViewModelInputs {
     func onTapSearchButton(with word: String)
     func onTapTableViewCell(index: Int)
     func onReachedBottomTableView()
+    func onPullToRefresh()
 }
 
 protocol RepositorySearchViewModelOutputs {
@@ -63,6 +64,11 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
 
     func onReachedBottomTableView() {
         pagination()
+    }
+
+    /// pull to resreshされた時に呼ぶ
+    func onPullToRefresh() {
+        searchRepository(by: dataStore.searchWord)
     }
 
     private func searchRepository(by word: String) {

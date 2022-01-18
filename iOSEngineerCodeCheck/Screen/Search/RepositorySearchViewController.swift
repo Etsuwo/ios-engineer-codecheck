@@ -21,6 +21,7 @@ final class RepositorySearchViewController: UIViewController {
 
     private let viewModel: RepositorySearchViewModelType = RepositorySearchViewModel()
     private var cancellables = Set<AnyCancellable>()
+    private let refreshControl = UIRefreshControl()
 
     // MARK: LifeCycle
 
@@ -41,6 +42,7 @@ final class RepositorySearchViewController: UIViewController {
 
     private func setupUI() {
         tableView.dataSource = self
+        tableView.refreshControl = refreshControl
     }
 
     private func bindUIAction() {
@@ -52,6 +54,13 @@ final class RepositorySearchViewController: UIViewController {
         tableView.reachedBottomPublisher()
             .sink(receiveValue: { [weak self] in
                 self?.viewModel.inputs.onReachedBottomTableView()
+            })
+            .store(in: &cancellables)
+        refreshControl.isRefreshingPublisher
+            .sink(receiveValue: { [weak self] isRefresh in
+                if isRefresh {
+                    self?.viewModel.inputs.onPullToRefresh()
+                }
             })
             .store(in: &cancellables)
         searchBar.textDidChangePublisher
@@ -68,6 +77,7 @@ final class RepositorySearchViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
             })
             .store(in: &cancellables)
         viewModel.outputs.onTransitionDetail
