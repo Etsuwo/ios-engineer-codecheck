@@ -6,29 +6,36 @@
 //  Copyright © 2020 YUMEMI Inc. All rights reserved.
 //
 
+import Combine
 import Kingfisher
+import MarkdownView
 import UIKit
 
 final class RepositoryDetailViewController: UIViewController {
     // MARK: IBOutlet
 
     @IBOutlet private weak var avatarImageView: UIImageView!
-    @IBOutlet private weak var fullNameLabel: UILabel!
-    @IBOutlet private weak var languageLabel: UILabel!
-    @IBOutlet private weak var starsCountLabel: UILabel!
-    @IBOutlet private weak var watchersCountLabel: UILabel!
+    @IBOutlet private weak var repositoryNameLabel: UILabel!
+    @IBOutlet private weak var ownerNameLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var detailLabel: UILabel!
     @IBOutlet private weak var forksCountLabel: UILabel!
     @IBOutlet private weak var issuesCountLabel: UILabel!
+    @IBOutlet weak var watchersCountLabel: UILabel!
+    @IBOutlet private weak var readmeMarkdownView: MarkdownView!
 
     // MARK: Propaties
 
     private var viewModel: RepositoryDetailViewModelType!
+    private var cancellables = Set<AnyCancellable>()
 
     // MARK: LifeCycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        bindViewModel()
+        viewModel.inputs.fetchReadme()
     }
 
     // MARK: Public Methods
@@ -42,12 +49,28 @@ final class RepositoryDetailViewController: UIViewController {
     // MARK: Private Methods
 
     private func setupUI() {
-        fullNameLabel.text = viewModel.outputs.fullName
-        languageLabel.text = L10n.RepositoryDetail.LanguageLabel.text(viewModel.outputs.language)
-        starsCountLabel.text = L10n.RepositoryDetail.StarsCountLabel.text(viewModel.outputs.stargazersCount)
-        watchersCountLabel.text = L10n.RepositoryDetail.WatchersCountLabel.text(viewModel.outputs.watchersCount)
-        forksCountLabel.text = L10n.RepositoryDetail.ForksCountLabel.text(viewModel.outputs.forksCount)
-        issuesCountLabel.text = L10n.RepositoryDetail.IssueCountLabel.text(viewModel.outputs.openIssuesCount)
+        repositoryNameLabel.text = viewModel.outputs.repositoryName
+        ownerNameLabel.text = viewModel.outputs.ownerName
+        descriptionLabel.text = viewModel.outputs.description
+        detailLabel.text = L10n.RepositoryDetail.DetailLabel.text(viewModel.outputs.language, viewModel.outputs.stargazersCount)
+        forksCountLabel.text = String(viewModel.outputs.forksCount)
+        issuesCountLabel.text = String(viewModel.outputs.openIssuesCount)
+        watchersCountLabel.text = String(viewModel.outputs.watchersCount)
         avatarImageView.kf.setImage(with: viewModel.outputs.avatarUrl)
+
+        readmeMarkdownView.isScrollEnabled = false
+        readmeMarkdownView.onRendered = { [weak self] height in
+            // 高さの調整
+            self?.readmeMarkdownView.heightAnchor.constraint(equalToConstant: height).isActive = true
+            self?.view.layoutIfNeeded()
+        }
+    }
+
+    private func bindViewModel() {
+        viewModel.outputs.readme
+            .sink(receiveValue: { [weak self] readme in
+                self?.readmeMarkdownView.load(markdown: readme)
+            })
+            .store(in: &cancellables)
     }
 }
