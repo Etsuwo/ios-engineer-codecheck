@@ -49,6 +49,11 @@ final class RepositorySearchViewController: UIViewController {
                 self?.viewModel.inputs.onTapTableViewCell(index: indexPath.row)
             })
             .store(in: &cancellables)
+        tableView.reachedBottomPublisher()
+            .sink(receiveValue: { [weak self] in
+                self?.viewModel.inputs.onReachedBottomTableView()
+            })
+            .store(in: &cancellables)
         searchBar.textDidChangePublisher
             .debounce(for: 0.5, scheduler: DispatchQueue.main)
             .sink(receiveValue: { [weak self] text in

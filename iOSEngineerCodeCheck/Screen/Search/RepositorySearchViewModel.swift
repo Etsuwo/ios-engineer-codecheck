@@ -12,6 +12,7 @@ import Foundation
 protocol RepositorySearchViewModelInputs {
     func onTapSearchButton(with word: String)
     func onTapTableViewCell(index: Int)
+    func onReachedBottomTableView()
 }
 
 protocol RepositorySearchViewModelOutputs {
@@ -32,6 +33,7 @@ final class RepositorySearchViewModel: RepositorySearchViewModelType {
 
     struct DataStore {
         var items: [Item] = []
+        var searchWord: String = ""
     }
 
     private var searchCancellable: AnyCancellable?
@@ -59,9 +61,14 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
         onTransitionDetailSubject.send(dataStore.items[index])
     }
 
+    func onReachedBottomTableView() {
+        pagination()
+    }
+
     private func searchRepository(by word: String) {
+        dataStore.searchWord = word
         searchCancellable?.cancel()
-        searchCancellable = repository.searchRepositories(by: word)
+        searchCancellable = repository.searchRepositories(by: word, isPagination: false)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -71,6 +78,22 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
                 }
             }, receiveValue: { [weak self] response in
                 self?.dataStore.items = response.items
+                self?.fetchSuccessSubject.send()
+            })
+    }
+
+    private func pagination() {
+        searchCancellable?.cancel()
+        searchCancellable = repository.searchRepositories(by: dataStore.searchWord, isPagination: true)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case let .failure(error):
+                    self?.errorMessageSubject.send(error.localizedDescription)
+                default: break
+                }
+            }, receiveValue: { [weak self] response in
+                self?.dataStore.items.append(contentsOf: response.items)
                 self?.fetchSuccessSubject.send()
             })
     }
