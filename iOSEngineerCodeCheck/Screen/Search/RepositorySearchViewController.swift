@@ -8,6 +8,7 @@
 
 import Combine
 import CombineCocoa
+import SwiftUI
 import UIKit
 
 final class RepositorySearchViewController: UIViewController {
@@ -47,10 +48,11 @@ final class RepositorySearchViewController: UIViewController {
                 self?.viewModel.inputs.onTapTableViewCell(index: indexPath.row)
             })
             .store(in: &cancellables)
-        searchBar.searchButtonClickedPublisher
-            .sink(receiveValue: { [weak self] in
-                guard let searchWord = self?.searchBar.text, searchWord.isNotEmpty else { return }
-                self?.viewModel.inputs.onTapSearchButton(with: searchWord)
+        searchBar.textDidChangePublisher
+            .debounce(for: 0.5, scheduler: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] text in
+                guard text.isNotEmpty else { return }
+                self?.viewModel.inputs.onTapSearchButton(with: text)
             })
             .store(in: &cancellables)
     }
