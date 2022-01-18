@@ -70,6 +70,11 @@ final class RepositorySearchViewController: UIViewController {
                 self?.viewModel.inputs.onTapSearchButton(with: text)
             })
             .store(in: &cancellables)
+        searchBar.searchButtonClickedPublisher
+            .sink(receiveValue: { [weak self] in
+                self?.searchBar.endEditing(false)
+            })
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
