@@ -11,15 +11,15 @@ import Combine
 import XCTest
 
 class GithubRepositoryRepositoryTests: XCTestCase {
-    private var repositoryWithStub: GithubRepositoryRepository!
-    private var repository: GithubRepositoryRepository!
+    private var repositoryWithStub: SearchRepositoryRepository!
+    private var repository: SearchRepositoryRepository!
     private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
         let stub = GithubAPIProviderStub()
-        repositoryWithStub = GithubRepositoryRepository(provider: stub)
+        repositoryWithStub = SearchRepositoryRepository(provider: stub)
         let provider = GithubAPIProvider()
-        repository = GithubRepositoryRepository(provider: provider)
+        repository = SearchRepositoryRepository(provider: provider)
     }
 
     /// searchRepositories()の単体テスト

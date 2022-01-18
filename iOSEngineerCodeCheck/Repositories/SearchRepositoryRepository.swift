@@ -9,12 +9,11 @@
 import Combine
 import Foundation
 
-protocol GithubRepositoryRepositoryProtocol {
+protocol SearchRepositoryRepositoryProtocol {
     func searchRepositories(by word: String, isPagination: Bool) -> AnyPublisher<SearchRepositoriesResponse, Error>
-    func getReadme(owner: String, repository: String) -> AnyPublisher<GetReadmeResponse, Error>
 }
 
-final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
+final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
     private let provider: GithubAPIProviderProtocol
     private var page = 1
     private var perPage = 30
@@ -51,17 +50,6 @@ final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
                 }
                 return response
             }
-            .eraseToAnyPublisher()
-    }
-
-    /// リポジトリのREADME.mdの取得をProviderに依頼
-    /// - Parameters:
-    ///   - owner: リポジトリ所有者の名前
-    ///   - repository: リポジトリ名
-    /// - Returns: GetReadmeResponseを流すPublisher
-    func getReadme(owner: String, repository: String) -> AnyPublisher<GetReadmeResponse, Error> {
-        let request = GetReadmeRequest(owner: owner, repo: repository)
-        return provider.exec(with: request)
             .eraseToAnyPublisher()
     }
 }

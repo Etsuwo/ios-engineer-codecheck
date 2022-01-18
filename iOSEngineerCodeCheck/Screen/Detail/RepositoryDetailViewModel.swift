@@ -34,12 +34,12 @@ protocol RepositoryDetailViewModelType {
 final class RepositoryDetailViewModel: RepositoryDetailViewModelType {
     var inputs: RepositoryDetailViewModelInputs { self }
     var outputs: RepositoryDetailViewModelOutputs { self }
-    private let repository: GithubRepositoryRepositoryProtocol
+    private let repository: GetReadmeRepositoryProtocol
     private var cancellable: AnyCancellable?
     private let readmeSubject = PassthroughSubject<String, Never>()
     private let item: Item
 
-    init(item: Item, repository: GithubRepositoryRepositoryProtocol = GithubRepositoryRepository()) {
+    init(item: Item, repository: GetReadmeRepositoryProtocol = GetReadmeRepository()) {
         self.item = item
         self.repository = repository
     }

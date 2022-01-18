@@ -38,13 +38,13 @@ final class RepositorySearchViewModel: RepositorySearchViewModelType {
     }
 
     private var searchCancellable: AnyCancellable?
-    private let repository: GithubRepositoryRepositoryProtocol
+    private let repository: SearchRepositoryRepositoryProtocol
     private var dataStore = DataStore()
     private let fetchSuccessSubject = PassthroughSubject<Void, Never>()
     private let errorMessageSubject = PassthroughSubject<String, Never>()
     private let onTransitionDetailSubject = PassthroughSubject<Item, Never>()
 
-    init(repository: GithubRepositoryRepositoryProtocol = GithubRepositoryRepository()) {
+    init(repository: SearchRepositoryRepositoryProtocol = SearchRepositoryRepository()) {
         self.repository = repository
     }
 }
