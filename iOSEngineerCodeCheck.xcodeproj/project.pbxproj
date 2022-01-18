@@ -38,7 +38,7 @@
 		5AA3D6842795D05500EECA17 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D6832795D05500EECA17 /* TableView+Extension.swift */; };
 		5AB58A782795453400E3669E /* GithubAPIProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB58A772795453400E3669E /* GithubAPIProvider.swift */; };
 		5AB58A7C27956FA000E3669E /* SearchRepositoriesRequestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AB58A7B27956FA000E3669E /* SearchRepositoriesRequestSample.json */; };
-		5AB58A7F279573B200E3669E /* GithubRepositoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB58A7E279573B200E3669E /* GithubRepositoryRepositoryTests.swift */; };
+		5AB58A7F279573B200E3669E /* SearchRepositoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */; };
 		6705427595D7AAB509C377B6 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
@@ -95,7 +95,7 @@
 		5AA3D6832795D05500EECA17 /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		5AB58A772795453400E3669E /* GithubAPIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPIProvider.swift; sourceTree = "<group>"; };
 		5AB58A7B27956FA000E3669E /* SearchRepositoriesRequestSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SearchRepositoriesRequestSample.json; path = iOSEngineerCodeCheck/Resources/APISample/SearchRepositoriesRequestSample.json; sourceTree = SOURCE_ROOT; };
-		5AB58A7E279573B200E3669E /* GithubRepositoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubRepositoryRepositoryTests.swift; sourceTree = "<group>"; };
+		5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryRepositoryTests.swift; sourceTree = "<group>"; };
 		99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACEA46D304CF28B4C8D76499 /* Pods_iOSEngineerCodeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0F18E59DAFD81FA53738B78 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheckTests/Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				BFD945F5244DC5EB0012785A /* APIRequestTests.swift */,
-				5AB58A7E279573B200E3669E /* GithubRepositoryRepositoryTests.swift */,
+				5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */,
 				BFD945F7244DC5EB0012785A /* Info.plist */,
 			);
 			path = iOSEngineerCodeCheckTests;
@@ -677,7 +677,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AB58A7F279573B200E3669E /* GithubRepositoryRepositoryTests.swift in Sources */,
+				5AB58A7F279573B200E3669E /* SearchRepositoryRepositoryTests.swift in Sources */,
 				BFD945F6244DC5EB0012785A /* APIRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

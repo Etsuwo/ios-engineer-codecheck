@@ -1,5 +1,5 @@
 //
-//  GithubRepositoryRepositoryTests.swift
+//  SearchRepositoryRepositoryTests.swift
 //  iOSEngineerCodeCheckTests
 //
 //  Created by Etsushi Otani on 2022/01/17.
@@ -10,7 +10,7 @@ import Combine
 @testable import iOSEngineerCodeCheck
 import XCTest
 
-class GithubRepositoryRepositoryTests: XCTestCase {
+class SearchRepositoryRepositoryTests: XCTestCase {
     private var repositoryWithStub: SearchRepositoryRepository!
     private var repository: SearchRepositoryRepository!
     private var cancellables = Set<AnyCancellable>()
@@ -26,7 +26,7 @@ class GithubRepositoryRepositoryTests: XCTestCase {
     func testSearchRepositoriesWithStub() {
         let expectation = expectation(description: "testSearchRepositoryWithStub")
 
-        repositoryWithStub.searchRepositories(by: "Alamofire")
+        repositoryWithStub.searchRepositories(by: "Alamofire", isPagination: false)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case let .failure(error): XCTFail(error.localizedDescription)
@@ -44,7 +44,7 @@ class GithubRepositoryRepositoryTests: XCTestCase {
     func testSearchRepositories() {
         let expectation = expectation(description: "testSearchRepository")
 
-        repository.searchRepositories(by: "Alamofire")
+        repository.searchRepositories(by: "Alamofire", isPagination: false)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case let .failure(error): XCTFail(error.localizedDescription)
