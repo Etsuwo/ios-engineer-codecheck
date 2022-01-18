@@ -24,6 +24,12 @@ internal enum L10n {
   }
 
   internal enum RepositoryDetail {
+    internal enum DetailLabel {
+      /// %@ / ☆ %@
+      internal static func text(_ p1: Any, _ p2: Any) -> String {
+        return L10n.tr("Localizable", "RepositoryDetail.DetailLabel.Text", String(describing: p1), String(describing: p2))
+      }
+    }
     internal enum ForksCountLabel {
       /// %@ forks
       internal static func text(_ p1: Any) -> String {

@@ -17,6 +17,7 @@
 "RepositorySearch.DetailLabel.Text" = "%@ / ☆ %@";
 
 // MARK: RepositoryDetailViewController
+"RepositoryDetail.DetailLabel.Text" = "%@ / ☆ %@";
 "RepositoryDetail.LanguageLabel.Text" = "Written in %@";
 "RepositoryDetail.StarsCountLabel.Text" = "%@ stars";
 "RepositoryDetail.WatchersCountLabel.Text" = "%@ watchers";
