@@ -76,6 +76,7 @@ final class RepositorySearchViewController: UIViewController {
         viewModel.outputs.fetchSuccess
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
+                self?.tableView.isHidden = false
                 self?.tableView.reloadData()
                 self?.refreshControl.endRefreshing()
             })

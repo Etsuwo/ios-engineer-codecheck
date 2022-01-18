@@ -27,6 +27,7 @@ internal enum Asset {
     internal static let mainBlack = ColorAsset(name: "mainBlack")
   }
   internal enum Images {
+    internal static let remon = ImageAsset(name: "remon")
     internal static let splash = ImageAsset(name: "splash")
   }
 }
