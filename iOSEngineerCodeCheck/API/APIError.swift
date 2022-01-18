@@ -9,12 +9,14 @@
 import Foundation
 
 enum APIError: Error {
+    case noMoreContent
     case unknownError
 }
 
 extension APIError: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .noMoreContent: return L10n.Error.Unknown.description
         case .unknownError: return L10n.Error.Unknown.description
         }
     }
