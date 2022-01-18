@@ -15,10 +15,11 @@ struct SearchRepositoriesRequest: Request {
     var path: String = "/search/repositories"
     var encording: ParameterEncoding = URLEncoding.queryString
     var parameter: [String: Any]? {
-        ["q": searchWord]
+        ["q": searchWord, "page": page]
     }
 
     var searchWord: String
+    var page: Int
 }
 
 extension SearchRepositoriesRequest {
