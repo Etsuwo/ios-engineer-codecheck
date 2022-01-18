@@ -27,6 +27,15 @@
           "revision": "15dde451f97a8ae18ea4f94969b7c8546f034b37",
           "version": null
         }
+      },
+      {
+        "package": "MarkdownView",
+        "repositoryURL": "https://github.com/keitaoouchi/MarkdownView.git",
+        "state": {
+          "branch": null,
+          "revision": "35964c602ecfccc359180224a9d7d318d03b304b",
+          "version": "1.8.3"
+        }
       }
     ]
   },

@@ -23,6 +23,8 @@ internal enum StoryboardScene {
     internal static let initialScene = InitialSceneType<UIKit.UINavigationController>(storyboard: Main.self)
 
     internal static let repositoryDetailViewController = SceneType<iOSEngineerCodeCheck.RepositoryDetailViewController>(storyboard: Main.self, identifier: "RepositoryDetailViewController")
+
+    internal static let repositorySearchViewController = SceneType<iOSEngineerCodeCheck.RepositorySearchViewController>(storyboard: Main.self, identifier: "RepositorySearchViewController")
   }
 }
 // swiftlint:enable explicit_type_interface identifier_name line_length type_body_length type_name

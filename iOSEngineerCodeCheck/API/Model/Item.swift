@@ -9,6 +9,7 @@
 import Foundation
 
 struct Item: Codable {
+    var name: String
     var fullName: String
     var owner: Owner
     var language: String?
@@ -16,8 +17,10 @@ struct Item: Codable {
     var watchersCount: Int
     var forksCount: Int
     var openIssuesCount: Int
+    var description: String?
 
     enum CodingKeys: String, CodingKey {
+        case name
         case fullName = "full_name"
         case owner
         case language
@@ -25,12 +28,14 @@ struct Item: Codable {
         case watchersCount = "watchers_count"
         case forksCount = "forks_count"
         case openIssuesCount = "open_issues_count"
+        case description
     }
 }
 
 extension Item {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
         fullName = try container.decode(String.self, forKey: .fullName)
         owner = try container.decode(Owner.self, forKey: .owner)
         language = try container.decode(String?.self, forKey: .language)
@@ -38,5 +43,6 @@ extension Item {
         watchersCount = try container.decode(Int.self, forKey: .watchersCount)
         forksCount = try container.decode(Int.self, forKey: .forksCount)
         openIssuesCount = try container.decode(Int.self, forKey: .openIssuesCount)
+        description = try container.decode(String?.self, forKey: .description)
     }
 }
