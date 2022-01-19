@@ -9,6 +9,8 @@
 import UIKit
 
 extension UIView {
+    /// 引数で受け取ったViewにAutoLayoutの制約を合わせる
+    /// - Parameter view: 制約を合わせるView
     func bind(to view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         topAnchor.constraint(equalTo: view.topAnchor).isActive = true

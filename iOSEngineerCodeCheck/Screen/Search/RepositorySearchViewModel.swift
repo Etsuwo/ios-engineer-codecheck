@@ -66,6 +66,7 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
         onTransitionDetailSubject.send(dataStore.items[index])
     }
 
+    /// TableViewが一番下までスクロールされた時に呼ぶ
     func onReachedBottomTableView() {
         pagination()
     }
@@ -75,6 +76,7 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
         searchRepository(by: dataStore.searchWord)
     }
 
+    /// 「再読み込み」ボタンが押された時に呼ぶ
     func reload() {
         searchRepository(by: dataStore.searchWord)
     }

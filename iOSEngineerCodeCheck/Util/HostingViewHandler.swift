@@ -13,6 +13,11 @@ import UIKit
 final class HostingViewHandler<HostedViewType: View> {
     private var hostingController: UIHostingController<HostedViewType>?
 
+    /// SwiftUIで作成したViewを指定の場所に表示する
+    /// - Parameters:
+    ///   - vc: 表示するViewController
+    ///   - view: ViewController上のView。このViewと同じ位置に表示する
+    ///   - hostedView: 表示するSwiftUI製のView
     func present(to vc: UIViewController, where view: UIView, hostedView: HostedViewType) {
         guard hostingController == nil else { return }
         let hostingController = UIHostingController(rootView: hostedView)
@@ -24,6 +29,7 @@ final class HostingViewHandler<HostedViewType: View> {
         self.hostingController = hostingController
     }
 
+    /// SwiftUIで作成したViewを消す
     func dismiss() {
         guard hostingController != nil else { return }
         hostingController?.willMove(toParent: nil)
