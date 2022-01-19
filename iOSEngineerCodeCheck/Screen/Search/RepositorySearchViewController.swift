@@ -8,6 +8,7 @@
 
 import Combine
 import CombineCocoa
+import SwiftUI
 import UIKit
 
 final class RepositorySearchViewController: UIViewController {
@@ -15,11 +16,16 @@ final class RepositorySearchViewController: UIViewController {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var presenterView: UIView!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
 
     // MARK: Propaties
 
     private let viewModel: RepositorySearchViewModelType = RepositorySearchViewModel()
     private var cancellables = Set<AnyCancellable>()
+    private let refreshControl = UIRefreshControl()
+    private var reloadableErrorViewHandler = HostingViewHandler<ReloadableErrorView>()
+    private var repositoryNotFoundViewHandler = HostingViewHandler<RepositoryNotFoundView>()
 
     // MARK: LifeCycle
 
@@ -28,6 +34,7 @@ final class RepositorySearchViewController: UIViewController {
         setupUI()
         bindUIAction()
         bindViewModel()
+        setupDismissKeyboardGesture()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -39,6 +46,7 @@ final class RepositorySearchViewController: UIViewController {
 
     private func setupUI() {
         tableView.dataSource = self
+        tableView.refreshControl = refreshControl
     }
 
     private func bindUIAction() {
@@ -47,10 +55,28 @@ final class RepositorySearchViewController: UIViewController {
                 self?.viewModel.inputs.onTapTableViewCell(index: indexPath.row)
             })
             .store(in: &cancellables)
+        tableView.reachedBottomPublisher()
+            .sink(receiveValue: { [weak self] in
+                self?.viewModel.inputs.onReachedBottomTableView()
+            })
+            .store(in: &cancellables)
+        refreshControl.isRefreshingPublisher
+            .sink(receiveValue: { [weak self] isRefresh in
+                if isRefresh {
+                    self?.viewModel.inputs.onPullToRefresh()
+                }
+            })
+            .store(in: &cancellables)
+        searchBar.textDidChangePublisher
+            .debounce(for: 0.5, scheduler: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] text in
+                guard text.isNotEmpty else { return }
+                self?.viewModel.inputs.onTapSearchButton(with: text)
+            })
+            .store(in: &cancellables)
         searchBar.searchButtonClickedPublisher
             .sink(receiveValue: { [weak self] in
-                guard let searchWord = self?.searchBar.text, searchWord.isNotEmpty else { return }
-                self?.viewModel.inputs.onTapSearchButton(with: searchWord)
+                self?.searchBar.endEditing(false)
             })
             .store(in: &cancellables)
     }
@@ -59,7 +85,21 @@ final class RepositorySearchViewController: UIViewController {
         viewModel.outputs.fetchSuccess
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
+                self?.reloadableErrorViewHandler.dismiss()
+                self?.repositoryNotFoundViewHandler.dismiss()
+                self?.tableView.isHidden = false
                 self?.tableView.reloadData()
+                self?.refreshControl.endRefreshing()
+            })
+            .store(in: &cancellables)
+        viewModel.outputs.repositoryNotFound
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.tableView.isHidden = true
+                strongSelf.reloadableErrorViewHandler.dismiss()
+                let repositoryNotFoundView = RepositoryNotFoundView()
+                strongSelf.repositoryNotFoundViewHandler.present(to: strongSelf, where: strongSelf.presenterView, hostedView: repositoryNotFoundView)
             })
             .store(in: &cancellables)
         viewModel.outputs.onTransitionDetail
@@ -69,6 +109,22 @@ final class RepositorySearchViewController: UIViewController {
                 detailVC.configure(with: item)
                 self?.navigationController?.pushViewController(detailVC, animated: true)
             })
+            .store(in: &cancellables)
+        viewModel.outputs.fetchError
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let strongSelf = self,
+                      let viewModel = self?.viewModel as? RepositorySearchViewModel else { return }
+                strongSelf.tableView.isHidden = true
+                strongSelf.repositoryNotFoundViewHandler.dismiss()
+                let reloadableErrorView = ReloadableErrorView(viewModel: viewModel)
+                strongSelf.reloadableErrorViewHandler.present(to: strongSelf, where: strongSelf.presenterView, hostedView: reloadableErrorView)
+            })
+            .store(in: &cancellables)
+        viewModel.outputs.isLoading
+            .receive(on: DispatchQueue.main)
+            .map { !$0 }
+            .assign(to: \.isHidden, on: activityIndicatorView)
             .store(in: &cancellables)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  GithubRepositoryRepositoryTests.swift
+//  SearchRepositoryRepositoryTests.swift
 //  iOSEngineerCodeCheckTests
 //
 //  Created by Etsushi Otani on 2022/01/17.
@@ -10,23 +10,23 @@ import Combine
 @testable import iOSEngineerCodeCheck
 import XCTest
 
-class GithubRepositoryRepositoryTests: XCTestCase {
-    private var repositoryWithStub: GithubRepositoryRepository!
-    private var repository: GithubRepositoryRepository!
+class SearchRepositoryRepositoryTests: XCTestCase {
+    private var repositoryWithStub: SearchRepositoryRepository!
+    private var repository: SearchRepositoryRepository!
     private var cancellables = Set<AnyCancellable>()
 
     override func setUp() {
         let stub = GithubAPIProviderStub()
-        repositoryWithStub = GithubRepositoryRepository(provider: stub)
+        repositoryWithStub = SearchRepositoryRepository(provider: stub)
         let provider = GithubAPIProvider()
-        repository = GithubRepositoryRepository(provider: provider)
+        repository = SearchRepositoryRepository(provider: provider)
     }
 
     /// searchRepositories()の単体テスト
     func testSearchRepositoriesWithStub() {
         let expectation = expectation(description: "testSearchRepositoryWithStub")
 
-        repositoryWithStub.searchRepositories(by: "Alamofire")
+        repositoryWithStub.searchRepositories(by: "Alamofire", isPagination: false)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case let .failure(error): XCTFail(error.localizedDescription)
@@ -44,7 +44,7 @@ class GithubRepositoryRepositoryTests: XCTestCase {
     func testSearchRepositories() {
         let expectation = expectation(description: "testSearchRepository")
 
-        repository.searchRepositories(by: "Alamofire")
+        repository.searchRepositories(by: "Alamofire", isPagination: false)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case let .failure(error): XCTFail(error.localizedDescription)

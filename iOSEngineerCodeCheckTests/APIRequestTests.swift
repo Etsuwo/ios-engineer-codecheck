@@ -16,7 +16,7 @@ class APIRequestTests: XCTestCase {
 
     func testSearchRepositoryRequest() {
         let expectation = expectation(description: "testSearchRepositoryRequest")
-        let request = SearchRepositoriesRequest(searchWord: "Alamofire")
+        let request = SearchRepositoriesRequest(searchWord: "Alamofire", page: 1)
 
         provider.exec(with: request)
             .sink(receiveCompletion: { completion in

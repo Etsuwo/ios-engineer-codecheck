@@ -1,33 +1,23 @@
 //
-//  GithubRepositoryRepository.swift
+//  GetReadmeRepository.swift
 //  iOSEngineerCodeCheck
 //
-//  Created by Etsushi Otani on 2022/01/16.
+//  Created by Etsushi Otani on 2022/01/18.
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
 
 import Combine
 import Foundation
 
-protocol GithubRepositoryRepositoryProtocol {
-    func searchRepositories(by word: String) -> AnyPublisher<SearchRepositoriesResponse, Error>
+protocol GetReadmeRepositoryProtocol {
     func getReadme(owner: String, repository: String) -> AnyPublisher<GetReadmeResponse, Error>
 }
 
-final class GithubRepositoryRepository: GithubRepositoryRepositoryProtocol {
+final class GetReadmeRepository: GetReadmeRepositoryProtocol {
     private let provider: GithubAPIProviderProtocol
 
     init(provider: GithubAPIProviderProtocol = GithubAPIProvider()) {
         self.provider = provider
-    }
-
-    /// Githubのリポジトリ検索をProviderに依頼
-    /// - Parameter word: 検索ワード
-    /// - Returns: SearchRepositoriesResponseを流すPublisher
-    func searchRepositories(by word: String) -> AnyPublisher<SearchRepositoriesResponse, Error> {
-        let request = SearchRepositoriesRequest(searchWord: word)
-        return provider.exec(with: request)
-            .eraseToAnyPublisher()
     }
 
     /// リポジトリのREADME.mdの取得をProviderに依頼

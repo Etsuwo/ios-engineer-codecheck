@@ -234,15 +234,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="remon" translatesAutoresizingMaskIntoConstraints="NO" id="nIC-aB-GHZ">
+                                <rect key="frame" x="40" y="289" width="348" height="348"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="nIC-aB-GHZ" secondAttribute="height" multiplier="1:1" id="sQz-it-f0P"/>
+                                </constraints>
+                            </imageView>
                             <searchBar contentMode="redraw" placeholder="リポジトリを検索できるよ" translatesAutoresizingMaskIntoConstraints="NO" id="Eoe-n9-bS6">
                                 <rect key="frame" x="0.0" y="88" width="428" height="44"/>
                                 <color key="backgroundColor" name="mainBackGround"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="qaL-h7-vvD"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mwL-lI-W2i">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCq-h7-vYQ">
+                                <rect key="frame" x="0.0" y="132" width="428" height="760"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mwL-lI-W2i">
                                 <rect key="frame" x="0.0" y="132" width="428" height="760"/>
                                 <color key="backgroundColor" name="mainBackGround"/>
                                 <prototypes>
@@ -338,21 +348,35 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-2O-F1m">
+                                <rect key="frame" x="195.66666666666666" y="444.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sh3-nc-oFA"/>
                         <color key="backgroundColor" name="mainBackGround"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nIC-aB-GHZ" secondAttribute="trailing" constant="40" id="4yB-1r-O8a"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="57q-Sc-lAI"/>
+                            <constraint firstItem="Sh3-nc-oFA" firstAttribute="trailing" secondItem="RCq-h7-vYQ" secondAttribute="trailing" id="5vl-UX-a7h"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="trailing" secondItem="Sh3-nc-oFA" secondAttribute="trailing" id="6eY-We-oI1"/>
+                            <constraint firstItem="ZwL-2O-F1m" firstAttribute="centerX" secondItem="Jic-qK-OQ7" secondAttribute="centerX" id="BLh-JV-lFY"/>
                             <constraint firstItem="mwL-lI-W2i" firstAttribute="top" secondItem="Eoe-n9-bS6" secondAttribute="bottom" id="IhV-GR-k7N"/>
+                            <constraint firstItem="RCq-h7-vYQ" firstAttribute="top" secondItem="Eoe-n9-bS6" secondAttribute="bottom" id="QLn-vs-W3F"/>
+                            <constraint firstItem="ZwL-2O-F1m" firstAttribute="centerY" secondItem="Jic-qK-OQ7" secondAttribute="centerY" id="T43-1X-lAa"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="top" secondItem="Sh3-nc-oFA" secondAttribute="top" id="Uny-QW-Dgt"/>
                             <constraint firstItem="Sh3-nc-oFA" firstAttribute="trailing" secondItem="mwL-lI-W2i" secondAttribute="trailing" id="XMN-nT-qQN"/>
                             <constraint firstItem="mwL-lI-W2i" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="XNo-tc-6rE"/>
                             <constraint firstItem="Sh3-nc-oFA" firstAttribute="bottom" secondItem="mwL-lI-W2i" secondAttribute="bottom" id="Yu6-Yz-93m"/>
+                            <constraint firstItem="nIC-aB-GHZ" firstAttribute="leading" secondItem="Jic-qK-OQ7" secondAttribute="leading" constant="40" id="eem-Mr-kXT"/>
+                            <constraint firstItem="nIC-aB-GHZ" firstAttribute="centerY" secondItem="Jic-qK-OQ7" secondAttribute="centerY" id="nhu-Ec-Rgs"/>
+                            <constraint firstItem="RCq-h7-vYQ" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="oS4-ab-48y"/>
+                            <constraint firstItem="Sh3-nc-oFA" firstAttribute="bottom" secondItem="RCq-h7-vYQ" secondAttribute="bottom" id="ylG-Wb-4Ks"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="けんさく" id="BAx-vl-Igo"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="ZwL-2O-F1m" id="jfB-mX-OwC"/>
+                        <outlet property="presenterView" destination="RCq-h7-vYQ" id="OxB-M2-j7f"/>
                         <outlet property="searchBar" destination="Eoe-n9-bS6" id="Naq-he-6E2"/>
                         <outlet property="tableView" destination="mwL-lI-W2i" id="jDz-7K-jaL"/>
                     </connections>
@@ -381,11 +405,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="remon" width="1498" height="1558"/>
         <namedColor name="SubBlack">
             <color red="0.2627450980392157" green="0.23921568627450981" blue="0.18823529411764706" alpha="0.69999998807907104" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mainBackGround">
-            <color red="0.9884518981" green="0.97728556389999999" blue="0.94635826349999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.9882352941176471" green="0.97647058823529409" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="mainBlack">
             <color red="0.2627450980392157" green="0.23921568627450981" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
