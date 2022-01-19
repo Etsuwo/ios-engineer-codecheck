@@ -24,6 +24,7 @@ final class RepositorySearchViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let refreshControl = UIRefreshControl()
     private var reloadableErrorViewHandler = HostingViewHandler<ReloadableErrorView>()
+    private var repositoryNotFoundViewHandler = HostingViewHandler<RepositoryNotFoundView>()
 
     // MARK: LifeCycle
 
@@ -84,9 +85,20 @@ final class RepositorySearchViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 self?.reloadableErrorViewHandler.dismiss()
+                self?.repositoryNotFoundViewHandler.dismiss()
                 self?.tableView.isHidden = false
                 self?.tableView.reloadData()
                 self?.refreshControl.endRefreshing()
+            })
+            .store(in: &cancellables)
+        viewModel.outputs.repositoryNotFound
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.tableView.isHidden = true
+                strongSelf.reloadableErrorViewHandler.dismiss()
+                let repositoryNotFoundView = RepositoryNotFoundView()
+                strongSelf.repositoryNotFoundViewHandler.present(to: strongSelf, where: strongSelf.presenterView, hostedView: repositoryNotFoundView)
             })
             .store(in: &cancellables)
         viewModel.outputs.onTransitionDetail
@@ -103,6 +115,7 @@ final class RepositorySearchViewController: UIViewController {
                 guard let strongSelf = self,
                       let viewModel = self?.viewModel as? RepositorySearchViewModel else { return }
                 strongSelf.tableView.isHidden = true
+                strongSelf.repositoryNotFoundViewHandler.dismiss()
                 let reloadableErrorView = ReloadableErrorView(viewModel: viewModel)
                 strongSelf.reloadableErrorViewHandler.present(to: strongSelf, where: strongSelf.presenterView, hostedView: reloadableErrorView)
             })

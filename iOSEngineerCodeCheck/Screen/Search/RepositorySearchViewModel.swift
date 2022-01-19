@@ -18,6 +18,7 @@ protocol RepositorySearchViewModelInputs: ReloadableErrorViewModelProtocol {
 
 protocol RepositorySearchViewModelOutputs {
     var fetchSuccess: AnyPublisher<Void, Never> { get }
+    var repositoryNotFound: AnyPublisher<Void, Never> { get }
     var errorMessage: AnyPublisher<String, Never> { get }
     var onTransitionDetail: AnyPublisher<Item, Never> { get }
     var items: [Item] { get }
@@ -41,6 +42,7 @@ final class RepositorySearchViewModel: RepositorySearchViewModelType {
     private let repository: SearchRepositoryRepositoryProtocol
     private var dataStore = DataStore()
     private let fetchSuccessSubject = PassthroughSubject<Void, Never>()
+    private let repositoryNotFoundSubject = PassthroughSubject<Void, Never>()
     private let errorMessageSubject = PassthroughSubject<String, Never>()
     private let onTransitionDetailSubject = PassthroughSubject<Item, Never>()
 
@@ -88,7 +90,7 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
                 }
             }, receiveValue: { [weak self] response in
                 self?.dataStore.items = response.items
-                self?.fetchSuccessSubject.send()
+                response.items.isEmpty ? self?.repositoryNotFoundSubject.send() : self?.fetchSuccessSubject.send()
             })
     }
 
@@ -112,6 +114,10 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
 extension RepositorySearchViewModel: RepositorySearchViewModelOutputs {
     var fetchSuccess: AnyPublisher<Void, Never> {
         fetchSuccessSubject.eraseToAnyPublisher()
+    }
+
+    var repositoryNotFound: AnyPublisher<Void, Never> {
+        repositoryNotFoundSubject.eraseToAnyPublisher()
     }
 
     var errorMessage: AnyPublisher<String, Never> {
