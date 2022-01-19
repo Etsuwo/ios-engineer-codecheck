@@ -12,6 +12,7 @@
 		5A165A1A2790BA4A0039B84A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A165A192790BA4A0039B84A /* Localizable.strings */; };
 		5A165A1D2790BB190039B84A /* Scenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A165A1C2790BB190039B84A /* Scenes.swift */; };
 		5A165A1F2790BB220039B84A /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A165A1E2790BB220039B84A /* Strings.swift */; };
+		5A210452279808E000810845 /* SearchBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A210451279808E000810845 /* SearchBarViewModel.swift */; };
 		5A23B0032794645400CC35A0 /* RepositorySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23B0022794645400CC35A0 /* RepositorySearchViewModel.swift */; };
 		5A23B0052794781F00CC35A0 /* RepositoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23B0042794781F00CC35A0 /* RepositoryDetailViewModel.swift */; };
 		5A23B008279481CC00CC35A0 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5A23B007279481CC00CC35A0 /* CombineCocoa */; };
@@ -77,6 +78,7 @@
 		5A165A192790BA4A0039B84A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		5A165A1C2790BB190039B84A /* Scenes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scenes.swift; sourceTree = "<group>"; };
 		5A165A1E2790BB220039B84A /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		5A210451279808E000810845 /* SearchBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewModel.swift; sourceTree = "<group>"; };
 		5A23B0022794645400CC35A0 /* RepositorySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchViewModel.swift; sourceTree = "<group>"; };
 		5A23B0042794781F00CC35A0 /* RepositoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewModel.swift; sourceTree = "<group>"; };
 		5A5CE73A2795D80D00F62BA5 /* AppDelegate+Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Global.swift"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				5AB0D2F52797CDB800208FB9 /* View */,
 				BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */,
 				5A23B0022794645400CC35A0 /* RepositorySearchViewModel.swift */,
+				5A210451279808E000810845 /* SearchBarViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				5A663CCB27915078006680EB /* String+Extension.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */,
 				5A165A1D2790BB190039B84A /* Scenes.swift in Sources */,
+				5A210452279808E000810845 /* SearchBarViewModel.swift in Sources */,
 				5AA3D6822795C76700EECA17 /* RepositorySearchCell.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				5AB58A782795453400E3669E /* GithubAPIProvider.swift in Sources */,
