@@ -8,12 +8,8 @@
 
 import SwiftUI
 
-protocol ReloadableErrorViewModelProtocol {
-    func reload()
-}
-
 struct ReloadableErrorView: View {
-    let viewModel: ReloadableErrorViewModelProtocol
+    let viewModel: ReloadableErrorViewModelType
 
     var body: some View {
         VStack {
@@ -24,7 +20,7 @@ struct ReloadableErrorView: View {
             Spacer()
                 .frame(height: 40)
             Button(action: {
-                viewModel.reload()
+                viewModel.inputs.onTapReloadButton()
             }, label: {
                 Text(L10n.ReloadableErrorView.Button.title)
                     .font(.system(size: 16, weight: .bold))

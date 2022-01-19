@@ -26,16 +26,14 @@ class SearchRepositoryRepositoryTests: XCTestCase {
     func testSearchRepositoriesWithStub() {
         let expectation = expectation(description: "testSearchRepositoryWithStub")
 
-        repositoryWithStub.searchRepositories(by: "Alamofire", isPagination: false)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case let .failure(error): XCTFail(error.localizedDescription)
-                case .finished: expectation.fulfill()
-                }
-            }, receiveValue: { response in
+        repositoryWithStub.fetchSuccess
+            .sink(receiveValue: { response in
                 XCTAssertNotNil(response)
+                expectation.fulfill()
             })
             .store(in: &cancellables)
+
+        repositoryWithStub.searchRepositories(by: "Alamofire", isPagination: false)
 
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -44,16 +42,14 @@ class SearchRepositoryRepositoryTests: XCTestCase {
     func testSearchRepositories() {
         let expectation = expectation(description: "testSearchRepository")
 
-        repository.searchRepositories(by: "Alamofire", isPagination: false)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case let .failure(error): XCTFail(error.localizedDescription)
-                case .finished: expectation.fulfill()
-                }
-            }, receiveValue: { response in
+        repository.fetchSuccess
+            .sink(receiveValue: { response in
                 XCTAssertNotNil(response)
+                expectation.fulfill()
             })
             .store(in: &cancellables)
+
+        repository.searchRepositories(by: "Alamofire", isPagination: false)
 
         waitForExpectations(timeout: 5, handler: nil)
     }
