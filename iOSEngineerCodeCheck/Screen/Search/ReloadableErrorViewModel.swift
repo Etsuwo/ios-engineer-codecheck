@@ -6,8 +6,8 @@
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 protocol ReloadableErrorViewModelInputs {
     func onTapReloadButton()
@@ -27,23 +27,24 @@ final class ReloadableErrorViewModel: ReloadableErrorViewModelType {
     var outputs: ReloadableErrorViewModelOutputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
     private let isPresentSubject = PassthroughSubject<Bool, Never>()
-    private var cancellable: AnyCancellable?
-    
+    private var cancellables = Set<AnyCancellable>()
+
     init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
         bind()
     }
-    
+
     private func bind() {
-        cancellable = repository.items
-            .sink(receiveCompletion: {[weak self] completion in
-                switch completion {
-                case .failure(_): self?.isPresentSubject.send(true)
-                default: break
-                }
-            }, receiveValue: {[weak self] _ in
+        repository.items
+            .sink(receiveValue: { [weak self] _ in
                 self?.isPresentSubject.send(false)
             })
+            .store(in: &cancellables)
+        repository.isError
+            .sink(receiveValue: { [weak self] _ in
+                self?.isPresentSubject.send(true)
+            })
+            .store(in: &cancellables)
     }
 }
 

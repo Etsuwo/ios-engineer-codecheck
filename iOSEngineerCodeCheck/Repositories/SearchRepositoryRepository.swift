@@ -12,8 +12,9 @@ import Foundation
 
 protocol SearchRepositoryRepositoryProtocol {
     func searchRepositories(by word: String?, isPagination: Bool)
-    var items: AnyPublisher<[Item], Error> { get }
+    var items: AnyPublisher<[Item], Never> { get }
     var currentItems: [Item] { get }
+    var isError: AnyPublisher<Error, Never> { get }
     var isLoading: AnyPublisher<Bool, Never> { get }
 }
 
@@ -21,14 +22,19 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
     private let provider: GithubAPIProviderProtocol
     private var cancellable: AnyCancellable?
     private let setting = SearchRepositorySetting()
-    private var itemsSubject = CurrentValueSubject<[Item], Error>([])
+    private var itemsSubject = CurrentValueSubject<[Item], Never>([])
+    private var isErrorSubject = PassthroughSubject<Error, Never>()
     private var isLoadingSubject = PassthroughSubject<Bool, Never>()
-    var items: AnyPublisher<[Item], Error> {
+    var items: AnyPublisher<[Item], Never> {
         itemsSubject.eraseToAnyPublisher()
     }
 
     var currentItems: [Item] {
         itemsSubject.value
+    }
+
+    var isError: AnyPublisher<Error, Never> {
+        isErrorSubject.eraseToAnyPublisher()
     }
 
     var isLoading: AnyPublisher<Bool, Never> {
@@ -53,13 +59,18 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
                 switch completion {
                 case let .failure(error):
                     print(error.localizedDescription)
-                    self?.itemsSubject.send(completion: .failure(error))
+                    self?.isErrorSubject.send(error)
                 default: break
                 }
                 self?.isLoadingSubject.send(false)
             }, receiveValue: { [weak self] response in
+                guard let strongSelf = self else { return }
                 self?.setting.updateAfter(with: response.items.count)
-                self?.itemsSubject.send(response.items)
+                var items = response.items
+                if isPagination {
+                    items = strongSelf.currentItems + items
+                }
+                self?.itemsSubject.send(items)
             })
     }
 }

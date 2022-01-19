@@ -6,8 +6,8 @@
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 protocol SearchBarViewModelInputs {
     func textDidChange(to word: String)
@@ -20,7 +20,7 @@ protocol SearchBarViewModelType {
 final class SearchBarViewModel: SearchBarViewModelType {
     var inputs: SearchBarViewModelInputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
-    
+
     init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
     }

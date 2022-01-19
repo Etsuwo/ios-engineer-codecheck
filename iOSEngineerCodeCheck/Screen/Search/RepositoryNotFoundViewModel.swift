@@ -20,23 +20,26 @@ protocol RepositoryNotFoundViewModelType {
 final class RepositoryNotFoundViewModel: RepositoryNotFoundViewModelType {
     var outputs: RepositoryNotFoundViewModelOutputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
-    private var cancellable: AnyCancellable?
+    private var cancellables = Set<AnyCancellable>()
     private let isPresentsubject = PassthroughSubject<Bool, Never>()
 
     init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
+        bind()
     }
 
     private func bind() {
-        cancellable = repository.items
-            .sink(receiveCompletion: { [weak self] completion in
-                if case .failure = completion {
-                    self?.isPresentsubject.send(false)
-                }
-            }, receiveValue: { [weak self] items in
+        repository.items
+            .sink(receiveValue: { [weak self] items in
                 let isPresent = items.isEmpty
                 self?.isPresentsubject.send(isPresent)
             })
+            .store(in: &cancellables)
+        repository.isError
+            .sink(receiveValue: { [weak self] _ in
+                self?.isPresentsubject.send(false)
+            })
+            .store(in: &cancellables)
     }
 }
 
