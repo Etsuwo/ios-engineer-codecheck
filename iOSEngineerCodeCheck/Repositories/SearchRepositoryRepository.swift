@@ -6,25 +6,34 @@
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
 
+import Alamofire
 import Combine
 import Foundation
-import Alamofire
 
 protocol SearchRepositoryRepositoryProtocol {
-    func searchRepositories(by word: String, isPagination: Bool)
+    func searchRepositories(by word: String?, isPagination: Bool)
     var items: AnyPublisher<[Item], Error> { get }
+    var currentItems: [Item] { get }
+    var isLoading: AnyPublisher<Bool, Never> { get }
 }
 
 final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
     private let provider: GithubAPIProviderProtocol
     private var cancellable: AnyCancellable?
-    private var itemsSubject = PassthroughSubject<[Item], Error>()
+    private let setting = SearchRepositorySetting()
+    private var itemsSubject = CurrentValueSubject<[Item], Error>([])
+    private var isLoadingSubject = PassthroughSubject<Bool, Never>()
     var items: AnyPublisher<[Item], Error> {
         itemsSubject.eraseToAnyPublisher()
     }
-    private var page = 1
-    private var perPage = 30
-    private var canPagination = true
+
+    var currentItems: [Item] {
+        itemsSubject.value
+    }
+
+    var isLoading: AnyPublisher<Bool, Never> {
+        isLoadingSubject.eraseToAnyPublisher()
+    }
 
     init(provider: GithubAPIProviderProtocol = GithubAPIProvider()) {
         self.provider = provider
@@ -33,17 +42,12 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
     /// Githubのリポジトリ検索をProviderに依頼
     /// - Parameter word: 検索ワード
     /// - Parameter isPageNation: ページネーションか否か
-    func searchRepositories(by word: String, isPagination: Bool) {
-        // 汚いのでどこかへ切り出したい
-        if isPagination {
-            page += 1
-        } else {
-            page = 1
-            canPagination = true
-        }
-        guard canPagination else { return }
-        
-        let request = SearchRepositoriesRequest(searchWord: word, page: page)
+    func searchRepositories(by word: String?, isPagination: Bool) {
+        setting.updateBefore(with: word, isPagination: isPagination)
+        guard setting.canPagination else { return }
+
+        isLoadingSubject.send(true)
+        let request = SearchRepositoriesRequest(searchWord: setting.word, page: setting.page)
         cancellable = provider.exec(with: request)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -52,12 +56,33 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
                     self?.itemsSubject.send(completion: .failure(error))
                 default: break
                 }
+                self?.isLoadingSubject.send(false)
             }, receiveValue: { [weak self] response in
-                guard let strongSelf = self else { return }
-                if response.items.count < strongSelf.perPage {
-                    strongSelf.canPagination = false
-                }
-                strongSelf.itemsSubject.send(response.items)
+                self?.setting.updateAfter(with: response.items.count)
+                self?.itemsSubject.send(response.items)
             })
+    }
+}
+
+final class SearchRepositorySetting {
+    private(set) var word = ""
+    private(set) var page = 1
+    private(set) var perPage = 30
+    private(set) var canPagination = true
+
+    func updateBefore(with word: String?, isPagination: Bool) {
+        if isPagination {
+            page += 1
+        } else {
+            page = 1
+            canPagination = true
+        }
+        self.word = word ?? self.word
+    }
+
+    func updateAfter(with itemCount: Int) {
+        if itemCount < perPage {
+            canPagination = false
+        }
     }
 }
