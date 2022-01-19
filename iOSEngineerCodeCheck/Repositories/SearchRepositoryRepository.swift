@@ -45,7 +45,7 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
         return provider.exec(with: request)
             .tryMap { [weak self] response in
                 guard let strongSelf = self else { return response }
-                if response.items.isEmpty {
+                if response.items.count < strongSelf.perPage {
                     strongSelf.canPagination = false
                 }
                 return response

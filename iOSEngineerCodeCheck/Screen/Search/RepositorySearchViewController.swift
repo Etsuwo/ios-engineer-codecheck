@@ -110,9 +110,9 @@ final class RepositorySearchViewController: UIViewController {
                 self?.navigationController?.pushViewController(detailVC, animated: true)
             })
             .store(in: &cancellables)
-        viewModel.outputs.errorMessage
+        viewModel.outputs.fetchError
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] _ in
+            .sink(receiveValue: { [weak self] in
                 guard let strongSelf = self,
                       let viewModel = self?.viewModel as? RepositorySearchViewModel else { return }
                 strongSelf.tableView.isHidden = true

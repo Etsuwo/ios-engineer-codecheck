@@ -19,7 +19,7 @@ protocol RepositorySearchViewModelInputs: ReloadableErrorViewModelProtocol {
 protocol RepositorySearchViewModelOutputs {
     var fetchSuccess: AnyPublisher<Void, Never> { get }
     var repositoryNotFound: AnyPublisher<Void, Never> { get }
-    var errorMessage: AnyPublisher<String, Never> { get }
+    var fetchError: AnyPublisher<Void, Never> { get }
     var onTransitionDetail: AnyPublisher<Item, Never> { get }
     var isLoading: AnyPublisher<Bool, Never> { get }
     var items: [Item] { get }
@@ -44,7 +44,7 @@ final class RepositorySearchViewModel: RepositorySearchViewModelType {
     private var dataStore = DataStore()
     private let fetchSuccessSubject = PassthroughSubject<Void, Never>()
     private let repositoryNotFoundSubject = PassthroughSubject<Void, Never>()
-    private let errorMessageSubject = PassthroughSubject<String, Never>()
+    private let fetchErrorSubject = PassthroughSubject<Void, Never>()
     private let onTransitionDetailSubject = PassthroughSubject<Item, Never>()
     private let isLoadingSubject = PassthroughSubject<Bool, Never>()
 
@@ -88,7 +88,8 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case let .failure(error):
-                    self?.errorMessageSubject.send(error.localizedDescription)
+                    print(error.localizedDescription)
+                    self?.fetchErrorSubject.send()
                 default: break
                 }
                 self?.isLoadingSubject.send(false)
@@ -105,7 +106,9 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case let .failure(error):
-                    self?.errorMessageSubject.send(error.localizedDescription)
+                    if case APIError.noMoreContent = error { break }
+                    print(error.localizedDescription)
+                    self?.fetchErrorSubject.send()
                 default: break
                 }
             }, receiveValue: { [weak self] response in
@@ -124,8 +127,8 @@ extension RepositorySearchViewModel: RepositorySearchViewModelOutputs {
         repositoryNotFoundSubject.eraseToAnyPublisher()
     }
 
-    var errorMessage: AnyPublisher<String, Never> {
-        errorMessageSubject.eraseToAnyPublisher()
+    var fetchError: AnyPublisher<Void, Never> {
+        fetchErrorSubject.eraseToAnyPublisher()
     }
 
     var onTransitionDetail: AnyPublisher<Item, Never> {
