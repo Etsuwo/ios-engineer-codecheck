@@ -40,7 +40,7 @@ final class TableViewViewModel: TableViewViewModelType {
     }
 
     private func bind() {
-        repository.items
+        repository.fetchSuccess
             .sink(receiveValue: { [weak self] items in
                 let isSuccess = !items.isEmpty
                 self?.isSuccessSearchRepositorySubject.send(isSuccess)

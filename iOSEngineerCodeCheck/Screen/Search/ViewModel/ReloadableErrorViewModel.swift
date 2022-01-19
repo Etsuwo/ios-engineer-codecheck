@@ -35,7 +35,7 @@ final class ReloadableErrorViewModel: ReloadableErrorViewModelType {
     }
 
     private func bind() {
-        repository.items
+        repository.fetchSuccess
             .sink(receiveValue: { [weak self] _ in
                 self?.isPresentSubject.send(false)
             })

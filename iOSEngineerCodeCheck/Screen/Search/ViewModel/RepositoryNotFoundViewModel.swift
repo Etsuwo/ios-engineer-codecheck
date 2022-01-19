@@ -29,7 +29,7 @@ final class RepositoryNotFoundViewModel: RepositoryNotFoundViewModelType {
     }
 
     private func bind() {
-        repository.items
+        repository.fetchSuccess
             .sink(receiveValue: { [weak self] items in
                 let isPresent = items.isEmpty
                 self?.isPresentsubject.send(isPresent)

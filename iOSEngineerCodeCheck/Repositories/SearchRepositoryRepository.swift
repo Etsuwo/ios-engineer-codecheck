@@ -12,7 +12,7 @@ import Foundation
 
 protocol SearchRepositoryRepositoryProtocol {
     func searchRepositories(by word: String?, isPagination: Bool)
-    var items: AnyPublisher<[Item], Never> { get }
+    var fetchSuccess: AnyPublisher<[Item], Never> { get }
     var currentItems: [Item] { get }
     var isError: AnyPublisher<Error, Never> { get }
     var isLoading: AnyPublisher<Bool, Never> { get }
@@ -22,15 +22,16 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
     private let provider: GithubAPIProviderProtocol
     private var cancellable: AnyCancellable?
     private let setting = SearchRepositorySetting()
-    private var itemsSubject = CurrentValueSubject<[Item], Never>([])
+    private var fetchSuccessSubject = PassthroughSubject<[Item], Never>()
     private var isErrorSubject = PassthroughSubject<Error, Never>()
     private var isLoadingSubject = PassthroughSubject<Bool, Never>()
-    var items: AnyPublisher<[Item], Never> {
-        itemsSubject.eraseToAnyPublisher()
+    private var items: [Item] = []
+    var fetchSuccess: AnyPublisher<[Item], Never> {
+        fetchSuccessSubject.eraseToAnyPublisher()
     }
 
     var currentItems: [Item] {
-        itemsSubject.value
+        items
     }
 
     var isError: AnyPublisher<Error, Never> {
@@ -70,7 +71,8 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
                 if isPagination {
                     items = strongSelf.currentItems + items
                 }
-                self?.itemsSubject.send(items)
+                self?.items = items
+                self?.fetchSuccessSubject.send(items)
             })
     }
 }
