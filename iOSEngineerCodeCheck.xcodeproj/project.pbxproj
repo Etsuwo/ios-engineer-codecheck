@@ -230,17 +230,24 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
-		5A23B000279463C300CC35A0 /* Search */ = {
+		5A21045B2798346500810845 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				5AB0D2F52797CDB800208FB9 /* View */,
-				BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */,
 				5A2104572798197C00810845 /* RepositoryNotFoundViewModel.swift */,
 				5A23B0022794645400CC35A0 /* RepositorySearchViewModel.swift */,
 				5A210451279808E000810845 /* SearchBarViewModel.swift */,
 				5A21045327980ABD00810845 /* TableViewViewModel.swift */,
 				5A210455279812C200810845 /* ReloadableErrorViewModel.swift */,
 				5A21045927981C1D00810845 /* IndicatorViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5A23B000279463C300CC35A0 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5A21045B2798346500810845 /* ViewModel */,
+				5AB0D2F52797CDB800208FB9 /* View */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -321,6 +328,7 @@
 				5AB0D2F12797C16A00208FB9 /* RepositoryNotFoundView.swift */,
 				5ADE4164279798B300272E78 /* ReloadableErrorView.swift */,
 				5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */,
+				BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
