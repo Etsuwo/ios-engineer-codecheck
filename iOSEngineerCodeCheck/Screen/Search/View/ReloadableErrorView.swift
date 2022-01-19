@@ -26,7 +26,7 @@ struct ReloadableErrorView: View {
             Button(action: {
                 viewModel.reload()
             }, label: {
-                Text("再読み込み")
+                Text(L10n.ReloadableErrorView.Button.title)
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(.white)
                     .frame(width: 200, height: 56, alignment: .center)

@@ -23,41 +23,18 @@ internal enum L10n {
     }
   }
 
+  internal enum ReloadableErrorView {
+    internal enum Button {
+      /// 再読み込み
+      internal static let title = L10n.tr("Localizable", "ReloadableErrorView.Button.Title")
+    }
+  }
+
   internal enum RepositoryDetail {
     internal enum DetailLabel {
       /// %@ / ☆ %@
       internal static func text(_ p1: Any, _ p2: Any) -> String {
         return L10n.tr("Localizable", "RepositoryDetail.DetailLabel.Text", String(describing: p1), String(describing: p2))
-      }
-    }
-    internal enum ForksCountLabel {
-      /// %@ forks
-      internal static func text(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "RepositoryDetail.ForksCountLabel.Text", String(describing: p1))
-      }
-    }
-    internal enum IssueCountLabel {
-      /// %@ open issues
-      internal static func text(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "RepositoryDetail.IssueCountLabel.Text", String(describing: p1))
-      }
-    }
-    internal enum LanguageLabel {
-      /// Written in %@
-      internal static func text(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "RepositoryDetail.LanguageLabel.Text", String(describing: p1))
-      }
-    }
-    internal enum StarsCountLabel {
-      /// %@ stars
-      internal static func text(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "RepositoryDetail.StarsCountLabel.Text", String(describing: p1))
-      }
-    }
-    internal enum WatchersCountLabel {
-      /// %@ watchers
-      internal static func text(_ p1: Any) -> String {
-        return L10n.tr("Localizable", "RepositoryDetail.WatchersCountLabel.Text", String(describing: p1))
       }
     }
   }

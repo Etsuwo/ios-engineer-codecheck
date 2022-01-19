@@ -18,8 +18,6 @@
 
 // MARK: RepositoryDetailViewController
 "RepositoryDetail.DetailLabel.Text" = "%@ / ☆ %@";
-"RepositoryDetail.LanguageLabel.Text" = "Written in %@";
-"RepositoryDetail.StarsCountLabel.Text" = "%@ stars";
-"RepositoryDetail.WatchersCountLabel.Text" = "%@ watchers";
-"RepositoryDetail.ForksCountLabel.Text" = "%@ forks";
-"RepositoryDetail.IssueCountLabel.Text" = "%@ open issues";
+
+// MARK: ReloadableErrorView
+"ReloadableErrorView.Button.Title" = "再読み込み";
