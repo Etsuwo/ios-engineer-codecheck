@@ -223,11 +223,9 @@
 		5A23B000279463C300CC35A0 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				5AB0D2F52797CDB800208FB9 /* View */,
 				BFD945E2244DC5E80012785A /* RepositorySearchViewController.swift */,
 				5A23B0022794645400CC35A0 /* RepositorySearchViewModel.swift */,
-				5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */,
-				5ADE4164279798B300272E78 /* ReloadableErrorView.swift */,
-				5AB0D2F12797C16A00208FB9 /* RepositoryNotFoundView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -300,6 +298,16 @@
 				5ADE41682797A42600272E78 /* HostingViewHandler.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		5AB0D2F52797CDB800208FB9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5AB0D2F12797C16A00208FB9 /* RepositoryNotFoundView.swift */,
+				5ADE4164279798B300272E78 /* ReloadableErrorView.swift */,
+				5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5AB58A762795451900E3669E /* Provider */ = {
