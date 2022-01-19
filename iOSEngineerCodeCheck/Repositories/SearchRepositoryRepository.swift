@@ -8,13 +8,20 @@
 
 import Combine
 import Foundation
+import Alamofire
 
 protocol SearchRepositoryRepositoryProtocol {
-    func searchRepositories(by word: String, isPagination: Bool) -> AnyPublisher<SearchRepositoriesResponse, Error>
+    func searchRepositories(by word: String, isPagination: Bool)
+    var items: AnyPublisher<[Item], Error> { get }
 }
 
 final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
     private let provider: GithubAPIProviderProtocol
+    private var cancellable: AnyCancellable?
+    private var itemsSubject = PassthroughSubject<[Item], Error>()
+    var items: AnyPublisher<[Item], Error> {
+        itemsSubject.eraseToAnyPublisher()
+    }
     private var page = 1
     private var perPage = 30
     private var canPagination = true
@@ -26,8 +33,7 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
     /// Githubのリポジトリ検索をProviderに依頼
     /// - Parameter word: 検索ワード
     /// - Parameter isPageNation: ページネーションか否か
-    /// - Returns: SearchRepositoriesResponseを流すPublisher
-    func searchRepositories(by word: String, isPagination: Bool) -> AnyPublisher<SearchRepositoriesResponse, Error> {
+    func searchRepositories(by word: String, isPagination: Bool) {
         // 汚いのでどこかへ切り出したい
         if isPagination {
             page += 1
@@ -35,21 +41,23 @@ final class SearchRepositoryRepository: SearchRepositoryRepositoryProtocol {
             page = 1
             canPagination = true
         }
-
-        // ページネーションできない場合はエラーを返す
-        guard canPagination else {
-            return Fail(outputType: SearchRepositoriesResponse.self, failure: APIError.noMoreContent).eraseToAnyPublisher()
-        }
-
+        guard canPagination else { return }
+        
         let request = SearchRepositoriesRequest(searchWord: word, page: page)
-        return provider.exec(with: request)
-            .tryMap { [weak self] response in
-                guard let strongSelf = self else { return response }
+        cancellable = provider.exec(with: request)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case let .failure(error):
+                    print(error.localizedDescription)
+                    self?.itemsSubject.send(completion: .failure(error))
+                default: break
+                }
+            }, receiveValue: { [weak self] response in
+                guard let strongSelf = self else { return }
                 if response.items.count < strongSelf.perPage {
                     strongSelf.canPagination = false
                 }
-                return response
-            }
-            .eraseToAnyPublisher()
+                strongSelf.itemsSubject.send(response.items)
+            })
     }
 }
