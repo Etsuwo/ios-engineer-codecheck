@@ -17,6 +17,7 @@ final class RepositorySearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var presenterView: UIView!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
 
     // MARK: Propaties
 
@@ -119,6 +120,11 @@ final class RepositorySearchViewController: UIViewController {
                 let reloadableErrorView = ReloadableErrorView(viewModel: viewModel)
                 strongSelf.reloadableErrorViewHandler.present(to: strongSelf, where: strongSelf.presenterView, hostedView: reloadableErrorView)
             })
+            .store(in: &cancellables)
+        viewModel.outputs.isLoading
+            .receive(on: DispatchQueue.main)
+            .map { !$0 }
+            .assign(to: \.isHidden, on: activityIndicatorView)
             .store(in: &cancellables)
     }
 }

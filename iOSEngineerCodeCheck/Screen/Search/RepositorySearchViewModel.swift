@@ -21,6 +21,7 @@ protocol RepositorySearchViewModelOutputs {
     var repositoryNotFound: AnyPublisher<Void, Never> { get }
     var errorMessage: AnyPublisher<String, Never> { get }
     var onTransitionDetail: AnyPublisher<Item, Never> { get }
+    var isLoading: AnyPublisher<Bool, Never> { get }
     var items: [Item] { get }
 }
 
@@ -45,6 +46,7 @@ final class RepositorySearchViewModel: RepositorySearchViewModelType {
     private let repositoryNotFoundSubject = PassthroughSubject<Void, Never>()
     private let errorMessageSubject = PassthroughSubject<String, Never>()
     private let onTransitionDetailSubject = PassthroughSubject<Item, Never>()
+    private let isLoadingSubject = PassthroughSubject<Bool, Never>()
 
     init(repository: SearchRepositoryRepositoryProtocol = SearchRepositoryRepository()) {
         self.repository = repository
@@ -78,6 +80,7 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
     }
 
     private func searchRepository(by word: String) {
+        isLoadingSubject.send(true)
         dataStore.searchWord = word
         searchCancellable?.cancel()
         searchCancellable = repository.searchRepositories(by: word, isPagination: false)
@@ -88,6 +91,7 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
                     self?.errorMessageSubject.send(error.localizedDescription)
                 default: break
                 }
+                self?.isLoadingSubject.send(false)
             }, receiveValue: { [weak self] response in
                 self?.dataStore.items = response.items
                 response.items.isEmpty ? self?.repositoryNotFoundSubject.send() : self?.fetchSuccessSubject.send()
@@ -126,6 +130,10 @@ extension RepositorySearchViewModel: RepositorySearchViewModelOutputs {
 
     var onTransitionDetail: AnyPublisher<Item, Never> {
         onTransitionDetailSubject.eraseToAnyPublisher()
+    }
+
+    var isLoading: AnyPublisher<Bool, Never> {
+        isLoadingSubject.eraseToAnyPublisher()
     }
 
     var items: [Item] {

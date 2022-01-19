@@ -348,6 +348,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-2O-F1m">
+                                <rect key="frame" x="195.66666666666666" y="444.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sh3-nc-oFA"/>
                         <color key="backgroundColor" name="mainBackGround"/>
@@ -356,8 +359,10 @@
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="57q-Sc-lAI"/>
                             <constraint firstItem="Sh3-nc-oFA" firstAttribute="trailing" secondItem="RCq-h7-vYQ" secondAttribute="trailing" id="5vl-UX-a7h"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="trailing" secondItem="Sh3-nc-oFA" secondAttribute="trailing" id="6eY-We-oI1"/>
+                            <constraint firstItem="ZwL-2O-F1m" firstAttribute="centerX" secondItem="Jic-qK-OQ7" secondAttribute="centerX" id="BLh-JV-lFY"/>
                             <constraint firstItem="mwL-lI-W2i" firstAttribute="top" secondItem="Eoe-n9-bS6" secondAttribute="bottom" id="IhV-GR-k7N"/>
                             <constraint firstItem="RCq-h7-vYQ" firstAttribute="top" secondItem="Eoe-n9-bS6" secondAttribute="bottom" id="QLn-vs-W3F"/>
+                            <constraint firstItem="ZwL-2O-F1m" firstAttribute="centerY" secondItem="Jic-qK-OQ7" secondAttribute="centerY" id="T43-1X-lAa"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="top" secondItem="Sh3-nc-oFA" secondAttribute="top" id="Uny-QW-Dgt"/>
                             <constraint firstItem="Sh3-nc-oFA" firstAttribute="trailing" secondItem="mwL-lI-W2i" secondAttribute="trailing" id="XMN-nT-qQN"/>
                             <constraint firstItem="mwL-lI-W2i" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="XNo-tc-6rE"/>
@@ -370,6 +375,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="けんさく" id="BAx-vl-Igo"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="ZwL-2O-F1m" id="jfB-mX-OwC"/>
                         <outlet property="presenterView" destination="RCq-h7-vYQ" id="OxB-M2-j7f"/>
                         <outlet property="searchBar" destination="Eoe-n9-bS6" id="Naq-he-6E2"/>
                         <outlet property="tableView" destination="mwL-lI-W2i" id="jDz-7K-jaL"/>
