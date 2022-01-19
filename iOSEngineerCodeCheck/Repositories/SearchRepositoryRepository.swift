@@ -82,7 +82,11 @@ final class SearchRepositorySetting {
     private(set) var page = 1
     private(set) var perPage = 30
     private(set) var canPagination = true
-
+    
+    /// searchRepositoriesを呼ぶ前に呼ぶ
+    /// - Parameters:
+    ///   - word: 検索ワード
+    ///   - isPagination: <#isPagination description#>
     func updateBefore(with word: String?, isPagination: Bool) {
         if isPagination {
             page += 1
@@ -92,7 +96,9 @@ final class SearchRepositorySetting {
         }
         self.word = word ?? self.word
     }
-
+    
+    /// searchRepositoriesが成功したときに呼ぶ
+    /// - Parameter itemCount: <#itemCount description#>
     func updateAfter(with itemCount: Int) {
         if itemCount < perPage {
             canPagination = false
