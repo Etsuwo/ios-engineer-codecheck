@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 
-protocol RepositorySearchViewModelInputs {
+protocol RepositorySearchViewModelInputs: ReloadableErrorViewModelProtocol {
     func onTapSearchButton(with word: String)
     func onTapTableViewCell(index: Int)
     func onReachedBottomTableView()
@@ -68,6 +68,10 @@ extension RepositorySearchViewModel: RepositorySearchViewModelInputs {
 
     /// pull to resreshされた時に呼ぶ
     func onPullToRefresh() {
+        searchRepository(by: dataStore.searchWord)
+    }
+
+    func reload() {
         searchRepository(by: dataStore.searchWord)
     }
 

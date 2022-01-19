@@ -248,6 +248,10 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCq-h7-vYQ">
+                                <rect key="frame" x="0.0" y="132" width="428" height="760"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mwL-lI-W2i">
                                 <rect key="frame" x="0.0" y="132" width="428" height="760"/>
                                 <color key="backgroundColor" name="mainBackGround"/>
@@ -350,18 +354,23 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="nIC-aB-GHZ" secondAttribute="trailing" constant="40" id="4yB-1r-O8a"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="57q-Sc-lAI"/>
+                            <constraint firstItem="Sh3-nc-oFA" firstAttribute="trailing" secondItem="RCq-h7-vYQ" secondAttribute="trailing" id="5vl-UX-a7h"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="trailing" secondItem="Sh3-nc-oFA" secondAttribute="trailing" id="6eY-We-oI1"/>
                             <constraint firstItem="mwL-lI-W2i" firstAttribute="top" secondItem="Eoe-n9-bS6" secondAttribute="bottom" id="IhV-GR-k7N"/>
+                            <constraint firstItem="RCq-h7-vYQ" firstAttribute="top" secondItem="Eoe-n9-bS6" secondAttribute="bottom" id="QLn-vs-W3F"/>
                             <constraint firstItem="Eoe-n9-bS6" firstAttribute="top" secondItem="Sh3-nc-oFA" secondAttribute="top" id="Uny-QW-Dgt"/>
                             <constraint firstItem="Sh3-nc-oFA" firstAttribute="trailing" secondItem="mwL-lI-W2i" secondAttribute="trailing" id="XMN-nT-qQN"/>
                             <constraint firstItem="mwL-lI-W2i" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="XNo-tc-6rE"/>
                             <constraint firstItem="Sh3-nc-oFA" firstAttribute="bottom" secondItem="mwL-lI-W2i" secondAttribute="bottom" id="Yu6-Yz-93m"/>
                             <constraint firstItem="nIC-aB-GHZ" firstAttribute="leading" secondItem="Jic-qK-OQ7" secondAttribute="leading" constant="40" id="eem-Mr-kXT"/>
                             <constraint firstItem="nIC-aB-GHZ" firstAttribute="centerY" secondItem="Jic-qK-OQ7" secondAttribute="centerY" id="nhu-Ec-Rgs"/>
+                            <constraint firstItem="RCq-h7-vYQ" firstAttribute="leading" secondItem="Sh3-nc-oFA" secondAttribute="leading" id="oS4-ab-48y"/>
+                            <constraint firstItem="Sh3-nc-oFA" firstAttribute="bottom" secondItem="RCq-h7-vYQ" secondAttribute="bottom" id="ylG-Wb-4Ks"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="けんさく" id="BAx-vl-Igo"/>
                     <connections>
+                        <outlet property="presenterView" destination="RCq-h7-vYQ" id="OxB-M2-j7f"/>
                         <outlet property="searchBar" destination="Eoe-n9-bS6" id="Naq-he-6E2"/>
                         <outlet property="tableView" destination="mwL-lI-W2i" id="jDz-7K-jaL"/>
                     </connections>

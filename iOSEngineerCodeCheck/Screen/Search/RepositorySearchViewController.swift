@@ -16,12 +16,14 @@ final class RepositorySearchViewController: UIViewController {
 
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var presenterView: UIView!
 
     // MARK: Propaties
 
     private let viewModel: RepositorySearchViewModelType = RepositorySearchViewModel()
     private var cancellables = Set<AnyCancellable>()
     private let refreshControl = UIRefreshControl()
+    private var reloadableErrorViewHandler = HostingViewHandler<ReloadableErrorView>()
 
     // MARK: LifeCycle
 
@@ -81,6 +83,7 @@ final class RepositorySearchViewController: UIViewController {
         viewModel.outputs.fetchSuccess
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
+                self?.reloadableErrorViewHandler.dismiss()
                 self?.tableView.isHidden = false
                 self?.tableView.reloadData()
                 self?.refreshControl.endRefreshing()
@@ -92,6 +95,16 @@ final class RepositorySearchViewController: UIViewController {
                 let detailVC = StoryboardScene.Main.repositoryDetailViewController.instantiate()
                 detailVC.configure(with: item)
                 self?.navigationController?.pushViewController(detailVC, animated: true)
+            })
+            .store(in: &cancellables)
+        viewModel.outputs.errorMessage
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] _ in
+                guard let strongSelf = self,
+                      let viewModel = self?.viewModel as? RepositorySearchViewModel else { return }
+                strongSelf.tableView.isHidden = true
+                let reloadableErrorView = ReloadableErrorView(viewModel: viewModel)
+                strongSelf.reloadableErrorViewHandler.present(to: strongSelf, where: strongSelf.presenterView, hostedView: reloadableErrorView)
             })
             .store(in: &cancellables)
     }
