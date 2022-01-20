@@ -48,6 +48,56 @@ Issues を確認した上、本プロジェクトを [**Duplicate** してくだ
 
 </details>
 
+# 概要
+
+本プロジェクトは株式会社ゆめみ　から出題される iOS エンジニアのインターン課題プロジェクトです。  
+課題issueと関連のあるPRは各issueに記載しております。issueをご確認下さい。  
+
+# アプリ仕様
+
+本アプリは GitHub のリポジトリーを検索するアプリです。  
+デザインコンセプトは「ハーブ」です。  
+また、Githubなどエンジニアリングに関わるサービスやツールは「ゆるさ」が足りないと感じたので全体として「ゆるい」テイストにしました。
+
+| スプラッシュ | 検索画面 | 詳細画面 |
+|-|-|-|
+|<img src="https://user-images.githubusercontent.com/47075496/150277522-3571d2d7-7cdd-4827-9b58-1c389068e3bd.png" width="200"> | <img src="https://user-images.githubusercontent.com/47075496/150277542-08e2b63f-2185-42fb-a7cc-fcb14e375bc2.png" width="200"> <img src="https://user-images.githubusercontent.com/47075496/150277624-e871b74b-7a89-411d-a321-e00b9a267bf1.png" width="200"> | <img src="https://user-images.githubusercontent.com/47075496/150277637-7f9b46eb-921f-4ef3-95a6-135e6b7e4b46.png" width="200"> |
+
+## 検索画面
+
+- Github上のリポジトリの検索をすることができます
+- 検索結果としてセルに以下が表示されます
+  - リポジトリ名
+  - リポジトリ所有者の名前
+  - リポジトリ所有者のアバター画像
+  - リポジトリの説明
+  - 開発言語
+  - 獲得スター
+- 検索結果が表示されたCellをタップすることで詳細画面に遷移します
+- 検索結果が多い時はページネーションを行います
+- 画面を下に引っ張ると検索結果をリフレッシュできます
+- 通信エラーが発生した場合、エラー画面を表示します
+- 検索結果がゼロ件の場合は、検索結果ゼロ画面を表示します
+
+## 詳細画面
+
+- 検索したGithub上のリポジトリの詳細を確認できます
+- リポジトリの詳細として以下が表示されます
+  - リポジトリ名
+  - リポジトリ所有者の名前
+  - リポジトリ所有者のアバター画像
+  - リポジトリの説明
+  - 開発言語
+  - 獲得スター
+  - Watcher数
+  - Fork数
+  - README.md
+- 現状、表示されたREADME.md上のリンクは動作しません
+
+## アプリ全体
+
+- iPad、ダークモード非対応
+
 # 環境
 ## 開発環境  
 Xcode: 13.0  
@@ -91,6 +141,7 @@ iOS: 15.0
 - [Alamofire](https://github.com/Alamofire/Alamofire)
 - [CombineCocoa](https://github.com/CombineCommunity/CombineCocoa)
 - [KingFisher](https://github.com/onevcat/Kingfisher)
+- [MarkdownView](https://github.com/keitaoouchi/MarkdownView)
 - [SwiftLint](https://github.com/realm/SwiftLint)
 - [SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 - [SwiftGen](https://github.com/SwiftGen/SwiftGen)
@@ -106,5 +157,3 @@ iOS: 15.0
 
 参考：[Gitのコミットメッセージの書き方](https://qiita.com/itosho/items/9565c6ad2ffc24c09364)
 
-# 課題
-課題issueと関連のあるPRは各issueに記載しております。issueをご確認下さい。
