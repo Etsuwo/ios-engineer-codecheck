@@ -21,7 +21,7 @@ final class RepositoryDetailViewController: UIViewController {
     @IBOutlet private weak var detailLabel: UILabel!
     @IBOutlet private weak var forksCountLabel: UILabel!
     @IBOutlet private weak var issuesCountLabel: UILabel!
-    @IBOutlet weak var watchersCountLabel: UILabel!
+    @IBOutlet private weak var watchersCountLabel: UILabel!
     @IBOutlet private weak var readmeMarkdownView: MarkdownView!
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
 
