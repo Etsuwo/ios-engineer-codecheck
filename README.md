@@ -59,9 +59,9 @@ Issues を確認した上、本プロジェクトを [**Duplicate** してくだ
 デザインコンセプトは「ハーブ」です。  
 また、Githubなどエンジニアリングに関わるサービスやツールは「ゆるさ」が足りないと感じたので全体として「ゆるい」テイストにしました。
 
-| スプラッシュ | 検索画面 | 詳細画面 |
-|-|-|-|
-|<img src="https://user-images.githubusercontent.com/47075496/150277522-3571d2d7-7cdd-4827-9b58-1c389068e3bd.png" width="200"> | <img src="https://user-images.githubusercontent.com/47075496/150277542-08e2b63f-2185-42fb-a7cc-fcb14e375bc2.png" width="200"> <img src="https://user-images.githubusercontent.com/47075496/150277624-e871b74b-7a89-411d-a321-e00b9a267bf1.png" width="200"> | <img src="https://user-images.githubusercontent.com/47075496/150277637-7f9b46eb-921f-4ef3-95a6-135e6b7e4b46.png" width="200"> |
+| スプラッシュ | 検索画面1 | 検索画面2 | 詳細画面 |
+|-|-|-|-|
+|<img src="https://user-images.githubusercontent.com/47075496/150277522-3571d2d7-7cdd-4827-9b58-1c389068e3bd.png" width="200"> | <img src="https://user-images.githubusercontent.com/47075496/150277542-08e2b63f-2185-42fb-a7cc-fcb14e375bc2.png" width="200"> | <img src="https://user-images.githubusercontent.com/47075496/150277624-e871b74b-7a89-411d-a321-e00b9a267bf1.png" width="200"> | <img src="https://user-images.githubusercontent.com/47075496/150277637-7f9b46eb-921f-4ef3-95a6-135e6b7e4b46.png" width="200"> |
 
 ## 検索画面
 
