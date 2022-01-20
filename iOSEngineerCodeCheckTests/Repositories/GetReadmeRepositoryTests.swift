@@ -22,6 +22,7 @@ class GetReadmeRepositoryTests: XCTestCase {
         repository = GetReadmeRepository(provider: provider)
     }
 
+    /// getReadme()の単体テスト
     func testGetReadmeWithStub() {
         let expectation = expectation(description: "testGetReadmeWithStub")
 
@@ -39,6 +40,7 @@ class GetReadmeRepositoryTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
     }
 
+    /// getReadme()の結合テスト
     func testGetReadme() {
         let expectation = expectation(description: "testGetReadme")
 
