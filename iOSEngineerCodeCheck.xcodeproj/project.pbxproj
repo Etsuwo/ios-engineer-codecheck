@@ -37,6 +37,9 @@
 		5A701BC82796A2F2006C667E /* GetReadmeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A701BC72796A2F2006C667E /* GetReadmeRequest.swift */; };
 		5A701BCC2796DC88006C667E /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A701BCB2796DC88006C667E /* UIViewController+Extension.swift */; };
 		5A701BD32796FA43006C667E /* GetReadmeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A701BD22796FA43006C667E /* GetReadmeRepository.swift */; };
+		5A973F1D2798E40E00343DC4 /* GetReadmeRequestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A973F1C2798E40E00343DC4 /* GetReadmeRequestSample.json */; };
+		5A973F1E2798E40E00343DC4 /* GetReadmeRequestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A973F1C2798E40E00343DC4 /* GetReadmeRequestSample.json */; };
+		5A973F202798E47800343DC4 /* GetReadmeRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A973F1F2798E47800343DC4 /* GetReadmeRepositoryTests.swift */; };
 		5AA3D67C2795C2FB00EECA17 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA3D67B2795C2FB00EECA17 /* Colors.xcassets */; };
 		5AA3D6802795C40C00EECA17 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D67F2795C40C00EECA17 /* Assets.swift */; };
 		5AA3D6822795C76700EECA17 /* RepositorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */; };
@@ -103,6 +106,8 @@
 		5A701BC72796A2F2006C667E /* GetReadmeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReadmeRequest.swift; sourceTree = "<group>"; };
 		5A701BCB2796DC88006C667E /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		5A701BD22796FA43006C667E /* GetReadmeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReadmeRepository.swift; sourceTree = "<group>"; };
+		5A973F1C2798E40E00343DC4 /* GetReadmeRequestSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = GetReadmeRequestSample.json; sourceTree = "<group>"; };
+		5A973F1F2798E47800343DC4 /* GetReadmeRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetReadmeRepositoryTests.swift; sourceTree = "<group>"; };
 		5AA3D67B2795C2FB00EECA17 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5AA3D67F2795C40C00EECA17 /* Assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchCell.swift; sourceTree = "<group>"; };
@@ -314,6 +319,23 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		5A973F212798EBF500343DC4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945F5244DC5EB0012785A /* APIRequestTests.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		5A973F222798EC0300343DC4 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				5A973F1F2798E47800343DC4 /* GetReadmeRepositoryTests.swift */,
+				5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		5AB0D2EE2797BFB500208FB9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,6 +366,7 @@
 		5AB58A7D279572C100E3669E /* APISample */ = {
 			isa = PBXGroup;
 			children = (
+				5A973F1C2798E40E00343DC4 /* GetReadmeRequestSample.json */,
 				5AB58A7B27956FA000E3669E /* SearchRepositoriesRequestSample.json */,
 			);
 			path = APISample;
@@ -391,8 +414,8 @@
 		BFD945F4244DC5EB0012785A /* iOSEngineerCodeCheckTests */ = {
 			isa = PBXGroup;
 			children = (
-				BFD945F5244DC5EB0012785A /* APIRequestTests.swift */,
-				5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */,
+				5A973F222798EC0300343DC4 /* Repositories */,
+				5A973F212798EBF500343DC4 /* API */,
 				BFD945F7244DC5EB0012785A /* Info.plist */,
 			);
 			path = iOSEngineerCodeCheckTests;
@@ -545,6 +568,7 @@
 				BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */,
 				5AB58A7C27956FA000E3669E /* SearchRepositoriesRequestSample.json in Resources */,
 				5A165A1A2790BA4A0039B84A /* Localizable.strings in Resources */,
+				5A973F1D2798E40E00343DC4 /* GetReadmeRequestSample.json in Resources */,
 				5AA3D67C2795C2FB00EECA17 /* Colors.xcassets in Resources */,
 				BFD945E8244DC5EB0012785A /* Images.xcassets in Resources */,
 				BFD945E6244DC5E80012785A /* Main.storyboard in Resources */,
@@ -555,6 +579,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A973F1E2798E40E00343DC4 /* GetReadmeRequestSample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,6 +764,7 @@
 			files = (
 				5AB58A7F279573B200E3669E /* SearchRepositoryRepositoryTests.swift in Sources */,
 				BFD945F6244DC5EB0012785A /* APIRequestTests.swift in Sources */,
+				5A973F202798E47800343DC4 /* GetReadmeRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

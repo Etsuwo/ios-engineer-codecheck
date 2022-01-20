@@ -31,4 +31,22 @@ class APIRequestTests: XCTestCase {
 
         waitForExpectations(timeout: 5, handler: nil)
     }
+
+    func testGetReadmeRequest() {
+        let expectation = expectation(description: "testGetReadmeRequest")
+        let request = GetReadmeRequest(owner: "Etsuwo", repo: "Etsuwo")
+
+        provider.exec(with: request)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case let .failure(error): XCTFail(error.localizedDescription)
+                case .finished: expectation.fulfill()
+                }
+            }, receiveValue: { response in
+                XCTAssertNotNil(response)
+            })
+            .store(in: &cancellables)
+
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 }
