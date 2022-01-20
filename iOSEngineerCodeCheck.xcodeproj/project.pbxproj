@@ -319,6 +319,23 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		5A973F212798EBF500343DC4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				BFD945F5244DC5EB0012785A /* APIRequestTests.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		5A973F222798EC0300343DC4 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				5A973F1F2798E47800343DC4 /* GetReadmeRepositoryTests.swift */,
+				5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		5AB0D2EE2797BFB500208FB9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,10 +414,9 @@
 		BFD945F4244DC5EB0012785A /* iOSEngineerCodeCheckTests */ = {
 			isa = PBXGroup;
 			children = (
-				BFD945F5244DC5EB0012785A /* APIRequestTests.swift */,
-				5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */,
+				5A973F222798EC0300343DC4 /* Repositories */,
+				5A973F212798EBF500343DC4 /* API */,
 				BFD945F7244DC5EB0012785A /* Info.plist */,
-				5A973F1F2798E47800343DC4 /* GetReadmeRepositoryTests.swift */,
 			);
 			path = iOSEngineerCodeCheckTests;
 			sourceTree = "<group>";
