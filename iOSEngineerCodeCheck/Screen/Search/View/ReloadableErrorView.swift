@@ -30,5 +30,6 @@ struct ReloadableErrorView: View {
                     .cornerRadius(8)
             })
         }
+        .accessibilityIdentifier("reloadableErrorView")
     }
 }
