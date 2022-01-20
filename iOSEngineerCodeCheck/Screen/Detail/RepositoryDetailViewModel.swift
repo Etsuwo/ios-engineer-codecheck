@@ -24,6 +24,7 @@ protocol RepositoryDetailViewModelOutputs {
     var openIssuesCount: Int { get }
     var avatarUrl: URL? { get }
     var readme: AnyPublisher<String, Never> { get }
+    var isLoading: AnyPublisher<Bool, Never> { get }
 }
 
 protocol RepositoryDetailViewModelType {
@@ -35,8 +36,6 @@ final class RepositoryDetailViewModel: RepositoryDetailViewModelType {
     var inputs: RepositoryDetailViewModelInputs { self }
     var outputs: RepositoryDetailViewModelOutputs { self }
     private let repository: GetReadmeRepositoryProtocol
-    private var cancellable: AnyCancellable?
-    private let readmeSubject = PassthroughSubject<String, Never>()
     private let item: Item
 
     init(item: Item, repository: GetReadmeRepositoryProtocol = GetReadmeRepository()) {
@@ -47,21 +46,7 @@ final class RepositoryDetailViewModel: RepositoryDetailViewModelType {
 
 extension RepositoryDetailViewModel: RepositoryDetailViewModelInputs {
     func fetchReadme() {
-        cancellable = repository.getReadme(owner: item.owner.login, repository: item.name)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case let .failure(error):
-                    print(error.localizedDescription)
-                default: break
-                }
-            }, receiveValue: { [weak self] data in
-                guard let data = Data(base64Encoded: data.content, options: .ignoreUnknownCharacters),
-                      let readme = String(data: data, encoding: .utf8)
-                else {
-                    return
-                }
-                self?.readmeSubject.send(readme)
-            })
+        repository.getReadme(owner: item.owner.login, repository: item.name)
     }
 }
 
@@ -75,5 +60,6 @@ extension RepositoryDetailViewModel: RepositoryDetailViewModelOutputs {
     var forksCount: Int { item.forksCount }
     var openIssuesCount: Int { item.openIssuesCount }
     var avatarUrl: URL? { URL(string: item.owner.avatarUrl) }
-    var readme: AnyPublisher<String, Never> { readmeSubject.eraseToAnyPublisher() }
+    var readme: AnyPublisher<String, Never> { repository.readme }
+    var isLoading: AnyPublisher<Bool, Never> { repository.isLoading }
 }

@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="44" width="428" height="882"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="buN-Ok-AbM">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="467.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="967.33333333333337"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Iim-eb-8Ad">
                                                 <rect key="frame" x="164" y="24" width="100" height="100"/>
@@ -153,12 +153,15 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dE-9S-tr4" customClass="MarkdownView" customModule="MarkdownView">
-                                                <rect key="frame" x="16" y="423.33333333333331" width="396" height="0.0"/>
+                                                <rect key="frame" x="16" y="423.33333333333326" width="396" height="500"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" priority="250" id="jKI-vF-5Hy"/>
+                                                    <constraint firstAttribute="height" priority="250" constant="500" id="jKI-vF-5Hy"/>
                                                 </constraints>
                                             </view>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="63I-kf-ffs">
+                                                <rect key="frame" x="204" y="663.33333333333337" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" name="mainBackGround"/>
                                         <constraints>
@@ -166,6 +169,7 @@
                                             <constraint firstItem="INf-Uv-Obo" firstAttribute="leading" secondItem="buN-Ok-AbM" secondAttribute="leading" constant="16" id="2C7-Rf-bOW"/>
                                             <constraint firstItem="4q1-pG-WSB" firstAttribute="top" secondItem="OuC-o1-Rf4" secondAttribute="bottom" id="6gv-hC-PPu"/>
                                             <constraint firstAttribute="trailing" secondItem="OuC-o1-Rf4" secondAttribute="trailing" constant="16" id="6xh-EG-yhT"/>
+                                            <constraint firstItem="63I-kf-ffs" firstAttribute="centerY" secondItem="8dE-9S-tr4" secondAttribute="centerY" id="9Ac-Zt-KSt"/>
                                             <constraint firstItem="OvB-Te-jEo" firstAttribute="trailing" secondItem="JFQ-lK-69d" secondAttribute="trailing" id="B28-qM-hoG"/>
                                             <constraint firstItem="OvB-Te-jEo" firstAttribute="top" secondItem="JFQ-lK-69d" secondAttribute="bottom" constant="8" id="Fq1-89-Hd9"/>
                                             <constraint firstItem="Iim-eb-8Ad" firstAttribute="centerX" secondItem="buN-Ok-AbM" secondAttribute="centerX" id="H9X-uQ-OPS"/>
@@ -174,6 +178,7 @@
                                             <constraint firstItem="JFQ-lK-69d" firstAttribute="leading" secondItem="4q1-pG-WSB" secondAttribute="leading" id="LTC-JK-vzp"/>
                                             <constraint firstItem="fAH-DP-jVp" firstAttribute="leading" secondItem="INf-Uv-Obo" secondAttribute="leading" id="MBA-ge-1cl"/>
                                             <constraint firstAttribute="bottom" secondItem="8dE-9S-tr4" secondAttribute="bottom" constant="44" id="MPn-3e-BB4"/>
+                                            <constraint firstItem="63I-kf-ffs" firstAttribute="centerX" secondItem="8dE-9S-tr4" secondAttribute="centerX" id="O3X-2t-mhU"/>
                                             <constraint firstAttribute="trailing" secondItem="INf-Uv-Obo" secondAttribute="trailing" constant="16" id="Qvr-LB-1Pa"/>
                                             <constraint firstItem="4q1-pG-WSB" firstAttribute="trailing" secondItem="OuC-o1-Rf4" secondAttribute="trailing" id="Rnv-37-UYZ"/>
                                             <constraint firstItem="8dE-9S-tr4" firstAttribute="leading" secondItem="buN-Ok-AbM" secondAttribute="leading" constant="16" id="WiZ-Ee-rXy"/>
@@ -211,6 +216,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="しょうさい" id="J6o-vL-S1z"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="63I-kf-ffs" id="gOE-Zc-x2l"/>
                         <outlet property="avatarImageView" destination="Iim-eb-8Ad" id="dmH-tP-ZuI"/>
                         <outlet property="descriptionLabel" destination="JFQ-lK-69d" id="4eH-b1-Yuc"/>
                         <outlet property="detailLabel" destination="OvB-Te-jEo" id="OnH-hz-N1y"/>

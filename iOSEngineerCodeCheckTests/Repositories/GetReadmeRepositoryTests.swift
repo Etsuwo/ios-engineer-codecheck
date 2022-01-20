@@ -26,16 +26,14 @@ class GetReadmeRepositoryTests: XCTestCase {
     func testGetReadmeWithStub() {
         let expectation = expectation(description: "testGetReadmeWithStub")
 
-        repositoryWithStub.getReadme(owner: "Etsuwo", repository: "Etsuwo")
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure: XCTFail()
-                default: expectation.fulfill()
-                }
-            }, receiveValue: { response in
+        repositoryWithStub.readme
+            .sink(receiveValue: { response in
                 XCTAssertNotNil(response)
+                expectation.fulfill()
             })
             .store(in: &cancellables)
+
+        repositoryWithStub.getReadme(owner: "Etsuwo", repository: "Etsuwo")
 
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -44,16 +42,14 @@ class GetReadmeRepositoryTests: XCTestCase {
     func testGetReadme() {
         let expectation = expectation(description: "testGetReadme")
 
-        repository.getReadme(owner: "Etsuwo", repository: "Etsuwo")
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure: XCTFail()
-                default: expectation.fulfill()
-                }
-            }, receiveValue: { response in
+        repository.readme
+            .sink(receiveValue: { response in
                 XCTAssertNotNil(response)
+                expectation.fulfill()
             })
             .store(in: &cancellables)
+
+        repository.getReadme(owner: "Etsuwo", repository: "Etsuwo")
 
         waitForExpectations(timeout: 5, handler: nil)
     }

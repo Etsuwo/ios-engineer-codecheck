@@ -31,18 +31,3 @@ struct Item: Codable {
         case description
     }
 }
-
-extension Item {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        fullName = try container.decode(String.self, forKey: .fullName)
-        owner = try container.decode(Owner.self, forKey: .owner)
-        language = try container.decode(String?.self, forKey: .language)
-        stargazersCount = try container.decode(Int.self, forKey: .stargazersCount)
-        watchersCount = try container.decode(Int.self, forKey: .watchersCount)
-        forksCount = try container.decode(Int.self, forKey: .forksCount)
-        openIssuesCount = try container.decode(Int.self, forKey: .openIssuesCount)
-        description = try container.decode(String?.self, forKey: .description)
-    }
-}

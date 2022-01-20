@@ -15,10 +15,3 @@ struct SearchRepositoriesResponse: Codable {
         case items
     }
 }
-
-extension SearchRepositoriesResponse {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        items = try container.decode([Item].self, forKey: .items)
-    }
-}
