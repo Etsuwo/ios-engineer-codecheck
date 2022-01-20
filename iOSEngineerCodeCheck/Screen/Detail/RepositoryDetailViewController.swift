@@ -23,6 +23,7 @@ final class RepositoryDetailViewController: UIViewController {
     @IBOutlet private weak var issuesCountLabel: UILabel!
     @IBOutlet weak var watchersCountLabel: UILabel!
     @IBOutlet private weak var readmeMarkdownView: MarkdownView!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
 
     // MARK: Propaties
 
@@ -71,6 +72,11 @@ final class RepositoryDetailViewController: UIViewController {
             .sink(receiveValue: { [weak self] readme in
                 self?.readmeMarkdownView.load(markdown: readme)
             })
+            .store(in: &cancellables)
+        viewModel.outputs.isLoading
+            .receive(on: DispatchQueue.main)
+            .map { !$0 }
+            .assign(to: \.isHidden, on: activityIndicatorView)
             .store(in: &cancellables)
     }
 }

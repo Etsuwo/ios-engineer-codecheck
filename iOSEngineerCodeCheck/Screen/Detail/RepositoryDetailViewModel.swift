@@ -24,6 +24,7 @@ protocol RepositoryDetailViewModelOutputs {
     var openIssuesCount: Int { get }
     var avatarUrl: URL? { get }
     var readme: AnyPublisher<String, Never> { get }
+    var isLoading: AnyPublisher<Bool, Never> { get }
 }
 
 protocol RepositoryDetailViewModelType {
@@ -60,4 +61,5 @@ extension RepositoryDetailViewModel: RepositoryDetailViewModelOutputs {
     var openIssuesCount: Int { item.openIssuesCount }
     var avatarUrl: URL? { URL(string: item.owner.avatarUrl) }
     var readme: AnyPublisher<String, Never> { repository.readme }
+    var isLoading: AnyPublisher<Bool, Never> { repository.isLoading }
 }
