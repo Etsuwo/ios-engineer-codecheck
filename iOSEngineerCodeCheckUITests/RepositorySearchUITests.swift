@@ -35,7 +35,7 @@ class RepositorySearchUITests: XCTestCase {
         let cell = app.tables.firstMatch.children(matching: .cell).firstMatch.waitForExistence(timeout: 10)
         XCTAssertTrue(cell)
     }
-    
+
     /// 検索結果ゼロ画面が表示されるかテスト
     func testRepositoryNotFound() {
         _ = app.waitForExistence(timeout: 5)
