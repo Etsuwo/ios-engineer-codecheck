@@ -1,0 +1,19 @@
+{
+  "name": "README.md",
+  "path": "README.md",
+  "sha": "d19d7cf829af1f5fee8a3eb0b8ed6fe5339635ee",
+  "size": 406,
+  "url": "https://api.github.com/repos/Etsuwo/Etsuwo/contents/README.md?ref=main",
+  "html_url": "https://github.com/Etsuwo/Etsuwo/blob/main/README.md",
+  "git_url": "https://api.github.com/repos/Etsuwo/Etsuwo/git/blobs/d19d7cf829af1f5fee8a3eb0b8ed6fe5339635ee",
+  "download_url": "https://raw.githubusercontent.com/Etsuwo/Etsuwo/main/README.md",
+  "type": "file",
+  "content": "IVtHaXRIdWIgU3RhdHMgQ2FyZF0oaHR0cHM6Ly9naXRodWItcmVhZG1lLXN0\nYXRzLnZlcmNlbC5hcHAvYXBpP3VzZXJuYW1lPUV0c3V3bykgIAohW1RvcCBM\nYW5ndWFnZXMgQ2FyZCAoQ29tcGFjdCBsYXlvdXQpXShodHRwczovL2dpdGh1\nYi1yZWFkbWUtc3RhdHMudmVyY2VsLmFwcC9hcGkvdG9wLWxhbmdzLz91c2Vy\nbmFtZT1FdHN1d28mbGF5b3V0PWNvbXBhY3QpCgojIyBBcHBzCiMjIyBbU2lt\ncGxlIFR1bmVyXShodHRwczovL2FwcHMuYXBwbGUuY29tL2pwL2FwcC9zaW1w\nbGV0dW5lci9pZDE1NjMxNDk3NjgpCiFbR3JvdXAgMl0oaHR0cHM6Ly91c2Vy\nLWltYWdlcy5naXRodWJ1c2VyY29udGVudC5jb20vNDcwNzU0OTYvMTIzMzU0\nMTc0LTBkZWIzNzAwLWQ1OWUtMTFlYi04M2ZiLTRkZjBkYjJiNzBjMi5wbmcp\nCg==\n",
+  "encoding": "base64",
+  "_links": {
+    "self": "https://api.github.com/repos/Etsuwo/Etsuwo/contents/README.md?ref=main",
+    "git": "https://api.github.com/repos/Etsuwo/Etsuwo/git/blobs/d19d7cf829af1f5fee8a3eb0b8ed6fe5339635ee",
+    "html": "https://github.com/Etsuwo/Etsuwo/blob/main/README.md"
+  }
+}
+
