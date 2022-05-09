@@ -10,14 +10,16 @@ import Alamofire
 import Combine
 import Foundation
 
-protocol GithubAPIProviderProtocol {
+public protocol GithubAPIProviderProtocol {
     func exec<T: Request>(with request: T) -> AnyPublisher<T.Response, Error> where T.Response: Codable
 }
 
-final class GithubAPIProvider: GithubAPIProviderProtocol {
+public final class GithubAPIProvider: GithubAPIProviderProtocol {
+    public init() {}
+
     /// API通信を実行する
     /// - Returns: Requestに対応するResponseを流すPublisher
-    func exec<T: Request>(with request: T) -> AnyPublisher<T.Response, Error> where T.Response: Codable {
+    public func exec<T: Request>(with request: T) -> AnyPublisher<T.Response, Error> where T.Response: Codable {
         Future<T.Response, Error> { [weak self] promise in
             self?.printForDebug(request: request)
 

@@ -8,16 +8,16 @@
 
 import Foundation
 
-enum APIError: Error {
+public enum APIError: Error {
     case noMoreContent
     case unknownError
 }
 
 extension APIError: LocalizedError {
-    var errorDescription: String? {
+    public var errorDescription: String? {
         switch self {
-        case .noMoreContent: return L10n.Error.Unknown.description
-        case .unknownError: return L10n.Error.Unknown.description
+        case .noMoreContent: return "わかりませーん"
+        case .unknownError: return "知りませーん"
         }
     }
 }

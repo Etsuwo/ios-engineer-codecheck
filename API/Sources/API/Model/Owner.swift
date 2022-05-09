@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Owner: Codable {
-    var avatarUrl: String
-    var login: String
+public struct Owner: Codable {
+    public var avatarUrl: String
+    public var login: String
 
     enum CodingKeys: String, CodingKey {
         case avatarUrl = "avatar_url"

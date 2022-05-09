@@ -6,6 +6,7 @@
 //  Copyright © 2020 YUMEMI Inc. All rights reserved.
 //
 
+import API
 import Combine
 import CombineCocoa
 import SwiftUI

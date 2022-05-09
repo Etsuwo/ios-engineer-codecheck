@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct APIEndpoint {
+public enum APIEndpoint {
     static let baseURL = "https://api.github.com"
 }

@@ -8,16 +8,16 @@
 
 import Foundation
 
-struct Item: Codable {
-    var name: String
-    var fullName: String
-    var owner: Owner
-    var language: String?
-    var stargazersCount: Int
-    var watchersCount: Int
-    var forksCount: Int
-    var openIssuesCount: Int
-    var description: String?
+public struct Item: Codable {
+    public var name: String
+    public var fullName: String
+    public var owner: Owner
+    public var language: String?
+    public var stargazersCount: Int
+    public var watchersCount: Int
+    public var forksCount: Int
+    public var openIssuesCount: Int
+    public var description: String?
 
     enum CodingKeys: String, CodingKey {
         case name

@@ -9,12 +9,17 @@
 import Alamofire
 import Foundation
 
-struct SearchRepositoriesRequest: Request {
-    typealias Response = SearchRepositoriesResponse
-    var method: HTTPMethod = .get
-    var path: String = "/search/repositories"
-    var encording: ParameterEncoding = URLEncoding.queryString
-    var parameter: [String: Any]? {
+public struct SearchRepositoriesRequest: Request {
+    public init(searchWord: String, page: Int) {
+        self.searchWord = searchWord
+        self.page = page
+    }
+
+    public typealias Response = SearchRepositoriesResponse
+    public var method: HTTPMethod = .get
+    public var path: String = "/search/repositories"
+    public var encording: ParameterEncoding = URLEncoding.queryString
+    public var parameter: [String: Any]? {
         ["q": searchWord, "page": page]
     }
 
@@ -22,7 +27,7 @@ struct SearchRepositoriesRequest: Request {
     var page: Int
 }
 
-extension SearchRepositoriesRequest {
+public extension SearchRepositoriesRequest {
     var sampleData: Data {
         let path = Bundle.main.path(forResource: "SearchRepositoriesRequestSample", ofType: "json")!
         return try! String(contentsOfFile: path).data(using: .utf8)!

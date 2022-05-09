@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct GetReadmeResponse: Codable {
-    var content: String
+public struct GetReadmeResponse: Codable {
+    public var content: String
 }

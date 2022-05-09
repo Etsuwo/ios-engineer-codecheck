@@ -9,7 +9,7 @@
 import Alamofire
 import Foundation
 
-protocol Request {
+public protocol Request {
     associatedtype Response
     var baseURL: String { get }
     var path: String { get }
@@ -20,7 +20,7 @@ protocol Request {
     var sampleData: Data { get } // テスト用
 }
 
-extension Request {
+public extension Request {
     var baseURL: String { APIEndpoint.baseURL }
     var headers: HTTPHeaders { ["Content-Type": "application/vnd.github.v3+json"] }
     var parameter: [String: Any]? { nil }

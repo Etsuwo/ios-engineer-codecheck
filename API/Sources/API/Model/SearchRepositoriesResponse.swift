@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct SearchRepositoriesResponse: Codable {
-    var items: [Item]
+public struct SearchRepositoriesResponse: Codable {
+    public var items: [Item]
 
     enum CodingKeys: String, CodingKey {
         case items

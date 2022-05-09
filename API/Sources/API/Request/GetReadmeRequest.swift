@@ -9,18 +9,23 @@
 import Alamofire
 import Foundation
 
-struct GetReadmeRequest: Request {
-    typealias Response = GetReadmeResponse
-    var method: HTTPMethod = .get
-    var path: String {
+public struct GetReadmeRequest: Request {
+    public init(owner: String, repo: String) {
+        self.owner = owner
+        self.repo = repo
+    }
+
+    public typealias Response = GetReadmeResponse
+    public var method: HTTPMethod = .get
+    public var path: String {
         "/repos/\(owner)/\(repo)/readme"
     }
 
-    var owner: String
-    var repo: String
+    public var owner: String
+    public var repo: String
 }
 
-extension GetReadmeRequest {
+public extension GetReadmeRequest {
     var sampleData: Data {
         let path = Bundle.main.path(forResource: "GetReadmeRequestSample", ofType: "json")!
         return try! String(contentsOfFile: path).data(using: .utf8)!
