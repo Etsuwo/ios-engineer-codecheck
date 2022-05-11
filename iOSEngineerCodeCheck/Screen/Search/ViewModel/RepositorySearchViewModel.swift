@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import Repositories
 
 final class RepositorySearchViewModel {
     let searchBarViewModel: SearchBarViewModelType

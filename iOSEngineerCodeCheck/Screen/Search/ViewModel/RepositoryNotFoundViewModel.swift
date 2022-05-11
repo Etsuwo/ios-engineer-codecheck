@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import Repositories
 
 protocol RepositoryNotFoundViewModelOutputs {
     var isPresent: AnyPublisher<Bool, Never> { get }

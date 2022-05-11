@@ -9,6 +9,7 @@
 import API
 import Combine
 import Foundation
+import Repositories
 
 protocol TableViewViewModelInputs {
     func onTapTableViewCell(index: Int)

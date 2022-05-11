@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import Repositories
 
 protocol IndicatorViewModelOutputs {
     var isLoading: AnyPublisher<Bool, Never> { get }

@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import Repositories
 
 protocol SearchBarViewModelInputs {
     func textDidChange(to word: String)

@@ -41,6 +41,7 @@
 		5ADE4165279798B300272E78 /* ReloadableErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADE4164279798B300272E78 /* ReloadableErrorView.swift */; };
 		5ADE416727979D0F00272E78 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADE416627979D0F00272E78 /* UIView+Extension.swift */; };
 		5ADE41692797A42600272E78 /* HostingViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADE41682797A42600272E78 /* HostingViewHandler.swift */; };
+		5AF8A8C2282A048500ABDE74 /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = 5AF8A8C1282A048500ABDE74 /* Repositories */; };
 		6705427595D7AAB509C377B6 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
@@ -128,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AF8A8C2282A048500ABDE74 /* Repositories in Frameworks */,
 				5A663CEB279333B0006680EB /* Kingfisher in Frameworks */,
 				38BF6F2E39252D9A6E4F9545 /* Pods_iOSEngineerCodeCheck.framework in Frameworks */,
 				5A23B008279481CC00CC35A0 /* CombineCocoa in Frameworks */,
@@ -398,6 +400,7 @@
 				5A23B007279481CC00CC35A0 /* CombineCocoa */,
 				5A701BC227969B38006C667E /* MarkdownView */,
 				5A3DC4CA28295EBF00F8CC28 /* API */,
+				5AF8A8C1282A048500ABDE74 /* Repositories */,
 			);
 			productName = iOSEngineerCodeCheck;
 			productReference = BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */;
@@ -1070,6 +1073,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5A701BC127969B38006C667E /* XCRemoteSwiftPackageReference "MarkdownView" */;
 			productName = MarkdownView;
+		};
+		5AF8A8C1282A048500ABDE74 /* Repositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Repositories;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
