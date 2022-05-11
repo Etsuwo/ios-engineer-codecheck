@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UITableView {
+public extension UITableView {
     func removeHighlight(animated: Bool = true) {
         if let selectedRow = indexPathForSelectedRow {
             deselectRow(at: selectedRow, animated: animated)
