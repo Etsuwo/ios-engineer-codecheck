@@ -20,7 +20,6 @@
 		5A23B0032794645400CC35A0 /* RepositorySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23B0022794645400CC35A0 /* RepositorySearchViewModel.swift */; };
 		5A23B0052794781F00CC35A0 /* RepositoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A23B0042794781F00CC35A0 /* RepositoryDetailViewModel.swift */; };
 		5A23B008279481CC00CC35A0 /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5A23B007279481CC00CC35A0 /* CombineCocoa */; };
-		5A494BCA2831474900270A7E /* AppFeatures in Frameworks */ = {isa = PBXBuildFile; productRef = 5A494BC92831474900270A7E /* AppFeatures */; };
 		5A5CE73B2795D80D00F62BA5 /* AppDelegate+Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5CE73A2795D80D00F62BA5 /* AppDelegate+Global.swift */; };
 		5A663CEB279333B0006680EB /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5A663CEA279333B0006680EB /* Kingfisher */; };
 		5A701BC327969B38006C667E /* MarkdownView in Frameworks */ = {isa = PBXBuildFile; productRef = 5A701BC227969B38006C667E /* MarkdownView */; };
@@ -31,6 +30,7 @@
 		5AA3D67C2795C2FB00EECA17 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA3D67B2795C2FB00EECA17 /* Colors.xcassets */; };
 		5AA3D6802795C40C00EECA17 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D67F2795C40C00EECA17 /* Assets.swift */; };
 		5AA3D6822795C76700EECA17 /* RepositorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */; };
+		5AAA552E2831515000969C61 /* AppFeatures in Frameworks */ = {isa = PBXBuildFile; productRef = 5AAA552D2831515000969C61 /* AppFeatures */; };
 		5AB0D2F22797C16A00208FB9 /* RepositoryNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB0D2F12797C16A00208FB9 /* RepositoryNotFoundView.swift */; };
 		5AB58A7C27956FA000E3669E /* SearchRepositoriesRequestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AB58A7B27956FA000E3669E /* SearchRepositoriesRequestSample.json */; };
 		5AB58A7F279573B200E3669E /* SearchRepositoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */; };
@@ -121,7 +121,7 @@
 				38BF6F2E39252D9A6E4F9545 /* Pods_iOSEngineerCodeCheck.framework in Frameworks */,
 				5A23B008279481CC00CC35A0 /* CombineCocoa in Frameworks */,
 				5A701BC327969B38006C667E /* MarkdownView in Frameworks */,
-				5A494BCA2831474900270A7E /* AppFeatures in Frameworks */,
+				5AAA552E2831515000969C61 /* AppFeatures in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,7 +362,7 @@
 				5A663CEA279333B0006680EB /* Kingfisher */,
 				5A23B007279481CC00CC35A0 /* CombineCocoa */,
 				5A701BC227969B38006C667E /* MarkdownView */,
-				5A494BC92831474900270A7E /* AppFeatures */,
+				5AAA552D2831515000969C61 /* AppFeatures */,
 			);
 			productName = iOSEngineerCodeCheck;
 			productReference = BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */;
@@ -985,10 +985,6 @@
 			package = 5A23B006279481CC00CC35A0 /* XCRemoteSwiftPackageReference "CombineCocoa" */;
 			productName = CombineCocoa;
 		};
-		5A494BC92831474900270A7E /* AppFeatures */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AppFeatures;
-		};
 		5A663CEA279333B0006680EB /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5A663CE9279333B0006680EB /* XCRemoteSwiftPackageReference "Kingfisher" */;
@@ -998,6 +994,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5A701BC127969B38006C667E /* XCRemoteSwiftPackageReference "MarkdownView" */;
 			productName = MarkdownView;
+		};
+		5AAA552D2831515000969C61 /* AppFeatures */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppFeatures;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

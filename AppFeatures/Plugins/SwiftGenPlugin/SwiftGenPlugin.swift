@@ -11,23 +11,28 @@ import PackagePlugin
 struct SwiftGenPlugin: BuildToolPlugin {
     func createBuildCommands(context: PluginContext, target: Target) async throws -> [Command] {
         let outputDir = context.pluginWorkDirectory
-        let targetAssets = target.directory.appending("Files/Colors.xcassets")
-        let outputFile = outputDir.appending("Color.generated.swift")
+//        let targetAssets = target.directory.appending("Files/Colors.xcassets")
+//        let outputFile = outputDir.appending("Color.generated.swift")
         return [
             .prebuildCommand(
                 displayName: "SwiftGen",
                 executable: try context.tool(named: "swiftgen").path,
                 arguments: [
+                    //                    "run",
+//                    "xcassets",
+//                    targetAssets.string,
+//                    "--param",
+//                    "publicAccess",
+//                    "--templateName",
+//                    "swift5",
+//                    "--output",
+//                    outputFile.string,
+                    "config",
                     "run",
-                    "xcassets",
-                    targetAssets.string,
-                    "--param",
-                    "publicAccess",
-                    "--templateName",
-                    "swift5",
-                    "--output",
-                    outputFile.string,
+                    "--config",
+                    target.directory.appending("Files/swiftgen.yml").string,
                 ],
+                environment: ["OUT_DIR": outputDir.string],
                 outputFilesDirectory: outputDir
             )
         ]

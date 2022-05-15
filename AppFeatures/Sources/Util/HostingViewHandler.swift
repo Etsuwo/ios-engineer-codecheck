@@ -8,6 +8,7 @@
 
 import Extensions
 import Foundation
+import Resources
 import SwiftUI
 import UIKit
 
@@ -24,7 +25,7 @@ public final class HostingViewHandler<HostedViewType: View> {
     public func present(to vc: UIViewController, where view: UIView, hostedView: HostedViewType) {
         guard hostingController == nil else { return }
         let hostingController = UIHostingController(rootView: hostedView)
-        // hostingController.view.backgroundColor = Asset.Colors.mainBackGround.color
+        hostingController.view.backgroundColor = Asset.Colors.mainBackGround.color
         vc.addChild(hostingController)
         view.addSubview(hostingController.view)
         hostingController.view.bind(to: view)

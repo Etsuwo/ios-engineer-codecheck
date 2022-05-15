@@ -41,7 +41,7 @@ let package = Package(
         ),
         .target(
             name: "Util",
-            dependencies: [.target(name: "Extensions")],
+            dependencies: [.target(name: "Extensions"), .target(name: "Resources")],
             path: "Sources/Util"
         ),
 

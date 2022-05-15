@@ -3,6 +3,8 @@ strings:
   outputs:
     - templateName: structured-swift5
       output: ${OUT_DIR}/Strings.swift
+      params:
+        publicAccess: true
 xcassets:
   inputs:
     - Images.xcassets
@@ -10,10 +12,14 @@ xcassets:
   outputs:
     - templateName: swift5
       output: ${OUT_DIR}/Assets.swift
+      params:
+        publicAccess: true
 ib:
   inputs:
     - Storyboards
   outputs:
     - templateName: scenes-swift5
       output: ${OUT_DIR}/Scenes.swift
+      params:
+        publicAccess: true
 

@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+let color = Asset.Colors.mainBackGround.color
