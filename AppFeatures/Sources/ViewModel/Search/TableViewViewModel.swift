@@ -11,32 +11,32 @@ import Combine
 import Foundation
 import Repositories
 
-protocol TableViewViewModelInputs {
+public protocol TableViewViewModelInputs {
     func onTapTableViewCell(index: Int)
     func onReachedBottomTableView()
     func onPullToRefresh()
 }
 
-protocol TableViewViewModelOutputs {
+public protocol TableViewViewModelOutputs {
     var isSuccessSearchRepository: AnyPublisher<Bool, Never> { get }
     var onTransitionDetail: AnyPublisher<Item, Never> { get }
     var item: [Item] { get }
 }
 
-protocol TableViewViewModelType {
+public protocol TableViewViewModelType {
     var inputs: TableViewViewModelInputs { get }
     var outputs: TableViewViewModelOutputs { get }
 }
 
-final class TableViewViewModel: TableViewViewModelType {
-    var inputs: TableViewViewModelInputs { self }
-    var outputs: TableViewViewModelOutputs { self }
+public final class TableViewViewModel: TableViewViewModelType {
+    public var inputs: TableViewViewModelInputs { self }
+    public var outputs: TableViewViewModelOutputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
     private var cancellables = Set<AnyCancellable>()
     private let isSuccessSearchRepositorySubject = PassthroughSubject<Bool, Never>()
     private let onTransitionDetailSubject = PassthroughSubject<Item, Never>()
 
-    init(repository: SearchRepositoryRepositoryProtocol) {
+    public init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
         bind()
     }
@@ -57,30 +57,30 @@ final class TableViewViewModel: TableViewViewModelType {
 }
 
 extension TableViewViewModel: TableViewViewModelInputs {
-    func onTapTableViewCell(index: Int) {
+    public func onTapTableViewCell(index: Int) {
         let item = repository.currentItems[index]
         onTransitionDetailSubject.send(item)
     }
 
-    func onReachedBottomTableView() {
+    public func onReachedBottomTableView() {
         repository.searchRepositories(by: nil, isPagination: true)
     }
 
-    func onPullToRefresh() {
+    public func onPullToRefresh() {
         repository.searchRepositories(by: nil, isPagination: false)
     }
 }
 
 extension TableViewViewModel: TableViewViewModelOutputs {
-    var isSuccessSearchRepository: AnyPublisher<Bool, Never> {
+    public var isSuccessSearchRepository: AnyPublisher<Bool, Never> {
         isSuccessSearchRepositorySubject.eraseToAnyPublisher()
     }
 
-    var onTransitionDetail: AnyPublisher<Item, Never> {
+    public var onTransitionDetail: AnyPublisher<Item, Never> {
         onTransitionDetailSubject.eraseToAnyPublisher()
     }
 
-    var item: [Item] {
+    public var item: [Item] {
         repository.currentItems
     }
 }

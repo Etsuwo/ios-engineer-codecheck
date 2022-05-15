@@ -10,25 +10,25 @@ import Combine
 import Foundation
 import Repositories
 
-protocol IndicatorViewModelOutputs {
+public protocol IndicatorViewModelOutputs {
     var isLoading: AnyPublisher<Bool, Never> { get }
 }
 
-protocol IndicatorViewModelType {
+public protocol IndicatorViewModelType {
     var outputs: IndicatorViewModelOutputs { get }
 }
 
-final class IndicatorViewModel: IndicatorViewModelType {
-    var outputs: IndicatorViewModelOutputs { self }
+public final class IndicatorViewModel: IndicatorViewModelType {
+    public var outputs: IndicatorViewModelOutputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
 
-    init(repository: SearchRepositoryRepositoryProtocol) {
+    public init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
     }
 }
 
 extension IndicatorViewModel: IndicatorViewModelOutputs {
-    var isLoading: AnyPublisher<Bool, Never> {
+    public var isLoading: AnyPublisher<Bool, Never> {
         repository.isLoading
     }
 }

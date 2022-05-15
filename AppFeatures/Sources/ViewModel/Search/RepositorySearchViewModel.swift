@@ -10,14 +10,14 @@ import Combine
 import Foundation
 import Repositories
 
-final class RepositorySearchViewModel {
-    let searchBarViewModel: SearchBarViewModelType
-    let tableViewViewModel: TableViewViewModelType
-    let reloadableErrorViewModel: ReloadableErrorViewModelType
-    let repositoryNotFoundViewModel: RepositoryNotFoundViewModelType
-    let indicatorViewModel: IndicatorViewModelType
+public final class RepositorySearchViewModel {
+    public let searchBarViewModel: SearchBarViewModelType
+    public let tableViewViewModel: TableViewViewModelType
+    public let reloadableErrorViewModel: ReloadableErrorViewModelType
+    public let repositoryNotFoundViewModel: RepositoryNotFoundViewModelType
+    public let indicatorViewModel: IndicatorViewModelType
 
-    init(repository: SearchRepositoryRepositoryProtocol = SearchRepositoryRepository()) {
+    public init(repository: SearchRepositoryRepositoryProtocol = SearchRepositoryRepository()) {
         searchBarViewModel = SearchBarViewModel(repository: repository)
         tableViewViewModel = TableViewViewModel(repository: repository)
         reloadableErrorViewModel = ReloadableErrorViewModel(repository: repository)

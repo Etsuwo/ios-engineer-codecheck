@@ -11,6 +11,7 @@ import Combine
 import Kingfisher
 import MarkdownView
 import UIKit
+import ViewModel
 
 final class RepositoryDetailViewController: UIViewController {
     // MARK: IBOutlet

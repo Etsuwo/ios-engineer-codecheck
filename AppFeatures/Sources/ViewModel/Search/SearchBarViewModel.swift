@@ -10,25 +10,25 @@ import Combine
 import Foundation
 import Repositories
 
-protocol SearchBarViewModelInputs {
+public protocol SearchBarViewModelInputs {
     func textDidChange(to word: String)
 }
 
-protocol SearchBarViewModelType {
+public protocol SearchBarViewModelType {
     var inputs: SearchBarViewModelInputs { get }
 }
 
-final class SearchBarViewModel: SearchBarViewModelType {
-    var inputs: SearchBarViewModelInputs { self }
+public final class SearchBarViewModel: SearchBarViewModelType {
+    public var inputs: SearchBarViewModelInputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
 
-    init(repository: SearchRepositoryRepositoryProtocol) {
+    public init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
     }
 }
 
 extension SearchBarViewModel: SearchBarViewModelInputs {
-    func textDidChange(to word: String) {
+    public func textDidChange(to word: String) {
         repository.searchRepositories(by: word, isPagination: false)
     }
 }

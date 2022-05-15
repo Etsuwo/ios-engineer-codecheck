@@ -16,7 +16,7 @@ xcassets:
         publicAccess: true
 ib:
   inputs:
-    - Storyboards
+    - Base.lproj
   outputs:
     - templateName: scenes-swift5
       output: ${OUT_DIR}/Scenes.swift

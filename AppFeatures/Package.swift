@@ -5,12 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "AppFeatures",
+    defaultLocalization: "ja",
     platforms: [.iOS(.v15)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AppFeatures",
-            targets: ["API", "Repositories", "Extensions", "Util", "Resources"]
+            targets: ["API", "Repositories", "Extensions", "Util", "Resources", "ViewModel"]
         ),
     ],
     dependencies: [
@@ -43,6 +44,14 @@ let package = Package(
             name: "Util",
             dependencies: [.target(name: "Extensions"), .target(name: "Resources")],
             path: "Sources/Util"
+        ),
+        .target(
+            name: "ViewModel",
+            dependencies: [
+                .target(name: "Repositories"),
+                .target(name: "API"),
+                .target(name: "Resources")
+            ]
         ),
 
         // MARK: SwiftGen

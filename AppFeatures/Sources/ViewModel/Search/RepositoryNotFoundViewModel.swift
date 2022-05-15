@@ -10,21 +10,21 @@ import Combine
 import Foundation
 import Repositories
 
-protocol RepositoryNotFoundViewModelOutputs {
+public protocol RepositoryNotFoundViewModelOutputs {
     var isPresent: AnyPublisher<Bool, Never> { get }
 }
 
-protocol RepositoryNotFoundViewModelType {
+public protocol RepositoryNotFoundViewModelType {
     var outputs: RepositoryNotFoundViewModelOutputs { get }
 }
 
-final class RepositoryNotFoundViewModel: RepositoryNotFoundViewModelType {
-    var outputs: RepositoryNotFoundViewModelOutputs { self }
+public final class RepositoryNotFoundViewModel: RepositoryNotFoundViewModelType {
+    public var outputs: RepositoryNotFoundViewModelOutputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
     private var cancellables = Set<AnyCancellable>()
     private let isPresentsubject = PassthroughSubject<Bool, Never>()
 
-    init(repository: SearchRepositoryRepositoryProtocol) {
+    public init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
         bind()
     }
@@ -45,7 +45,7 @@ final class RepositoryNotFoundViewModel: RepositoryNotFoundViewModelType {
 }
 
 extension RepositoryNotFoundViewModel: RepositoryNotFoundViewModelOutputs {
-    var isPresent: AnyPublisher<Bool, Never> {
+    public var isPresent: AnyPublisher<Bool, Never> {
         isPresentsubject.eraseToAnyPublisher()
     }
 }

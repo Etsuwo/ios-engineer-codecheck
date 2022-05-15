@@ -13,6 +13,7 @@ import Extensions
 import SwiftUI
 import UIKit
 import Util
+import ViewModel
 
 final class RepositorySearchViewController: UIViewController {
     // MARK: IBOutlet

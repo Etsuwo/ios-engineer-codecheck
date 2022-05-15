@@ -10,27 +10,27 @@ import Combine
 import Foundation
 import Repositories
 
-protocol ReloadableErrorViewModelInputs {
+public protocol ReloadableErrorViewModelInputs {
     func onTapReloadButton()
 }
 
-protocol ReloadableErrorViewModelOutputs {
+public protocol ReloadableErrorViewModelOutputs {
     var isPresent: AnyPublisher<Bool, Never> { get }
 }
 
-protocol ReloadableErrorViewModelType {
+public protocol ReloadableErrorViewModelType {
     var inputs: ReloadableErrorViewModelInputs { get }
     var outputs: ReloadableErrorViewModelOutputs { get }
 }
 
-final class ReloadableErrorViewModel: ReloadableErrorViewModelType {
-    var inputs: ReloadableErrorViewModelInputs { self }
-    var outputs: ReloadableErrorViewModelOutputs { self }
+public final class ReloadableErrorViewModel: ReloadableErrorViewModelType {
+    public var inputs: ReloadableErrorViewModelInputs { self }
+    public var outputs: ReloadableErrorViewModelOutputs { self }
     private let repository: SearchRepositoryRepositoryProtocol
     private let isPresentSubject = PassthroughSubject<Bool, Never>()
     private var cancellables = Set<AnyCancellable>()
 
-    init(repository: SearchRepositoryRepositoryProtocol) {
+    public init(repository: SearchRepositoryRepositoryProtocol) {
         self.repository = repository
         bind()
     }
@@ -50,13 +50,13 @@ final class ReloadableErrorViewModel: ReloadableErrorViewModelType {
 }
 
 extension ReloadableErrorViewModel: ReloadableErrorViewModelInputs {
-    func onTapReloadButton() {
+    public func onTapReloadButton() {
         repository.searchRepositories(by: nil, isPagination: false)
     }
 }
 
 extension ReloadableErrorViewModel: ReloadableErrorViewModelOutputs {
-    var isPresent: AnyPublisher<Bool, Never> {
+    public var isPresent: AnyPublisher<Bool, Never> {
         isPresentSubject.eraseToAnyPublisher()
     }
 }

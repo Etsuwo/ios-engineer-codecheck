@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import ViewModel
 
 struct ReloadableErrorView: View {
     let viewModel: ReloadableErrorViewModelType
