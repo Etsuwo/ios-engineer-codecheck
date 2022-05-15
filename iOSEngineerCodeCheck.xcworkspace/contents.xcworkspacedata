@@ -2,13 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Extensions">
-   </FileRef>
-   <FileRef
-      location = "group:Repositories">
-   </FileRef>
-   <FileRef
-      location = "group:API">
+      location = "group:AppFeatures">
    </FileRef>
    <FileRef
       location = "group:iOSEngineerCodeCheck.xcodeproj">

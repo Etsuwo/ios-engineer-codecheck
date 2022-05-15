@@ -1,0 +1,19 @@
+strings:
+  inputs: Localizable.strings
+  outputs:
+    - templateName: structured-swift5
+      output: ${OUT_DIR}/Strings.swift
+xcassets:
+  inputs:
+    - Images.xcassets
+    - Colors.xcassets
+  outputs:
+    - templateName: swift5
+      output: ${OUT_DIR}/Assets.swift
+ib:
+  inputs:
+    - Storyboards
+  outputs:
+    - templateName: scenes-swift5
+      output: ${OUT_DIR}/Scenes.swift
+

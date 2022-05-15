@@ -12,6 +12,7 @@ import CombineCocoa
 import Extensions
 import SwiftUI
 import UIKit
+import Util
 
 final class RepositorySearchViewController: UIViewController {
     // MARK: IBOutlet
