@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Resources
 import UIKit
 
-extension AppDelegate {
+public extension CodeCheckAppDelegate {
     func setupAppNavigationController() {
         let color = UIColor.white
         let appearance = UINavigationBarAppearance()

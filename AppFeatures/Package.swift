@@ -11,7 +11,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AppFeatures",
-            targets: ["API", "Repositories", "Extensions", "Util", "Resources", "ViewModel", "Screen"]
+            targets: ["AppFeatures"]
         ),
     ],
     dependencies: [
@@ -27,7 +27,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "AppFeatures",
-            dependencies: []
+            dependencies: ["Resources", "Screen"]
         ),
         .target(
             name: "API",
@@ -62,6 +62,8 @@ let package = Package(
                 .target(name: "ViewModel"),
                 .target(name: "API"),
                 .target(name: "Resources"),
+                .target(name: "Extensions"),
+                .target(name: "Util"),
                 .product(name: "CombineCocoa", package: "CombineCocoa"),
                 .product(name: "Kingfisher", package: "Kingfisher"),
                 .product(name: "MarkdownView", package: "MarkdownView")

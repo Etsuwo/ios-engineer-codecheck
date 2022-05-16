@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CombineCommunity/CombineCocoa.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "1a1821995b49c05032980554fc5c3f1204d53076"
+        "revision" : "4e262c2f9fb1cee1cb3be5717f7e6b55eb823971",
+        "version" : "0.4.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "59eb199fdb8dd47733624e8b0277822d0232579e"
+        "revision" : "59eb199fdb8dd47733624e8b0277822d0232579e",
+        "version" : "7.2.2"
       }
     },
     {
