@@ -23,10 +23,10 @@
 		5AA3D67C2795C2FB00EECA17 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA3D67B2795C2FB00EECA17 /* Colors.xcassets */; };
 		5AA3D6802795C40C00EECA17 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D67F2795C40C00EECA17 /* Assets.swift */; };
 		5AA3D6822795C76700EECA17 /* RepositorySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA3D6812795C76700EECA17 /* RepositorySearchCell.swift */; };
+		5AADD83F28322A50002F3588 /* AppFeatures in Frameworks */ = {isa = PBXBuildFile; productRef = 5AADD83E28322A50002F3588 /* AppFeatures */; };
 		5AB0D2F22797C16A00208FB9 /* RepositoryNotFoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB0D2F12797C16A00208FB9 /* RepositoryNotFoundView.swift */; };
 		5AB58A7C27956FA000E3669E /* SearchRepositoriesRequestSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 5AB58A7B27956FA000E3669E /* SearchRepositoriesRequestSample.json */; };
 		5AB58A7F279573B200E3669E /* SearchRepositoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AB58A7E279573B200E3669E /* SearchRepositoryRepositoryTests.swift */; };
-		5AC136572831670A00C31172 /* AppFeatures in Frameworks */ = {isa = PBXBuildFile; productRef = 5AC136562831670A00C31172 /* AppFeatures */; };
 		5ADE4165279798B300272E78 /* ReloadableErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADE4164279798B300272E78 /* ReloadableErrorView.swift */; };
 		6705427595D7AAB509C377B6 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99F4225568C6046149BAC498 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */; };
@@ -107,7 +107,7 @@
 				38BF6F2E39252D9A6E4F9545 /* Pods_iOSEngineerCodeCheck.framework in Frameworks */,
 				5A23B008279481CC00CC35A0 /* CombineCocoa in Frameworks */,
 				5A701BC327969B38006C667E /* MarkdownView in Frameworks */,
-				5AC136572831670A00C31172 /* AppFeatures in Frameworks */,
+				5AADD83F28322A50002F3588 /* AppFeatures in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +333,7 @@
 				5A663CEA279333B0006680EB /* Kingfisher */,
 				5A23B007279481CC00CC35A0 /* CombineCocoa */,
 				5A701BC227969B38006C667E /* MarkdownView */,
-				5AC136562831670A00C31172 /* AppFeatures */,
+				5AADD83E28322A50002F3588 /* AppFeatures */,
 			);
 			productName = iOSEngineerCodeCheck;
 			productReference = BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */;
@@ -959,7 +959,7 @@
 			package = 5A701BC127969B38006C667E /* XCRemoteSwiftPackageReference "MarkdownView" */;
 			productName = MarkdownView;
 		};
-		5AC136562831670A00C31172 /* AppFeatures */ = {
+		5AADD83E28322A50002F3588 /* AppFeatures */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppFeatures;
 		};

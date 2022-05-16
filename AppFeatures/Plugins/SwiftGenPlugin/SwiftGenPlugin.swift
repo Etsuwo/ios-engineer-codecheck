@@ -11,29 +11,50 @@ import PackagePlugin
 struct SwiftGenPlugin: BuildToolPlugin {
     func createBuildCommands(context: PluginContext, target: Target) async throws -> [Command] {
         let outputDir = context.pluginWorkDirectory
-//        let targetAssets = target.directory.appending("Files/Colors.xcassets")
-//        let outputFile = outputDir.appending("Color.generated.swift")
+        let colorAssets = target.directory.appending("Resources/Colors.xcassets")
+        let imageAssets = target.directory.appending("Resources/Images.xcassets")
+        let assetsOutputFile = outputDir.appending("Color.generated.swift")
+        let strings = target.directory.appending("Resources/Localizable.strings")
+        let stringsOutputFile = outputDir.appending("Strings.generated.swift")
         return [
-            .prebuildCommand(
+            .buildCommand(
                 displayName: "SwiftGen",
                 executable: try context.tool(named: "swiftgen").path,
                 arguments: [
-                    //                    "run",
-//                    "xcassets",
-//                    targetAssets.string,
-//                    "--param",
-//                    "publicAccess",
-//                    "--templateName",
-//                    "swift5",
-//                    "--output",
-//                    outputFile.string,
-                    "config",
                     "run",
-                    "--config",
-                    target.directory.appending("Files/swiftgen.yml").string,
+                    "xcassets",
+                    colorAssets.string,
+                    imageAssets.string,
+                    "--param",
+                    "publicAccess",
+                    "--templateName",
+                    "swift5",
+                    "--output",
+                    assetsOutputFile.string,
+//                    "config",
+//                    "run",
+//                    "--config",
+//                    target.directory.appending("Resources/swiftgen.yml").string,
                 ],
-                environment: ["OUT_DIR": outputDir.string],
-                outputFilesDirectory: outputDir
+                environment: [:],
+                outputFiles: [assetsOutputFile]
+            ),
+            .buildCommand(
+                displayName: "SwiftGen",
+                executable: try context.tool(named: "swiftgen").path,
+                arguments: [
+                    "run",
+                    "strings",
+                    strings.string,
+                    "--param",
+                    "publicAccess",
+                    "--templateName",
+                    "structured-swift5",
+                    "--output",
+                    stringsOutputFile.string,
+                ],
+                environment: [:],
+                outputFiles: [stringsOutputFile]
             )
         ]
     }

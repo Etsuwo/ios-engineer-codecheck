@@ -11,13 +11,16 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AppFeatures",
-            targets: ["API", "Repositories", "Extensions", "Util", "Resources", "ViewModel"]
+            targets: ["API", "Repositories", "Extensions", "Util", "Resources", "ViewModel", "Screen"]
         ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1"))
+        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1")),
+        .package(url: "https://github.com/CombineCommunity/CombineCocoa.git", from: "0.2.1"),
+        .package(url: "https://github.com/onevcat/Kingfisher.git", .upToNextMajor(from: "7.0.0")),
+        .package(url: "https://github.com/keitaoouchi/MarkdownView.git", .upToNextMajor(from: "1.9.1"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -53,6 +56,25 @@ let package = Package(
                 .target(name: "Resources")
             ]
         ),
+        .target(
+            name: "Screen",
+            dependencies: [
+                .target(name: "ViewModel"),
+                .target(name: "API"),
+                .target(name: "Resources"),
+                .product(name: "CombineCocoa", package: "CombineCocoa"),
+                .product(name: "Kingfisher", package: "Kingfisher"),
+                .product(name: "MarkdownView", package: "MarkdownView")
+            ],
+            resources: [.process("Resources")],
+            plugins: [.plugin(name: "StoryboardGenPlugin")]
+        ),
+        .target(
+            name: "Resources",
+            dependencies: [],
+            resources: [.process("Resources")],
+            plugins: [.plugin(name: "SwiftGenPlugin")]
+        ),
 
         // MARK: SwiftGen
 
@@ -66,15 +88,10 @@ let package = Package(
             capability: .buildTool(),
             dependencies: ["swift-cli-tools"]
         ),
-        .target(
-            name: "Resources",
-            dependencies: [],
-            resources: [
-                .process("Files")
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin")
-            ]
+        .plugin(
+            name: "StoryboardGenPlugin",
+            capability: .buildTool(),
+            dependencies: ["swift-cli-tools"]
         ),
 
         // MARK: Test
