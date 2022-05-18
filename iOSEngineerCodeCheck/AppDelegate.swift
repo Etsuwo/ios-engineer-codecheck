@@ -12,3 +12,5 @@ import UIKit
 @main
 class AppDelegate: AppFeatures.CodeCheckAppDelegate {}
 class SceneDelegate: AppFeatures.CodeCheckSceneDelegate {}
+
+let a = 1
