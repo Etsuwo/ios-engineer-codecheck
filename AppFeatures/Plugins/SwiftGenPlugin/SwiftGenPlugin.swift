@@ -37,6 +37,7 @@ struct SwiftGenPlugin: BuildToolPlugin {
 //                    target.directory.appending("Resources/swiftgen.yml").string,
                 ],
                 environment: [:],
+                inputFiles: [colorAssets, imageAssets],
                 outputFiles: [assetsOutputFile]
             ),
             .buildCommand(
@@ -54,6 +55,7 @@ struct SwiftGenPlugin: BuildToolPlugin {
                     stringsOutputFile.string,
                 ],
                 environment: [:],
+                inputFiles: [strings],
                 outputFiles: [stringsOutputFile]
             )
         ]
